@@ -72,7 +72,7 @@ ti-mindmap-hub-research/
 
 TI Mindmap HUB generates STIX 2.1 bundles for each processed threat intelligence report. These bundles can be imported into:
 
-- **SIEMs**: Splunk, Microsoft Sentinel, Elastic Security
+- **SIEMs**: Microsoft Sentinel, Splunk, Elastic Security
 - **SOARs**: Cortex XSOAR, Splunk SOAR, Tines
 - **TIPs**: MISP, OpenCTI, ThreatConnect, Anomali
 
