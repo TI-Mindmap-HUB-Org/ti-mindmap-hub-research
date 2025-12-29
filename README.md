@@ -6,9 +6,10 @@
 
 [![Research Project](https://img.shields.io/badge/Type-Research%20Project-blueviolet)](https://ti-mindmap-hub.com/research)
 [![Status](https://img.shields.io/badge/Status-Beta-yellow)](https://ti-mindmap-hub.com)
+[![MCP](https://img.shields.io/badge/MCP-Enabled-green)](mcp-integration/)
 [![License](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey)](LICENSE)
 
-[Live Platform](https://ti-mindmap-hub.com) · [Research](https://ti-mindmap-hub.com/research) · [Weekly Briefings](https://medium.com/ti-mindmap-hub-research) · [Roadmap](https://ti-mindmap-hub.com/roadmap)
+[Live Platform](https://ti-mindmap-hub.com) · [Research](https://ti-mindmap-hub.com/research) · [MCP Integration](mcp-integration/) · [Roadmap](https://ti-mindmap-hub.com/roadmap)
 
 </div>
 
@@ -41,30 +42,68 @@ TI Mindmap HUB is an **independent research project** exploring the application 
 | **STIX 2.1 Export** | Standardized bundles for SIEM/SOAR/TIP integration | ✅ Live |
 | **Weekly Briefing** | Multi-agent AI system analyzing weekly trends | ✅ Live |
 | **IOC Search** | Fast lookup across all processed reports | ✅ Live |
-| **Knowledge Graph** | Visual exploration of threat relationships | 🚧 In Development |
-| **MCP Server** | Model Context Protocol integration | 🚧 In Development |
+| **CVE Intelligence** | Real-time CVE enrichment with EPSS scores | ✅ Live |
+| **MCP Server** | Model Context Protocol for AI assistant integration | ✅ Live |
+| **Knowledge Graph** | Visual exploration of threat relationships | 🚧 Beta |
+
+---
+
+## MCP Integration
+
+TI Mindmap HUB exposes a [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) server, allowing AI assistants to query threat intelligence data directly.
+
+### Supported Clients
+
+| Client | Guide |
+|--------|-------|
+| **VS Code + GitHub Copilot** | [Setup Guide](mcp-integration/VSCODE_SETUP.md) |
+| **Claude Desktop** | [Setup Guide](mcp-integration/CLAUDE_DESKTOP_SETUP.md) |
+| **Custom Clients** | [MCP Server Documentation](mcp-integration/) |
+
+### Available Tools (16)
+
+- **Reports**: List, search, and retrieve threat intelligence reports
+- **Weekly Briefings**: Access AI-generated weekly threat summaries
+- **CVE Intelligence**: Search and analyze vulnerabilities
+- **IOC Search**: Query indicators across all processed data
+- **STIX Export**: Retrieve structured threat data
+
+### Quick Example
+
+With Claude Desktop or VS Code Copilot connected:
+
+```
+"Show me the latest ransomware reports from the past week"
+"Search for CVE-2024-3400 and explain its impact"
+"Get the STIX bundle for report abc123"
+```
+
+📖 **[Full MCP Documentation →](mcp-integration/)**
 
 ---
 
 ## Repository Contents
 
-This public repository contains:
-
 ```
 ti-mindmap-hub-research/
-├── docs/
+├── documentation/
 │   ├── METHODOLOGY.md          # Research methodology and approach
 │   ├── LIMITATIONS.md          # Known limitations of AI-generated content
 │   ├── STIX-GENERATION.md      # STIX 2.1 generation process
 │   └── CONTRIBUTING.md         # How to contribute
+├── mcp-integration/            # MCP server documentation
+│   ├── README.md               # MCP server overview
+│   ├── VSCODE_SETUP.md         # VS Code + Copilot setup
+│   ├── CLAUDE_DESKTOP_SETUP.md # Claude Desktop setup
+│   └── mcp-bridge.js           # Bridge script for stdio clients
 ├── schemas/
 │   └── stix-examples/          # Example STIX 2.1 bundles
-├── LICENSE                     # CC BY-NC 4.0 License
+├── LICENSE                     # CC BY-NC 4.0
 ├── SECURITY.md                 # Security policy
 └── README.md                   # This file
 ```
 
-> **Note**: The core application code is maintained in private repositories. This public repository focuses on documentation, methodology, schemas, and research outputs.
+> **Note**: The core application code is maintained in private repositories. This public repository focuses on documentation, methodology, schemas, and integration guides.
 
 ---
 
@@ -72,7 +111,7 @@ ti-mindmap-hub-research/
 
 TI Mindmap HUB generates STIX 2.1 bundles for each processed threat intelligence report. These bundles can be imported into:
 
-- **SIEMs**: Microsoft Sentinel, Splunk, Elastic Security
+- **SIEMs**: Splunk, Microsoft Sentinel, Elastic Security
 - **SOARs**: Cortex XSOAR, Splunk SOAR, Tines
 - **TIPs**: MISP, OpenCTI, ThreatConnect, Anomali
 
@@ -106,7 +145,7 @@ As with any AI system, outputs are experimental and require human verification:
 - **False Positives**: Automated extraction may include benign indicators
 - **Context Loss**: Nuanced context from original reports may not be fully captured
 
-For detailed information, see [`docs/LIMITATIONS.md`](docs/LIMITATIONS.md).
+For detailed information, see [`documentation/LIMITATIONS.md`](documentation/LIMITATIONS.md).
 
 ---
 
@@ -117,6 +156,7 @@ This project actively collaborates with universities and independent researchers
 - STIX 2.1 generation and validation
 - Knowledge graph construction for threat intelligence
 - Evaluation of LLM performance in security contexts
+- MCP protocol applications in cybersecurity
 
 ### Interested in Collaborating?
 

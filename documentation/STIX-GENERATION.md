@@ -258,4 +258,4 @@ See [`LIMITATIONS.md`](LIMITATIONS.md#stix-21-generation-limitations) for STIX-s
 
 ---
 
-*Last updated: December 2025*
+*Last updated: January 2025*

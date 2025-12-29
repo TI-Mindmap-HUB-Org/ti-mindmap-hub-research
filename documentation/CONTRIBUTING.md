@@ -152,4 +152,4 @@ Thank you for helping improve TI Mindmap HUB!
 
 ---
 
-*Last updated: December 2025*
+*Last updated: January 2025*
