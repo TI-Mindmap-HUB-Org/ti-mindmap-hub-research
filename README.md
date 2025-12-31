@@ -90,7 +90,8 @@ ti-mindmap-hub-research/
 │   ├── METHODOLOGY.md          # Research methodology and approach
 │   ├── LIMITATIONS.md          # Known limitations of AI-generated content
 │   ├── STIX-GENERATION.md      # STIX 2.1 generation process
-│   └── CONTRIBUTING.md         # How to contribute
+│   ├── CONTRIBUTING.md         # How to contribute
+│   └── ACADEMIC-COLLABORATIONS.md  # Academic partnerships
 ├── mcp-integration/            # MCP server documentation
 │   ├── README.md               # MCP server overview
 │   ├── VSCODE_SETUP.md         # VS Code + Copilot setup
@@ -157,6 +158,28 @@ This project actively collaborates with universities and independent researchers
 - Knowledge graph construction for threat intelligence
 - Evaluation of LLM performance in security contexts
 - MCP protocol applications in cybersecurity
+
+### Supervised Research
+
+| Project | Author | Type | Status |
+|---------|--------|------|--------|
+| [STIX 2.1 Generator](https://github.com/GiulioTriggiani/STIX-2.1-Generator) | Giulio Triggiani | Master's Thesis | ✅ Integrated |
+
+#### STIX 2.1 Generator — Giulio Triggiani
+
+Master's thesis on automatic STIX 2.1 bundle generation using Large Language Models, developed at the University of Salerno (UNISA). The methodology has been integrated into TI Mindmap HUB's production pipeline.
+
+**Supervisors:** Assoc. Prof. Arcangelo Castiglione, Ing. Antonio Formato
+
+**Key contributions:**
+- LLM-based extraction of STIX Domain Objects (SDOs) and Cyber Observables (SCOs)
+- Automated relationship mapping between threat entities
+- Evaluation framework with standard and graph-based metrics
+- ~85% precision on SDO extraction
+
+📄 [Thesis PDF](https://github.com/GiulioTriggiani/STIX-2.1-Generator/blob/main/thesis/Tesi_Triggiani_Giulio.pdf) · 💻 [Repository](https://github.com/GiulioTriggiani/STIX-2.1-Generator)
+
+For more details, see [`documentation/ACADEMIC-COLLABORATIONS.md`](documentation/ACADEMIC-COLLABORATIONS.md).
 
 ### Interested in Collaborating?
 
