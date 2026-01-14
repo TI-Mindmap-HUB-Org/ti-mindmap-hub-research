@@ -33,11 +33,13 @@ All requests require an API key passed in the `X-API-Key` header.
 ### Getting an API Key
 
 1. Sign up at [ti-mindmap-hub.com](https://ti-mindmap-hub.com)
-2. Navigate to **Settings** → **API Keys**
-3. Click **Generate New Key**
+2. Navigate to **My Profile** → **MCP Server API Keys**
+3. Click **Generate Key**
 4. Copy and securely store your key (format: `tim_xxxxxxxxxxxx`)
 
-## Available Tools
+> **Roadmap**: OAuth 2.0 authentication support is planned for a future release, enabling browser-based authorization flows for MCP clients that support it (e.g., Claude Web).
+
+## Available Tools (19)
 
 ### Reports (5 tools)
 
@@ -82,6 +84,24 @@ All requests require an API key passed in the `X-API-Key` header.
 | `list_cves` | List CVEs with filters | `page`, `size`, `severity`, `sort_by`, `sort_order` |
 | `get_cves_by_article` | Get CVEs from article | `article_id` |
 | `get_cve_statistics` | Get CVE statistics | — |
+
+### STIX Bundles (3 tools)
+
+| Tool | Description | Parameters |
+|------|-------------|------------|
+| `get_stix_bundle` | Get STIX 2.1 bundle for an article | `article_id` |
+| `list_stix_bundles` | List all available STIX bundles | `limit`, `offset` |
+| `get_stix_statistics` | Get STIX generation statistics | — |
+
+The STIX bundle contains structured threat intelligence objects:
+- **Threat Actors** (`threat-actor`)
+- **Malware** (`malware`)
+- **Attack Patterns / TTPs** (`attack-pattern`)
+- **Indicators / IOCs** (`indicator`)
+- **Vulnerabilities / CVEs** (`vulnerability`)
+- **Relationships** between all objects
+
+Bundles can be imported into STIX-compatible platforms like MISP, OpenCTI, or Microsoft Sentinel.
 
 ### Statistics & Submissions (2 tools)
 
@@ -192,17 +212,9 @@ Content-Type: application/json
                                      ▼                           ▼
                             ┌─────────────────────┐     ┌─────────────────────┐
                             │     CosmosDB        │     │   Blob Storage      │
-                            │  (Users, API Keys)  │     │   (Reports)         │
+                            │  (Users, API Keys)  │     │   (Reports, STIX)   │
                             └─────────────────────┘     └─────────────────────┘
 ```
-
-## Rate Limits
-
-| Plan | Requests/hour | Requests/day |
-|------|---------------|--------------|
-| Free | 100 | 1,000 |
-| Pro | 1,000 | 10,000 |
-| Enterprise | Unlimited | Unlimited |
 
 ## Error Codes
 
@@ -215,7 +227,6 @@ Content-Type: application/json
 | -32000 | Server error |
 | 401 | Invalid or missing API key |
 | 403 | Insufficient permissions |
-| 429 | Rate limit exceeded |
 
 ## Files in This Directory
 
@@ -227,6 +238,6 @@ Content-Type: application/json
 
 ## Support
 
-- **Documentation**: [ti-mindmap-hub.com/docs](https://ti-mindmap-hub.com/docs)
+- **Documentation**: [ti-mindmap-hub.com/mcp-integration](https://ti-mindmap-hub.com/mcp-integration)
 - **Issues**: [GitHub Issues](https://github.com/TI-Mindmap-HUB-Org/ti-mindmap-hub-research/issues)
 - **Email**: [info@ti-mindmap-hub.com](mailto:info@ti-mindmap-hub.com)
