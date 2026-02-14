@@ -1,38 +1,37 @@
 ---
-name: Source Suggestion
-about: Suggest a new OSINT source for monitoring
-title: '[SOURCE] '
-labels: source-suggestion
+name: Feature Request
+about: Suggest a new documentation feature, research artifact, or OSINT source
+title: '[REQUEST] '
+labels: enhancement
 assignees: ''
 ---
 
-## Source Details
+## Request Type
 
-**Name**: 
-**URL**: 
-**Type**: (e.g., Security Vendor Blog, Government Advisory, Research Publication)
+- [ ] New documentation page or section
+- [ ] OSINT source suggestion
+- [ ] Research artifact request
+- [ ] STIX example request
+- [ ] Other
 
 ## Description
 
-Brief description of the source and why it would be valuable.
+Describe what you would like to see added or changed.
 
-## Content Examples
+## Use Case
 
-Links to 2-3 example articles/reports from this source:
+Who benefits and how?
 
-1. 
-2. 
-3. 
+## Additional Context
 
-## Frequency
+Any references, links, or examples that help explain the request.
 
-How often does this source publish new content?
+### For Source Suggestions
 
-- [ ] Daily
-- [ ] Weekly
-- [ ] Monthly
-- [ ] Irregular
+If suggesting a new OSINT source:
 
-## Additional Notes
-
-Any other relevant information (RSS feed availability, API access, etc.)
+- **Source name:**
+- **URL:**
+- **Type:** (vendor blog, government advisory, research publication)
+- **Publish frequency:** (daily / weekly / monthly / irregular)
+- **Example articles:** (2-3 links)
