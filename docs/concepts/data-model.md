@@ -1,4 +1,9 @@
-# STIX 2.1 Generation
+---
+title: STIX 2.1 Data Model
+description: How TI Mindmap HUB generates STIX 2.1 bundles — object types, patterns, relationships, and integration guides.
+---
+
+# STIX 2.1 Data Model
 
 This document describes how TI Mindmap HUB generates STIX 2.1 bundles from processed threat intelligence reports.
 
@@ -204,7 +209,7 @@ Generated from extracted CVE identifiers.
 
 ## Complete Bundle Example
 
-See [`../schemas/stix-examples/`](../schemas/stix-examples/) for complete bundle examples.
+See the [example STIX bundle](https://github.com/TI-Mindmap-HUB-Org/ti-mindmap-hub-research/blob/main/schemas/stix-examples/example-apt-campaign.json) for a complete bundle example.
 
 ## Integration Guide
 
@@ -248,7 +253,7 @@ All generated bundles are validated against:
 
 ## Known Limitations
 
-See [`LIMITATIONS.md`](LIMITATIONS.md#stix-21-generation-limitations) for STIX-specific limitations.
+See [Known Limitations](limitations.md#stix-21-generation-limitations) for STIX-specific limitations.
 
 ## References
 

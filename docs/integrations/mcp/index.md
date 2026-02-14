@@ -1,3 +1,8 @@
+---
+title: MCP Server
+description: Model Context Protocol server for TI Mindmap HUB — 19 tools for AI assistants to query threat intelligence data.
+---
+
 # MCP Server Integration
 
 TI Mindmap HUB exposes a [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) server that allows AI assistants to access threat intelligence data programmatically.
@@ -17,8 +22,8 @@ The MCP server provides AI clients with access to:
 
 | Client | Setup Guide |
 |--------|-------------|
-| VS Code + GitHub Copilot | [VSCODE_SETUP.md](VSCODE_SETUP.md) |
-| Claude Desktop | [CLAUDE_DESKTOP_SETUP.md](CLAUDE_DESKTOP_SETUP.md) |
+| VS Code + GitHub Copilot | [VS Code + Copilot Setup](vscode-copilot.md) |
+| Claude Desktop | [Claude Desktop Setup](claude-desktop.md) |
 
 ## Server Endpoint
 
@@ -232,9 +237,9 @@ Content-Type: application/json
 
 | File | Description |
 |------|-------------|
-| [VSCODE_SETUP.md](VSCODE_SETUP.md) | Setup guide for VS Code + GitHub Copilot |
-| [CLAUDE_DESKTOP_SETUP.md](CLAUDE_DESKTOP_SETUP.md) | Setup guide for Claude Desktop |
-| [mcp-bridge.js](mcp-bridge.js) | Bridge script for stdio-based clients |
+| [VS Code + Copilot Setup](vscode-copilot.md) | Setup guide for VS Code + GitHub Copilot |
+| [Claude Desktop Setup](claude-desktop.md) | Setup guide for Claude Desktop |
+| [mcp-bridge.js](https://github.com/TI-Mindmap-HUB-Org/ti-mindmap-hub-research/blob/main/mcp-integration/mcp-bridge.js) | Bridge script for stdio-based clients |
 
 ## Support
 

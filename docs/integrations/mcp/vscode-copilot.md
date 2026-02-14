@@ -1,3 +1,8 @@
+---
+title: VS Code + Copilot Setup
+description: Connect VS Code with GitHub Copilot to TI Mindmap HUB's threat intelligence via MCP.
+---
+
 # VS Code + GitHub Copilot Setup
 
 Connect VS Code with GitHub Copilot to TI Mindmap HUB's threat intelligence platform via MCP.
@@ -209,6 +214,6 @@ Analyze this threat article: https://example.com/threat-report
 
 ## Support
 
-- **MCP Server Documentation**: [README.md](README.md)
+- **MCP Server Documentation**: [MCP Server Overview](index.md)
 - **Issues**: [GitHub Issues](https://github.com/TI-Mindmap-HUB-Org/ti-mindmap-hub-research/issues)
 - **Email**: [info@ti-mindmap-hub.com](mailto:info@ti-mindmap-hub.com)

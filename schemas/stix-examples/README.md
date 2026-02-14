@@ -58,4 +58,4 @@ stix2_validator example-apt-campaign.json
 
 ## More Information
 
-See [`../../documentation/STIX-GENERATION.md`](../../documentation/STIX-GENERATION.md) for detailed documentation on STIX generation.
+See [`docs/concepts/data-model.md`](../../docs/concepts/data-model.md) for detailed documentation on STIX generation.

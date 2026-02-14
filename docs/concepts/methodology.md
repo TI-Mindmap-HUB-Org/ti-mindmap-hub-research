@@ -1,4 +1,9 @@
-# Research Methodology
+---
+title: Processing Methodology
+description: How TI Mindmap HUB processes threat intelligence through a six-stage AI pipeline — from content acquisition to structured outputs.
+---
+
+# Processing Methodology
 
 This document describes the methodology used in TI Mindmap HUB for processing threat intelligence using Generative AI.
 
@@ -104,7 +109,7 @@ Structured Data → STIX Object Creation → Relationship Mapping → Bundle Ass
 - `uses` — Threat-Actor → Malware/Attack-Pattern
 - `attributed-to` — Malware → Threat-Actor
 
-See [`STIX-GENERATION.md`](STIX-GENERATION.md) for detailed STIX generation documentation.
+See [STIX 2.1 Data Model](data-model.md) for detailed STIX generation documentation.
 
 ### Stage 6: Weekly Briefing Generation
 
@@ -149,7 +154,7 @@ The weekly briefing uses a specialized multi-agent architecture:
 
 ## Known Limitations
 
-See [`LIMITATIONS.md`](LIMITATIONS.md) for detailed information on system limitations.
+See [Known Limitations](limitations.md) for detailed information on system limitations.
 
 ## Technology Stack
 

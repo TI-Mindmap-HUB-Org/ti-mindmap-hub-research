@@ -1,3 +1,8 @@
+---
+title: Claude Desktop Setup
+description: Connect Claude Desktop to TI Mindmap HUB via MCP using a local Node.js bridge.
+---
+
 # Claude Desktop Setup
 
 Connect Claude Desktop to TI Mindmap HUB's threat intelligence platform via MCP using a local bridge.
@@ -30,7 +35,7 @@ The bridge:
 
 ### 1. Download the MCP Bridge
 
-Download [`mcp-bridge.js`](mcp-bridge.js) from this repository.
+Download [`mcp-bridge.js`](https://github.com/TI-Mindmap-HUB-Org/ti-mindmap-hub-research/blob/main/mcp-integration/mcp-bridge.js) from this repository.
 
 Save it to a permanent location:
 - **Windows**: `C:\Users\YourName\mcp-bridge\mcp-bridge.js`
@@ -259,6 +264,6 @@ To update to a new version:
 
 ## Support
 
-- **MCP Server Documentation**: [README.md](README.md)
+- **MCP Server Documentation**: [MCP Server Overview](index.md)
 - **Issues**: [GitHub Issues](https://github.com/TI-Mindmap-HUB-Org/ti-mindmap-hub-research/issues)
 - **Email**: [info@ti-mindmap-hub.com](mailto:info@ti-mindmap-hub.com)
