@@ -3,55 +3,121 @@ title: TI Mindmap HUB Documentation
 description: Documentation for TI Mindmap HUB — an independent research platform that uses Generative AI to transform OSINT threat reports into structured, actionable cyber threat intelligence.
 ---
 
+<div class="hero" markdown>
+
 # TI Mindmap HUB
 
-**An independent research platform exploring Generative AI applications in Cyber Threat Intelligence.**
+<p class="hero__subtitle">
+An independent research platform exploring Generative AI applications
+in Cyber Threat Intelligence analysis.
+</p>
 
-TI Mindmap HUB automates the processing of OSINT (Open-Source Intelligence) sources, transforming unstructured threat reports into structured, actionable intelligence — including STIX 2.1 bundles, IOC extraction, MITRE ATT&CK mapping, and weekly threat briefings.
+<div class="hero__chips">
+  <span class="hero__chip">Research Project</span>
+  <span class="hero__chip">Independent</span>
+  <span class="hero__chip">Non-Commercial</span>
+</div>
 
-!!! note "Independence Statement"
-    This is a personal research project. It is not affiliated with, endorsed by, or representative of any employer, organization, or commercial entity.
+</div>
+
+## Core Features
+
+<div class="feature-grid" markdown>
+
+<div class="feature-card" markdown>
+<div class="feature-icon">:zap:</div>
+
+### Automated Ingestion
+
+Continuously monitors curated OSINT sources and processes new threat reports automatically — from security vendor blogs, government advisories, and research publications.
+</div>
+
+<div class="feature-card" markdown>
+<div class="feature-icon">:brain:</div>
+
+### AI-Powered Analysis
+
+Generates detailed summaries, visual mindmaps, extracted IOCs, MITRE ATT&CK mappings, "Five Whats" structured reports, and probable attack execution sequences.
+</div>
+
+<div class="feature-card" markdown>
+<div class="feature-icon">:chart_with_upwards_trend:</div>
+
+### Weekly Briefing Agent
+
+A multi-agent AI system analyzes all weekly intelligence, identifies emerging trends, frequent TTPs, most targeted sectors, and deep dives into significant campaigns.
+</div>
+
+<div class="feature-card" markdown>
+<div class="feature-icon">:shield:</div>
+
+### Centralized Intelligence
+
+All processed reports in a centralized, filterable dashboard. A single pane of glass for browsing and searching through a growing library of threat intelligence.
+</div>
+
+<div class="feature-card feature-card--wide" markdown>
+<div class="feature-icon">:jigsaw:</div>
+
+### Integration & Export
+
+Each report offers multiple views: raw text, visual mindmaps, structured IOC/TTP tables, and downloadable **STIX 2.1 bundles**. Seamless integration with SIEMs, SOARs, TIPs, and AI assistants via the **MCP server** (19 tools).
+
+!!! warning ""
+    All AI-generated outputs are experimental and require human verification before operational use.
+
+</div>
+
+</div>
 
 ---
 
-## What You Get
+## Who Is This For?
 
-- **Automated Ingestion** — Continuous monitoring of curated OSINT sources
-- **AI-Powered Analysis** — LLM-generated summaries, mindmaps, and structured reports
-- **IOC Extraction** — Automated identification of IPs, domains, hashes, CVEs
-- **TTP Mapping** — Automatic alignment to the MITRE ATT&CK framework
-- **STIX 2.1 Export** — Standardized bundles for SIEM, SOAR, and TIP integration
-- **Weekly Briefings** — Multi-agent AI system analyzing weekly threat trends
-- **CVE Intelligence** — Real-time CVE enrichment with EPSS scores
-- **MCP Server** — Model Context Protocol integration for AI assistants
-- **Knowledge Graph** — Visual exploration of threat relationships (Beta)
+<div class="audience-grid" markdown>
+
+<div class="audience-card" markdown>
+
+### :mag: Security Practitioners
+
+Start with the [Getting Started](getting-started/index.md) guide. Consume [Outputs](outputs/index.md) and connect your tools via [Integrations](integrations/index.md).
+</div>
+
+<div class="audience-card" markdown>
+
+### :test_tube: Researchers
+
+Explore the [Concepts](concepts/index.md) section and [Academic Collaborations](research/academic-collaborations.md) for methodology, data-model details, and partnership opportunities.
+</div>
+
+<div class="audience-card" markdown>
+
+### :handshake: Contributors
+
+Read the [Contributing](community/contributing.md) guide and the [Style Guide](community/style-guide.md) to submit documentation, STIX examples, or source suggestions.
+</div>
+
+</div>
 
 ---
 
 ## Quick Links
 
-| | |
-|---|---|
-| **Try the Platform** | [ti-mindmap-hub.com](https://ti-mindmap-hub.com) |
-| **Source Code** | [GitHub Repository](https://github.com/TI-Mindmap-HUB-Org/ti-mindmap-hub-research) |
-| **MCP Integration** | [Connect your AI assistant](integrations/mcp/index.md) |
-| **Security Policy** | [Vulnerability disclosure](security/index.md) |
-| **Contact** | [info@ti-mindmap-hub.com](mailto:info@ti-mindmap-hub.com) |
-| **Twitter / X** | [@ti_mindmap_hub](https://x.com/ti_mindmap_hub) |
+<div class="link-grid" markdown>
 
----
+<a class="link-card" href="https://ti-mindmap-hub.com">:globe_with_meridians: Try the Platform</a>
 
-## For Security Practitioners
+<a class="link-card" href="https://github.com/TI-Mindmap-HUB-Org/ti-mindmap-hub-research">:material-github: GitHub Repository</a>
 
-Start with the [Getting Started](getting-started/index.md) guide to understand what the platform produces and how to consume its outputs. If you work with STIX or MITRE ATT&CK tooling, see the [Outputs](outputs/index.md) and [Integrations](integrations/index.md) sections.
+<a class="link-card" href="integrations/mcp/">:robot: MCP Integration</a>
 
-## For Researchers
+<a class="link-card" href="security/">:lock: Security Policy</a>
 
-Explore the [Concepts](concepts/index.md) section for methodology and data-model details. Review [Academic Collaborations](research/academic-collaborations.md) for partnership opportunities and published results.
+<a class="link-card" href="mailto:info@ti-mindmap-hub.com">:e-mail: Contact Us</a>
 
-## For Contributors
+<a class="link-card" href="https://x.com/ti_mindmap_hub">:material-twitter: @ti_mindmap_hub</a>
 
-Read the [Contributing](community/contributing.md) guide and the [Docs Style Guide](community/style-guide.md) to learn how to add or improve documentation, submit STIX examples, or suggest new intelligence sources.
+</div>
 
 ---
 
