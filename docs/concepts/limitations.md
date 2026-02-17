@@ -1,3 +1,8 @@
+---
+title: Known Limitations
+description: Comprehensive transparency on the limitations of TI Mindmap HUB's AI-generated content — hallucinations, false positives, and operational recommendations.
+---
+
 # Known Limitations
 
 This document provides transparency about the limitations of TI Mindmap HUB's AI-generated content. Understanding these limitations is essential for appropriate use of the platform.

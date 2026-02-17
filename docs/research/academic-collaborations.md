@@ -1,3 +1,8 @@
+---
+title: Academic Collaborations
+description: Academic partnerships, supervised research, and collaboration opportunities with TI Mindmap HUB.
+---
+
 # Academic Collaborations
 
 TI Mindmap HUB is committed to advancing research in the intersection of Generative AI and Cyber Threat Intelligence. This document details our academic collaborations, supervised research, and partnership opportunities.

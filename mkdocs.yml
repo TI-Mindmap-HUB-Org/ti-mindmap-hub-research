@@ -1,0 +1,144 @@
+site_name: TI Mindmap HUB Docs
+site_url: https://docs.ti-mindmap-hub.com
+site_description: >-
+  Documentation for TI Mindmap HUB — an independent research platform
+  exploring Generative AI applications in Cyber Threat Intelligence.
+site_author: TI Mindmap HUB
+repo_url: https://github.com/TI-Mindmap-HUB-Org/ti-mindmap-hub-research
+repo_name: TI-Mindmap-HUB-Org/ti-mindmap-hub-research
+edit_uri: edit/main/docs/
+
+copyright: >-
+  &copy; 2025 TI Mindmap HUB &mdash;
+  Licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>
+
+theme:
+  name: material
+  language: en
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: deep purple
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: deep purple
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  font:
+    text: Inter
+    code: Fira Code
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.action.edit
+    - content.code.copy
+    - toc.follow
+  icon:
+    repo: fontawesome/brands/github
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/TI-Mindmap-HUB-Org/ti-mindmap-hub-research
+    - icon: fontawesome/brands/x-twitter
+      link: https://x.com/ti_mindmap_hub
+    - icon: fontawesome/solid/globe
+      link: https://ti-mindmap-hub.com
+  analytics:
+    provider: google
+    property: G-Y5SS9FR5V4
+  generator: false
+
+extra_css:
+  - assets/stylesheets/extra.css
+
+plugins:
+  - search
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+      toc_depth: 3
+  - pymdownx.betterem
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+  - meta
+
+nav:
+  - Home: index.md
+  - Getting Started:
+      - Overview: getting-started/index.md
+  - Concepts:
+      - Overview: concepts/index.md
+      - Processing Methodology: concepts/methodology.md
+      - STIX 2.1 Data Model: concepts/data-model.md
+      - Known Limitations: concepts/limitations.md
+  - Outputs:
+      - Overview: outputs/index.md
+      - STIX Bundles: outputs/stix-bundles.md
+      - IOC Extraction: outputs/ioc-extraction.md
+      - MITRE ATT&CK Mapping: outputs/mitre-mapping.md
+      - Weekly Briefings: outputs/weekly-briefings.md
+  - Integrations:
+      - Overview: integrations/index.md
+      - MCP Server:
+          - Overview: integrations/mcp/index.md
+          - VS Code + Copilot: integrations/mcp/vscode-copilot.md
+          - Claude Desktop: integrations/mcp/claude-desktop.md
+      - STIX Platforms: integrations/stix-platforms.md
+  - Tutorials:
+      - Overview: tutorials/index.md
+      - Report to Intelligence: tutorials/report-to-intelligence.md
+  - Videos:
+      - Overview: videos/index.md
+      - Platform Overview: videos/platform-overview.md
+      - MCP Integration Demo: videos/mcp-integration-demo.md
+  - Research:
+      - Overview: research/index.md
+      - Academic Collaborations: research/academic-collaborations.md
+  - Security: security/index.md
+  - Community:
+      - Overview: community/index.md
+      - Contributing: community/contributing.md
+      - Docs Style Guide: community/style-guide.md
+  - Deployment:
+      - Azure Static Web Apps: deployment/azure-static-web-apps.md
+  - Changelog: changelog.md

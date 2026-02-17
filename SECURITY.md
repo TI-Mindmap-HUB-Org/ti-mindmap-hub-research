@@ -27,6 +27,7 @@ If you discover a security vulnerability in TI Mindmap HUB, please report it res
 
 This security policy applies to:
 - The TI Mindmap HUB web application (ti-mindmap-hub.com)
+- The MCP server (mcp.ti-mindmap-hub.com)
 - APIs and backend services
 - This public repository
 
@@ -45,7 +46,7 @@ We appreciate security researchers who help keep TI Mindmap HUB secure. With you
 
 ### AI-Generated Content
 
-Remember that all content on the platform is AI-generated and may contain:
+All content on the platform is AI-generated and may contain:
 - Incorrect information
 - False positives in IOC extraction
 - Misattributed threat actors
@@ -54,10 +55,14 @@ Remember that all content on the platform is AI-generated and may contain:
 
 ### Data Handling
 
-- User data is stored on Azure infrastructure
-- Authentication via Azure AD B2C
+- User data is stored on managed cloud infrastructure
+- Authentication uses industry-standard identity services
 - No user data is used for AI training
 - See [Privacy Policy](https://ti-mindmap-hub.com/privacy) for details
+
+## Full Security Documentation
+
+For the complete security and privacy documentation, see [docs.ti-mindmap-hub.com/security](https://docs.ti-mindmap-hub.com/security/).
 
 ---
 

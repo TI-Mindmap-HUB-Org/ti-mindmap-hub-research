@@ -1,0 +1,43 @@
+# TI Mindmap HUB — llms.txt
+# https://docs.ti-mindmap-hub.com
+# Independent research platform exploring Generative AI in Cyber Threat Intelligence
+
+## Key Pages
+
+- Home: /
+- Getting Started: /getting-started/
+- Processing Methodology: /concepts/methodology/
+- STIX 2.1 Data Model: /concepts/data-model/
+- Known Limitations: /concepts/limitations/
+- STIX Bundles: /outputs/stix-bundles/
+- IOC Extraction: /outputs/ioc-extraction/
+- MITRE ATT&CK Mapping: /outputs/mitre-mapping/
+- Weekly Briefings: /outputs/weekly-briefings/
+- MCP Server: /integrations/mcp/
+- VS Code + Copilot Setup: /integrations/mcp/vscode-copilot/
+- Claude Desktop Setup: /integrations/mcp/claude-desktop/
+- STIX Platform Integration: /integrations/stix-platforms/
+- Tutorial — Report to Intelligence: /tutorials/report-to-intelligence/
+- Academic Collaborations: /research/academic-collaborations/
+- Security & Privacy: /security/
+- Contributing: /community/contributing/
+- Changelog: /changelog/
+
+## Project Summary
+
+TI Mindmap HUB automates the processing of OSINT threat intelligence reports
+using Large Language Models. It produces structured outputs including STIX 2.1
+bundles, IOC extraction, MITRE ATT&CK mapping, and weekly threat briefings.
+The platform exposes a Model Context Protocol (MCP) server with 19 tools for
+AI assistant integration (VS Code + GitHub Copilot, Claude Desktop).
+
+## Contact
+
+- Website: https://ti-mindmap-hub.com
+- Email: info@ti-mindmap-hub.com
+- GitHub: https://github.com/TI-Mindmap-HUB-Org/ti-mindmap-hub-research
+- Twitter/X: https://x.com/ti_mindmap_hub
+
+## License
+
+CC BY-NC 4.0 (Creative Commons Attribution-NonCommercial 4.0 International)
