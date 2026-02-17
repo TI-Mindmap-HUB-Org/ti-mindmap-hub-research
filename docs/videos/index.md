@@ -24,6 +24,7 @@ See how to connect an AI assistant to TI Mindmap HUB via the Model Context Proto
 !!! info "More Videos Coming"
     Additional video tutorials are in production. Check back for updates or follow [@ti_mindmap_hub](https://x.com/ti_mindmap_hub) for announcements.
 
+
 ---
 
 ## Embedding Videos in Docs
