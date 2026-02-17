@@ -1,11 +1,418 @@
-/* Responsive YouTube embed container */
+/* ==========================================================================
+   TI Mindmap HUB — Custom Theme
+   Matches the app's indigo-to-purple gradient design system.
+   ========================================================================== */
+
+/* ---------- Design Tokens ---------- */
+:root {
+  --hub-indigo: #667eea;
+  --hub-purple: #764ba2;
+  --hub-slate:  #4a5568;
+  --hub-amber:  #f59e0b;
+  --hub-radius: 12px;
+  --hub-gradient: linear-gradient(135deg, #4a5568 0%, #667eea 50%, #764ba2 100%);
+}
+
+/* ==========================================================================
+   Dark (Slate) Scheme — Default
+   ========================================================================== */
+[data-md-color-scheme="slate"] {
+  --md-hue: 230;
+  --md-primary-fg-color:        #667eea;
+  --md-primary-fg-color--light: #8299ee;
+  --md-primary-fg-color--dark:  #4f6ce6;
+  --md-primary-bg-color:        #ffffff;
+  --md-accent-fg-color:         #9f7aea;
+  --md-default-bg-color:        #1a1b2e;
+  --md-default-bg-color--light: #22243a;
+  --md-default-bg-color--lighter: #2a2d47;
+  --md-default-bg-color--lightest: #333654;
+  --md-code-bg-color:           #22243a;
+  --md-typeset-a-color:         #667eea;
+  --md-footer-bg-color:         #13142380;
+  --md-footer-bg-color--dark:   #0f1017;
+}
+
+/* ==========================================================================
+   Light Scheme — Harmonized
+   ========================================================================== */
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color:        #667eea;
+  --md-primary-fg-color--light: #8299ee;
+  --md-primary-fg-color--dark:  #4f6ce6;
+  --md-accent-fg-color:         #764ba2;
+  --md-typeset-a-color:         #5a6fd6;
+}
+
+/* ==========================================================================
+   Header — Gradient Banner
+   ========================================================================== */
+.md-header {
+  background: var(--hub-gradient);
+  box-shadow: 0 2px 16px rgba(102, 126, 234, 0.25);
+}
+
+.md-header[data-md-state="shadow"] {
+  box-shadow: 0 4px 24px rgba(102, 126, 234, 0.35);
+}
+
+/* Ensure tabs bar matches */
+.md-tabs {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+/* ==========================================================================
+   Hero Section (homepage)
+   ========================================================================== */
+.hero {
+  background: var(--hub-gradient);
+  border-radius: var(--hub-radius);
+  padding: 3rem 2.5rem;
+  margin-bottom: 2rem;
+  color: #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: -40%;
+  right: -8%;
+  width: 280px;
+  height: 280px;
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 50%;
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  bottom: -30%;
+  left: -5%;
+  width: 200px;
+  height: 200px;
+  background: rgba(118, 75, 162, 0.2);
+  border-radius: 50%;
+  filter: blur(50px);
+  pointer-events: none;
+}
+
+.hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+.hero h1 {
+  font-size: 2.4rem;
+  font-weight: 800;
+  margin: 0 0 0.5rem 0;
+  color: #ffffff;
+  line-height: 1.15;
+}
+
+.hero .hero__subtitle {
+  font-size: 1.15rem;
+  opacity: 0.92;
+  margin-bottom: 1.25rem;
+  max-width: 720px;
+  line-height: 1.6;
+}
+
+.hero__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.hero__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.85rem;
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #ffffff;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 2rem 1.5rem;
+  }
+  .hero h1 {
+    font-size: 1.7rem;
+  }
+}
+
+/* ==========================================================================
+   Feature Cards Grid
+   ========================================================================== */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  margin: 1.5rem 0;
+}
+
+@media (max-width: 768px) {
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.feature-card {
+  padding: 1.5rem;
+  border-radius: var(--hub-radius);
+  border: 1px solid rgba(102, 126, 234, 0.12);
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+[data-md-color-scheme="slate"] .feature-card {
+  background: rgba(34, 36, 58, 0.7);
+  backdrop-filter: blur(10px);
+}
+
+[data-md-color-scheme="default"] .feature-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(102, 126, 234, 0.18);
+  border-color: rgba(102, 126, 234, 0.3);
+}
+
+.feature-card .feature-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
+  font-size: 1.4rem;
+  margin-bottom: 0.85rem;
+}
+
+.feature-card h3 {
+  margin: 0 0 0.4rem 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.feature-card p {
+  margin: 0;
+  font-size: 0.88rem;
+  opacity: 0.82;
+  line-height: 1.55;
+}
+
+/* Wide card spanning 2 columns */
+.feature-card--wide {
+  grid-column: span 2;
+}
+
+@media (max-width: 768px) {
+  .feature-card--wide {
+    grid-column: span 1;
+  }
+}
+
+/* ==========================================================================
+   Use-Case / Audience Cards
+   ========================================================================== */
+.audience-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin: 1.5rem 0;
+}
+
+@media (max-width: 900px) {
+  .audience-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.audience-card {
+  padding: 1.5rem;
+  border-radius: var(--hub-radius);
+  border: 1px solid rgba(102, 126, 234, 0.1);
+  transition: all 0.25s ease-in-out;
+}
+
+[data-md-color-scheme="slate"] .audience-card {
+  background: rgba(102, 126, 234, 0.06);
+}
+
+[data-md-color-scheme="default"] .audience-card {
+  background: rgba(102, 126, 234, 0.04);
+}
+
+.audience-card:hover {
+  transform: translateX(4px);
+  border-color: rgba(102, 126, 234, 0.25);
+}
+
+[data-md-color-scheme="slate"] .audience-card:hover {
+  background: rgba(102, 126, 234, 0.12);
+}
+
+[data-md-color-scheme="default"] .audience-card:hover {
+  background: rgba(102, 126, 234, 0.08);
+}
+
+.audience-card h3 {
+  margin: 0 0 0.35rem 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.audience-card p {
+  margin: 0;
+  font-size: 0.88rem;
+  opacity: 0.82;
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   Quick-Link Cards
+   ========================================================================== */
+.link-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.85rem;
+  margin: 1.5rem 0;
+}
+
+@media (max-width: 768px) {
+  .link-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .link-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.link-card {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.85rem 1rem;
+  border-radius: 8px;
+  text-decoration: none !important;
+  font-weight: 600;
+  font-size: 0.88rem;
+  border: 1px solid rgba(102, 126, 234, 0.15);
+  transition: all 0.2s ease;
+}
+
+[data-md-color-scheme="slate"] .link-card {
+  background: rgba(102, 126, 234, 0.07);
+  color: var(--md-default-fg-color);
+}
+
+[data-md-color-scheme="default"] .link-card {
+  background: rgba(102, 126, 234, 0.05);
+  color: var(--md-default-fg-color);
+}
+
+.link-card:hover {
+  border-color: rgba(102, 126, 234, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.12);
+}
+
+/* ==========================================================================
+   Admonitions — Rounded card style
+   ========================================================================== */
+.md-typeset .admonition,
+.md-typeset details {
+  border-radius: var(--hub-radius);
+  border: none;
+  border-left: 4px solid;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+}
+
+[data-md-color-scheme="slate"] .md-typeset .admonition,
+[data-md-color-scheme="slate"] .md-typeset details {
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+}
+
+.md-typeset .admonition-title,
+.md-typeset summary {
+  border-radius: var(--hub-radius) var(--hub-radius) 0 0;
+}
+
+/* ==========================================================================
+   Code Blocks — Rounded to match cards
+   ========================================================================== */
+.md-typeset pre > code {
+  border-radius: var(--hub-radius);
+}
+
+.md-typeset code {
+  border-radius: 4px;
+}
+
+[data-md-color-scheme="slate"] .md-typeset pre > code {
+  border: 1px solid rgba(102, 126, 234, 0.1);
+}
+
+/* ==========================================================================
+   Navigation Sidebar
+   ========================================================================== */
+.md-nav__link--active {
+  font-weight: 600;
+}
+
+[data-md-color-scheme="slate"] .md-nav__link:hover {
+  color: var(--hub-indigo);
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+[data-md-color-scheme="slate"] .md-footer {
+  border-top: 1px solid rgba(102, 126, 234, 0.1);
+}
+
+/* ==========================================================================
+   Tables — subtle styling
+   ========================================================================== */
+.md-typeset table:not([class]) {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) th {
+  background: rgba(102, 126, 234, 0.12);
+}
+
+/* ==========================================================================
+   Responsive YouTube Embed
+   ========================================================================== */
 .video-wrapper {
   position: relative;
-  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  padding-bottom: 56.25%;
   height: 0;
   overflow: hidden;
   max-width: 100%;
   margin: 1.5em 0;
+  border-radius: var(--hub-radius);
 }
 
 .video-wrapper iframe {
@@ -15,5 +422,26 @@
   width: 100%;
   height: 100%;
   border: 0;
-  border-radius: 4px;
+  border-radius: var(--hub-radius);
+}
+
+/* ==========================================================================
+   Smooth transitions for scheme toggle
+   ========================================================================== */
+body,
+.md-header,
+.md-tabs,
+.md-main,
+.md-footer {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ==========================================================================
+   Section separator — subtle gradient line
+   ========================================================================== */
+.md-typeset hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.3), transparent);
+  margin: 2rem 0;
 }
