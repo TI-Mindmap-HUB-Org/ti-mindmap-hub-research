@@ -25,7 +25,7 @@ in Cyber Threat Intelligence analysis.
 <div class="feature-grid" markdown>
 
 <div class="feature-card" markdown>
-<div class="feature-icon">:zap:</div>
+<div class="feature-icon">⚡</div>
 
 ### Automated Ingestion
 
@@ -33,7 +33,7 @@ Continuously monitors curated OSINT sources and processes new threat reports aut
 </div>
 
 <div class="feature-card" markdown>
-<div class="feature-icon">:brain:</div>
+<div class="feature-icon">🧠</div>
 
 ### AI-Powered Analysis
 
@@ -41,7 +41,7 @@ Generates detailed summaries, visual mindmaps, extracted IOCs, MITRE ATT&CK mapp
 </div>
 
 <div class="feature-card" markdown>
-<div class="feature-icon">:chart_with_upwards_trend:</div>
+<div class="feature-icon">📈</div>
 
 ### Weekly Briefing Agent
 
@@ -49,7 +49,7 @@ A multi-agent AI system analyzes all weekly intelligence, identifies emerging tr
 </div>
 
 <div class="feature-card" markdown>
-<div class="feature-icon">:shield:</div>
+<div class="feature-icon">🛡️</div>
 
 ### Centralized Intelligence
 
@@ -57,7 +57,7 @@ All processed reports in a centralized, filterable dashboard. A single pane of g
 </div>
 
 <div class="feature-card feature-card--wide" markdown>
-<div class="feature-icon">:jigsaw:</div>
+<div class="feature-icon">🧩</div>
 
 ### Integration & Export
 
@@ -78,21 +78,21 @@ Each report offers multiple views: raw text, visual mindmaps, structured IOC/TTP
 
 <div class="audience-card" markdown>
 
-### :mag: Security Practitioners
+### 🔍 Security Practitioners
 
 Start with the [Getting Started](getting-started/index.md) guide. Consume [Outputs](outputs/index.md) and connect your tools via [Integrations](integrations/index.md).
 </div>
 
 <div class="audience-card" markdown>
 
-### :test_tube: Researchers
+### 🧪 Researchers
 
 Explore the [Concepts](concepts/index.md) section and [Academic Collaborations](research/academic-collaborations.md) for methodology, data-model details, and partnership opportunities.
 </div>
 
 <div class="audience-card" markdown>
 
-### :handshake: Contributors
+### 🤝 Contributors
 
 Read the [Contributing](community/contributing.md) guide and the [Style Guide](community/style-guide.md) to submit documentation, STIX examples, or source suggestions.
 </div>
@@ -105,17 +105,17 @@ Read the [Contributing](community/contributing.md) guide and the [Style Guide](c
 
 <div class="link-grid" markdown>
 
-<a class="link-card" href="https://ti-mindmap-hub.com">:globe_with_meridians: Try the Platform</a>
+<a class="link-card" href="https://ti-mindmap-hub.com">🌐 Try the Platform</a>
 
-<a class="link-card" href="https://github.com/TI-Mindmap-HUB-Org/ti-mindmap-hub-research">:material-github: GitHub Repository</a>
+<a class="link-card" href="https://github.com/TI-Mindmap-HUB-Org/ti-mindmap-hub-research">📂 GitHub Repository</a>
 
-<a class="link-card" href="integrations/mcp/">:robot: MCP Integration</a>
+<a class="link-card" href="integrations/mcp/">🤖 MCP Integration</a>
 
-<a class="link-card" href="security/">:lock: Security Policy</a>
+<a class="link-card" href="security/">🔒 Security Policy</a>
 
-<a class="link-card" href="mailto:info@ti-mindmap-hub.com">:e-mail: Contact Us</a>
+<a class="link-card" href="mailto:info@ti-mindmap-hub.com">📧 Contact Us</a>
 
-<a class="link-card" href="https://x.com/ti_mindmap_hub">:material-twitter: @ti_mindmap_hub</a>
+<a class="link-card" href="https://x.com/ti_mindmap_hub">🐦 @ti_mindmap_hub</a>
 
 </div>
 

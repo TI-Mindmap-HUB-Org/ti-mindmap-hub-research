@@ -14,17 +14,16 @@ copyright: >-
 
 theme:
   name: material
+  custom_dir: docs/overrides
   language: en
   palette:
-    - media: "(prefers-color-scheme: dark)"
-      scheme: slate
+    - scheme: slate
       primary: indigo
       accent: deep purple
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
-    - media: "(prefers-color-scheme: light)"
-      scheme: default
+    - scheme: default
       primary: indigo
       accent: deep purple
       toggle:
@@ -57,7 +56,7 @@ extra:
     - icon: fontawesome/solid/globe
       link: https://ti-mindmap-hub.com
   analytics:
-    provider: google
+    provider: custom
     property: G-Y5SS9FR5V4
   generator: false
 
