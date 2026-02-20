@@ -109,7 +109,7 @@ Read the [Contributing](community/contributing.md) guide and the [Style Guide](c
 
 <a class="link-card" href="https://github.com/TI-Mindmap-HUB-Org/ti-mindmap-hub-research">📂 GitHub Repository</a>
 
-<a class="link-card" href="integrations/mcp/">🤖 MCP Integration</a>
+<a class="link-card" href="mcp/">🤖 MCP Integration</a>
 
 <a class="link-card" href="security/">🔒 Security Policy</a>
 

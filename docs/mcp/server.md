@@ -233,16 +233,16 @@ Content-Type: application/json
 | 401 | Invalid or missing API key |
 | 403 | Insufficient permissions |
 
-## Files in This Directory
+## Related Pages
 
-| File | Description |
+| Page | Description |
 |------|-------------|
+| [MCP Overview](index.md) | MCP section overview, use cases, and agents |
 | [VS Code + Copilot Setup](vscode-copilot.md) | Setup guide for VS Code + GitHub Copilot |
 | [Claude Desktop Setup](claude-desktop.md) | Setup guide for Claude Desktop |
 | [mcp-bridge.js](https://github.com/TI-Mindmap-HUB-Org/ti-mindmap-hub-research/blob/main/mcp-integration/mcp-bridge.js) | Bridge script for stdio-based clients |
 
 ## Support
 
-- **Documentation**: [ti-mindmap-hub.com/mcp-integration](https://ti-mindmap-hub.com/mcp-integration)
 - **Issues**: [GitHub Issues](https://github.com/TI-Mindmap-HUB-Org/ti-mindmap-hub-research/issues)
 - **Email**: [info@ti-mindmap-hub.com](mailto:info@ti-mindmap-hub.com)

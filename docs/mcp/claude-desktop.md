@@ -264,6 +264,6 @@ To update to a new version:
 
 ## Support
 
-- **MCP Server Documentation**: [MCP Server Overview](index.md)
+- **MCP Server Documentation**: [MCP Server](server.md)
 - **Issues**: [GitHub Issues](https://github.com/TI-Mindmap-HUB-Org/ti-mindmap-hub-research/issues)
 - **Email**: [info@ti-mindmap-hub.com](mailto:info@ti-mindmap-hub.com)

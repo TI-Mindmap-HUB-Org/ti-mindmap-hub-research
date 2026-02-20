@@ -115,5 +115,5 @@ For best results:
 ## Next Steps
 
 - [Outputs](../outputs/index.md) — Detailed documentation of each output type
-- [MCP Integration](../integrations/mcp/index.md) — Automate queries with AI assistants
+- [MCP](../mcp/index.md) — Automate queries with AI assistants
 - [Known Limitations](../concepts/limitations.md) — Understand what to verify

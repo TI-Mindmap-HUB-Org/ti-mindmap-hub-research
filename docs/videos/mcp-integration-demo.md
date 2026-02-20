@@ -36,7 +36,7 @@ See how to connect an AI assistant to TI Mindmap HUB via the Model Context Proto
 
 ## Related
 
-- [MCP Server Documentation](../integrations/mcp/index.md)
-- [VS Code + Copilot Setup](../integrations/mcp/vscode-copilot.md)
-- [Claude Desktop Setup](../integrations/mcp/claude-desktop.md)
+- [MCP Server Documentation](../mcp/server.md)
+- [VS Code + Copilot Setup](../mcp/vscode-copilot.md)
+- [Claude Desktop Setup](../mcp/claude-desktop.md)
 - [Platform Overview](platform-overview.md)
