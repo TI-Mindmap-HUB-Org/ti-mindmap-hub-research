@@ -1,6 +1,6 @@
 ---
 title: Processing Methodology
-description: How TI Mindmap HUB processes threat intelligence through a six-stage AI pipeline — from content acquisition to structured outputs.
+description: How TI Mindmap HUB processes threat intelligence through a multi-stage AI pipeline — from content acquisition to structured STIX 2.1 outputs and analyst frontend.
 ---
 
 # Processing Methodology
@@ -9,51 +9,55 @@ This document describes the methodology used in TI Mindmap HUB for processing th
 
 ## Overview
 
-TI Mindmap HUB employs a multi-stage pipeline to transform unstructured threat intelligence reports into structured, actionable data. The system leverages Large Language Models (LLMs) for natural language understanding and information extraction.
+TI Mindmap HUB employs a multi-stage pipeline to transform unstructured threat intelligence reports into structured, actionable data. The system leverages Large Language Models (LLMs) for natural language understanding and information extraction, combined with pattern matching and validation layers.
+
+For the visual pipeline diagrams, see [Concepts](index.md).
 
 ## Processing Pipeline
 
 ### Stage 1: Content Acquisition
 
 ```
-OSINT Sources → Web Scraping → Raw Content → Content Cleaning
+OSINT Sources / Analyst Submissions → Validation → Raw Storage → Processing Trigger
 ```
 
 **Process:**
-1. Curated list of threat intelligence sources is monitored continuously
-2. New articles are identified and retrieved
-3. HTML content is cleaned and converted to plain text
-4. Metadata (source, date, URL) is preserved
+
+1. Curated list of OSINT threat intelligence sources is monitored continuously
+2. Analysts can submit URLs via the web interface or the MCP `submit_article` tool
+3. Submissions are validated, deduplicated, and assigned a tracking identifier
+4. Raw content is stored for reference and reproducibility
+5. The article is queued for automated analysis
 
 **Sources include:**
+
 - Security vendor blogs (e.g., Mandiant, CrowdStrike, Recorded Future)
 - Government advisories (e.g., CISA, NCSC)
 - Security research publications
 - Industry reports
+- Analyst-submitted URLs
 
-### Stage 2: AI-Powered Analysis
-
-```
-Clean Content → LLM Processing → Structured Outputs
-```
-
-**Outputs generated:**
-- Technical summary
-- Visual mindmap (Mermaid format)
-- Indicators of Compromise (IOCs)
-- TTPs mapped to MITRE ATT&CK
-- "Five Whats" structured report
-- Probable attack execution sequence
-
-**Prompt Engineering:**
-- Each output type uses specialized prompts
-- Prompts are iteratively refined based on output quality
-- Temperature and other parameters are tuned per task
-
-### Stage 3: IOC Extraction
+### Stage 2: Normalization and Processing
 
 ```
-Raw Text → Pattern Matching + LLM → IOC List → Validation → Deduplication
+Raw Content → Text Parsing → Entity Extraction → Normalization and Confidence Scoring
+```
+
+**Process:**
+
+1. HTML is stripped and content is converted to clean text
+2. Metadata (source, publication date, URL) is preserved
+3. LLMs and pattern matchers identify candidate entities across the text
+4. Extracted entities are validated, deduplicated, and assigned confidence levels (high, medium, low)
+
+### Stage 3: Threat Analysis Layer
+
+Five extraction branches run in parallel:
+
+#### IOC Detection and Enrichment
+
+```
+Normalized Text → Pattern Matching + LLM → IOC List → Validation → Deduplication
 ```
 
 **IOC Types Extracted:**
@@ -63,53 +67,130 @@ Raw Text → Pattern Matching + LLM → IOC List → Validation → Deduplicatio
 | IPv4/IPv6 | Regex + LLM | Format validation, private range exclusion |
 | Domains | Regex + LLM | TLD validation, whitelist filtering |
 | URLs | Regex + LLM | Format validation |
-| File Hashes (MD5, SHA1, SHA256) | Regex | Length and character validation |
-| CVE IDs | Regex | Format validation (CVE-YYYY-NNNNN) |
+| File Hashes (MD5, SHA-1, SHA-256) | Regex | Length and character validation |
 | Email Addresses | Regex + LLM | Format validation |
 
 **Whitelisting:**
-- Common benign domains are excluded (e.g., google.com, microsoft.com)
-- Cloud provider ranges may be filtered
-- Known false positive patterns are maintained
 
-### Stage 4: TTP Mapping
+- Common benign domains are excluded (e.g., google.com, microsoft.com)
+- Cloud provider infrastructure ranges are filtered
+- RFC 5737 documentation IP ranges are excluded
+- Known false-positive patterns are maintained
+
+#### TTP Extraction and ATT&CK Mapping
 
 ```
-Content + IOCs → LLM → MITRE ATT&CK Techniques → Validation
+Report Behaviors → LLM Analysis → MITRE ATT&CK Techniques → Validation
 ```
 
 **Process:**
-1. LLM analyzes content for attack behaviors
-2. Behaviors are mapped to MITRE ATT&CK techniques
-3. Technique IDs are validated against ATT&CK database
+
+1. LLM analyzes content for described attack behaviors
+2. Behaviors are mapped to specific ATT&CK techniques based on behavioral analysis (not keyword matching)
+3. Technique IDs are validated against the ATT&CK database
 4. Tactics are inferred from technique associations
 
 **Output:**
+
 - Technique ID (e.g., T1566.001)
 - Technique name
 - Associated tactic(s)
 - Confidence level (when determinable)
 
-### Stage 5: STIX 2.1 Generation
+#### CVE Extraction with Risk Context
 
 ```
-Structured Data → STIX Object Creation → Relationship Mapping → Bundle Assembly
+Vulnerability Mentions → Pattern Matching → Enrichment → Risk Context
 ```
+
+**Process:**
+
+1. CVE identifiers are extracted via pattern matching (CVE-YYYY-NNNNN)
+2. Each CVE is enriched with CVSS severity, EPSS score, and exploit status
+3. Patch availability and Proof-of-Concept status are correlated
+4. Affected products and correlated references are linked
+
+#### Threat Actor and Malware Extraction
+
+```
+Attribution Context → LLM Analysis → Named Entities → Relationship Mapping
+```
+
+**Process:**
+
+1. LLM identifies named threat groups, malware families, and tools
+2. Contextual relationships between actors and their tools/techniques are preserved
+3. Attribution is extracted without fabrication — only explicitly stated attributions are captured
+
+#### Summary and Mindmap Synthesis
+
+```
+Full Report Content → LLM Processing → Summary + Mindmap + 5W Analysis
+```
+
+**Outputs generated:**
+
+- Technical summary
+- Visual mindmap (Mermaid format) connecting actors, campaigns, malware, TTPs, IOCs, and targets
+- "Five Whats" structured root-cause analysis (Who, What, When, Where, Why)
+- Probable attack execution sequence
+
+**Prompt Engineering:**
+
+- Each output type uses specialized prompts
+- Prompts are iteratively refined based on output quality
+- Temperature and other parameters are tuned per task
+
+### Stage 4: STIX 2.1 Structuring
+
+```
+Extracted Objects → Relationship Generation → Bundle Assembly → Validation → Storage
+```
+
+The backend assembles all extraction outputs into a unified STIX 2.1 bundle:
 
 **Objects Generated:**
+
 - `report` — Container for the intelligence
 - `threat-actor` — When identified in the source
 - `malware` — Malware families mentioned
-- `indicator` — IOCs with patterns
+- `indicator` — IOCs with STIX patterns
 - `attack-pattern` — MITRE ATT&CK techniques
+- `vulnerability` — CVE identifiers with risk context
 - `relationship` — Connections between objects
 
 **Relationship Types:**
+
 - `indicates` — Indicator → Malware/Threat-Actor
 - `uses` — Threat-Actor → Malware/Attack-Pattern
 - `attributed-to` — Malware → Threat-Actor
+- `exploits` — Malware/Threat-Actor → Vulnerability
+
+**Validation:**
+
+- STIX 2.1 JSON Schema compliance
+- Object reference integrity
+- Required field presence
+- Pattern syntax validation (for indicators)
 
 See [STIX 2.1 Data Model](data-model.md) for detailed STIX generation documentation.
+
+### Stage 5: Per-Article Frontend Delivery
+
+Each processed article is presented to the analyst through a tabbed interface with:
+
+- **Header Metadata** — Title, source, publication date, link to original report, bookmark, and PDF export
+- **Intel Graph** — Interactive STIX graph with graph/JSON views, object count, and bundle download
+- **Diamond Model** — Adversary, capability, infrastructure, and victim mapping
+- **AI Summary** — AI-generated technical summary
+- **TI Mindmap** — Interactive visual threat model
+- **IOCs** — High and medium confidence indicators with JSON export (low-confidence IOCs available in downloadable file)
+- **CVEs** — CVSS severity, exploited/patch/PoC status, affected products, and references
+- **TTP Catalog** — Full MITRE ATT&CK technique catalog
+- **Attack Flow** — Reconstructed attack execution sequence
+- **5W Context** — Structured root-cause analysis
+- **ATT&CK Heatmap** — Visual technique heatmap across tactics
+- **Source Report** — Original content for verification
 
 ### Stage 6: Weekly Briefing Generation
 
@@ -117,8 +198,9 @@ See [STIX 2.1 Data Model](data-model.md) for detailed STIX generation documentat
 Weekly Reports → Multi-Agent Analysis → Trend Identification → Briefing
 ```
 
-**Multi-Agent System:**
-The weekly briefing uses a specialized multi-agent architecture:
+**Multi-Agent System (Autogen-based):**
+
+The weekly briefing uses a specialized multi-agent architecture that processes 50–60 reports per week:
 
 1. **Collector Agent** — Aggregates all reports from the past week
 2. **Analyst Agents** — Each analyzes a subset of reports
@@ -127,6 +209,7 @@ The weekly briefing uses a specialized multi-agent architecture:
 5. **Editor Agent** — Reviews and refines output
 
 **Briefing Sections:**
+
 - Executive summary
 - Top TTPs observed
 - Most targeted sectors
@@ -136,17 +219,21 @@ The weekly briefing uses a specialized multi-agent architecture:
 ## Quality Assurance
 
 ### Automated Validation
+
 - IOC format validation
 - STIX schema compliance
 - MITRE ATT&CK ID verification
 - Duplicate detection
+- Confidence scoring
 
 ### Human Review
+
 - Periodic sampling of outputs
 - Feedback incorporation
 - Prompt refinement based on errors
 
 ### Metrics Tracked
+
 - IOC extraction precision/recall (sampled)
 - TTP mapping accuracy (sampled)
 - Processing success rate
@@ -170,6 +257,7 @@ See [Known Limitations](limitations.md) for detailed information on system limit
 ## Reproducibility
 
 While the core application code is private, we aim to provide:
+
 - Detailed methodology documentation (this document)
 - Example outputs and STIX bundles
 - Evaluation metrics when available
@@ -177,11 +265,8 @@ While the core application code is private, we aim to provide:
 
 ## Future Research Directions
 
-1. **Knowledge Graph Construction** — Building a graph database of threat relationships
+1. **Knowledge Graph Construction** — Building a graph database of threat relationships for longitudinal analysis
 2. **Confidence Scoring** — Developing reliable confidence metrics for AI outputs
 3. **Cross-Source Correlation** — Linking intelligence across multiple sources
 4. **Evaluation Framework** — Systematic evaluation of extraction accuracy
-
----
-
-*Last updated: January 2025*
+5. **Expanded OSINT Coverage** — Broader source monitoring and deeper cross-report correlation
