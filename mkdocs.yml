@@ -112,16 +112,19 @@ nav:
       - Known Limitations: concepts/limitations.md
   - Outputs:
       - Overview: outputs/index.md
+      - Interactive Mindmaps: outputs/mindmaps.md
       - STIX Bundles: outputs/stix-bundles.md
       - IOC Extraction: outputs/ioc-extraction.md
+      - CVE Intelligence: outputs/cve-intelligence.md
       - MITRE ATT&CK Mapping: outputs/mitre-mapping.md
       - Weekly Briefings: outputs/weekly-briefings.md
+  - MCP:
+      - Overview: mcp/index.md
+      - MCP Server: mcp/server.md
+      - VS Code + Copilot: mcp/vscode-copilot.md
+      - Claude Desktop: mcp/claude-desktop.md
   - Integrations:
       - Overview: integrations/index.md
-      - MCP Server:
-          - Overview: integrations/mcp/index.md
-          - VS Code + Copilot: integrations/mcp/vscode-copilot.md
-          - Claude Desktop: integrations/mcp/claude-desktop.md
       - STIX Platforms: integrations/stix-platforms.md
   - Tutorials:
       - Overview: tutorials/index.md
@@ -138,6 +141,4 @@ nav:
       - Overview: community/index.md
       - Contributing: community/contributing.md
       - Docs Style Guide: community/style-guide.md
-  - Deployment:
-      - Azure Static Web Apps: deployment/azure-static-web-apps.md
   - Changelog: changelog.md
