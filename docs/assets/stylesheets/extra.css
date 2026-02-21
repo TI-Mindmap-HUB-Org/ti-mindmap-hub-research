@@ -426,6 +426,88 @@
 }
 
 /* ==========================================================================
+   Mermaid Diagrams — Expanded width for readability
+   ========================================================================== */
+
+/* Container: break out of content column for more breathing room */
+.md-typeset pre.mermaid,
+.md-typeset .mermaid {
+  overflow-x: auto;
+  overflow-y: hidden;
+  margin-left: -1.5rem;
+  margin-right: -1.5rem;
+  width: calc(100% + 3rem);
+  padding: 2rem 1.5rem;
+  border-radius: var(--hub-radius);
+  scrollbar-width: thin;
+}
+
+[data-md-color-scheme="slate"] .md-typeset pre.mermaid,
+[data-md-color-scheme="slate"] .md-typeset .mermaid {
+  background: rgba(34, 36, 58, 0.5);
+  border: 1px solid rgba(102, 126, 234, 0.12);
+}
+
+[data-md-color-scheme="default"] .md-typeset pre.mermaid,
+[data-md-color-scheme="default"] .md-typeset .mermaid {
+  background: rgba(102, 126, 234, 0.03);
+  border: 1px solid rgba(102, 126, 234, 0.1);
+}
+
+/* SVG: ensure diagrams render at full size without compression */
+.md-typeset .mermaid svg {
+  max-width: none !important;
+  height: auto !important;
+  min-height: 300px;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Horizontal (LR) flowcharts need extra width to avoid node compression */
+.md-typeset .mermaid svg[aria-roledescription="flowchart-v2"] {
+  min-width: 900px;
+}
+
+/* Scrollbar styling for diagram overflow */
+.md-typeset pre.mermaid::-webkit-scrollbar,
+.md-typeset .mermaid::-webkit-scrollbar {
+  height: 6px;
+}
+
+.md-typeset pre.mermaid::-webkit-scrollbar-thumb,
+.md-typeset .mermaid::-webkit-scrollbar-thumb {
+  background: rgba(102, 126, 234, 0.3);
+  border-radius: 3px;
+}
+
+.md-typeset pre.mermaid::-webkit-scrollbar-track,
+.md-typeset .mermaid::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Larger breakout on wider screens */
+@media (min-width: 1220px) {
+  .md-typeset pre.mermaid,
+  .md-typeset .mermaid {
+    margin-left: -3rem;
+    margin-right: -3rem;
+    width: calc(100% + 6rem);
+    padding: 2.5rem 2rem;
+  }
+}
+
+/* Mobile: no breakout, just scroll */
+@media (max-width: 768px) {
+  .md-typeset pre.mermaid,
+  .md-typeset .mermaid {
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+    width: calc(100% + 1rem);
+    padding: 1.25rem 0.75rem;
+  }
+}
+
+/* ==========================================================================
    Smooth transitions for scheme toggle
    ========================================================================== */
 body,
