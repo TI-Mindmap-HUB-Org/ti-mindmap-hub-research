@@ -10,499 +10,394 @@ tags:
   - axios
   - rat
   - credential-theft
-sources_count: 7
+  - javascript
+  - postinstall-hook
+  - c2
+  - anti-forensics
+sources_count: 9
 author: "TI Mindmap HUB"
 ---
 
 # 🛡️ Threat Intelligence Report: Axios npm Supply Chain Attack
 
----
-
-## 1. Source Reports
-
-| # | Title | Published | Source | Platform Link |
-|---|-------|-----------|--------|---------------|
-| 1 | Supply Chain Attack on Axios Pulls Malicious Dependency from npm | 2026-03-31 | socket.dev | [Report](https://ti-mindmap-hub.com/report/bade1989-8d07-4b35-b573-9bdc8d4b7dc5) |
-| 2 | One of the most popular JavaScript packages on earth Axios has been compromised | 2026-03-31 | opensourcemalware.com | [Report](https://ti-mindmap-hub.com/report/a83ab645-a5cb-4c77-945d-2a085f9b7bcb) |
-| 3 | Axios npm Supply Chain Attack: Cross-Platform RAT Delivery via Compromised Maintainer Credentials | 2026-03-31 | picussecurity.com | [Report](https://ti-mindmap-hub.com/report/c729ac02-ea2d-44b4-bc77-58584879a7ee) |
-| 4 | Axios npm compromise: XOR dropper to cross-platform RAT | 2026-03-31 | derp.ca | [Report](https://ti-mindmap-hub.com/report/c7be730d-e165-4425-928b-c746fa3d72fc) |
-| 5 | Axios NPM Distribution Compromised in Supply Chain Attack | 2026-03-31 | wiz.io | [Report](https://ti-mindmap-hub.com/report/2aa15683-2d92-4d69-b583-071c4d0cfd24) |
-| 6 | Supply-Chain Compromise of axios npm Package | 2026-03-31 | gist.github.com (joe-desimone) | [Report](https://ti-mindmap-hub.com/report/2a19352c-0d3b-41bd-a954-878887e3e61d) |
-| 7 | axios Compromised on npm — Malicious Versions Drop Remote Access Trojan | 2026-03-31 | stepsecurity.io | [Report](https://ti-mindmap-hub.com/report/2532c2c1-043f-46b4-bfbb-0de55dd22ea8) |
+> **Date:** 2026-03-31 | **Severity:** CRITICAL | **TLP:** WHITE
 
 ---
 
-## 2. Cross-Source Analysis
+## 📑 Source Reports
 
-### 2.1 Consensus Findings
-
-All seven reports converge on the same core attack chain and agree on the following:
-
-- **Target:** The `axios` npm package, one of the most widely used JavaScript HTTP clients (~83–100 million weekly downloads, used in approximately 80% of cloud and developer environments).
-- **Attack vector:** Compromise of a classic npm access token belonging to the lead maintainer account (`jasonsaayman`), followed by unauthorized publication of two poisoned versions: `axios@1.14.1` (tagged `latest`) and `axios@0.30.4` (tagged `legacy`).
-- **Mechanism:** Injection of a single new runtime dependency — `plain-crypto-js@4.2.1` — into the package manifest. This malicious package executed a postinstall script (`setup.js`) that served as a multi-platform RAT dropper.
-- **C2 infrastructure:** All payloads communicated with `sfrclak.com:8000` (IP: `142.11.206.73`).
-- **Exposure window:** Approximately 169 minutes (under 3 hours) before npm removed the compromised versions.
-- **Anti-forensics:** The dropper deleted itself and restored a clean `package.json` after execution, leaving minimal forensic artifacts.
-
-### 2.2 Unique Insights Per Source
-
-| Source | Key Unique Contribution |
-|--------|------------------------|
-| **socket.dev** | First public disclosure; identified `plain-crypto-js@4.2.1` as malicious; discovered secondary downstream packages `@shadanai/openclaw` and `@qqbrowser/openclaw-qbot` that re-distributed the poisoned dependency |
-| **opensourcemalware.com** | Detailed RAT capability breakdown including reflective DLL injection (Windows), registry persistence key (`HKCU\...\Run\MicrosoftUpdate`), and Windows User-Agent string `mozilla/4.0 (compatible; msie 8.0; windows nt 5.1; trident/4.0)` |
-| **picussecurity.com** | Confirmed that the attacker changed the maintainer's npm email to `ifstap@proton.me`, effectively locking out the legitimate owner and blocking recovery. Noted that the classic npm token lacked IP binding, expiration, and fine-grained permissions |
-| **derp.ca** | Deepest technical analysis: disclosed the XOR key (`OrDeR_7077`), two-layer obfuscation scheme (reverse + base64 + XOR), campaign ID `6202033`, and confirmed the C2 was hosted by Hostwinds in Seattle (AS54290). Exposure window of exactly 169 minutes. Noted absence of macOS persistence |
-| **wiz.io** | Identified a second compromised account (`nrwise`) and confirmed at least 3% of environments reported execution of the compromised code. Provided GHSA advisory IDs: `GHSA-fw8c-xr5c-95f9` and `MAL-2026-2306` |
-| **joe-desimone (GitHub)** | Highlighted the provenance gap: legitimate axios releases were published via GitHub Actions OIDC with SLSA provenance attestation; malicious versions were published via CLI without any attestation — a detectable signal |
-| **stepsecurity.io** | Provided runtime validation via Harden-Runner showing live network connections and process spawning during `npm install`; confirmed process orphaning to evade process-tree analysis |
-
-### 2.3 Points of Discrepancy
-
-- **Weekly downloads:** Reports range from 40M (opensourcemalware.com) to 100M+ (derp.ca, wiz.io). The most authoritative figures cite ~83–100M, suggesting the lower figure is outdated.
-- **macOS persistence:** Most reports describe macOS persistence via the `com.apple.act.mond` binary. However, derp.ca specifically notes the macOS variant did **not** implement persistence, relying on the binary being run once at installation time. Windows persistence is confirmed by all sources via the registry Run key.
-- **Linux payload recovery:** The Linux RAT (`/tmp/ld.py`) was referenced by all sources, but derp.ca confirms the payload was **never recovered** by researchers, leaving its full capabilities unknown.
+| # | Title | Date | Source | Platform Link |
+|---|-------|------|--------|---------------|
+| 1 | Supply Chain Attack on Axios Pulls Malicious Dependency from npm | 2026-03-31 | socket.dev | [View Report](https://ti-mindmap-hub.com/report/bade1989-8d07-4b35-b573-9bdc8d4b7dc5) |
+| 2 | One of the most popular JavaScript packages on earth Axios has been compromised | 2026-03-31 | opensourcemalware.com | [View Report](https://ti-mindmap-hub.com/report/a83ab645-a5cb-4c77-945d-2a085f9b7bcb) |
+| 3 | Axios npm compromise: XOR dropper to cross-platform RAT | 2026-03-31 | www.derp.ca | [View Report](https://ti-mindmap-hub.com/report/c7be730d-e165-4425-928b-c746fa3d72fc) |
+| 4 | Axios NPM Distribution Compromised in Supply Chain Attack | 2026-03-31 | www.wiz.io | [View Report](https://ti-mindmap-hub.com/report/2aa15683-2d92-4d69-b583-071c4d0cfd24) |
+| 5 | Supply-Chain Compromise of axios npm Package | 2026-03-31 | gist.github.com/joe-desimone | [View Report](https://ti-mindmap-hub.com/report/2a19352c-0d3b-41bd-a954-878887e3e61d) |
+| 6 | axios Compromised on npm – Malicious Versions Drop Remote Access Trojan | 2026-03-31 | www.stepsecurity.io | [View Report](https://ti-mindmap-hub.com/report/2532c2c1-043f-46b4-bfbb-0de55dd22ea8) |
+| 7 | Elastic releases detections for the Axios supply chain compromise | 2026-03-31 | www.elastic.co | [View Report](https://ti-mindmap-hub.com/report/4b217583-d0cc-4320-925a-d08d6d822a78) |
+| 8 | Axios npm Supply Chain Attack: Cross-Platform RAT Delivery via Compromised Maintainer Credentials (Picus) | 2026-03-31 | www.picussecurity.com | [View Report](https://ti-mindmap-hub.com/report/c729ac02-ea2d-44b4-bc77-58584879a7ee) |
+| 9 | Axios npm Supply Chain Attack: Cross-Platform RAT Delivery via Compromised Maintainer Credentials (Picus, updated) | 2026-03-31 | www.picussecurity.com | [View Report](https://ti-mindmap-hub.com/report/4e8c37fa-d703-4455-91c6-fd14afe6219a) |
 
 ---
 
-## 3. Threat Intelligence Report
+## 1. Executive Summary
 
-### 3.1 Executive Summary
+On March 31, 2026, one of the most impactful software supply chain attacks in recent history was discovered targeting **Axios**, the most widely used JavaScript HTTP client library with over **100 million weekly downloads** on npm and deployment in approximately **80% of cloud and code environments**. A threat actor compromised the npm maintainer account of `jasonsaayman`, the lead Axios maintainer, by stealing a **classic npm access token** — a long-lived credential lacking modern protections such as IP binding, expiration, or granular scoping.
 
-On March 31, 2026, a sophisticated threat actor executed a high-impact supply chain attack against the `axios` JavaScript library, one of the most widely used npm packages globally. By stealing a classic npm access token from the project's lead maintainer, the attacker bypassed the official CI/CD pipeline and published two malicious package versions (`axios@1.14.1` and `axios@0.30.4`) to the npm registry. Rather than modifying axios's own code — which would have been immediately visible — the attacker injected a single dependency, the newly created and trojanized `plain-crypto-js@4.2.1`, into the package manifest.
+Using these stolen credentials, the attacker published two malicious Axios versions — **v1.14.1** (tagged `latest`) and **v0.30.4** (tagged `legacy`) — both modified to include a single new dependency: **`plain-crypto-js@4.2.1`**. This trojanized package, published minutes before the Axios releases, contained a heavily obfuscated **postinstall dropper script** that downloaded and executed **cross-platform Remote Access Trojans (RATs)** targeting macOS, Windows, and Linux. The malicious versions were live for approximately **169 minutes** before npm removed them, but the exposure window was sufficient to compromise an undetermined number of developer machines, CI/CD pipelines, and production systems. According to Wiz, at least **3% of monitored environments** reported execution of the compromised code.
 
-Any developer, CI/CD pipeline, or production server that ran `npm install` against these versions during the approximately 169-minute exposure window automatically fetched and executed a cross-platform Remote Access Trojan (RAT) dropper. The dropper delivered OS-specific second-stage RATs for Windows, macOS, and Linux, enabling persistent unauthorized access, system reconnaissance, credential exposure, and arbitrary command execution. Anti-forensic cleanup routines erased traces of the infection immediately after execution, significantly complicating incident response.
+The campaign demonstrated exceptional operational discipline: credential pre-staging, a decoy clean package version to avoid detection heuristics, anti-forensic self-deletion after execution, EDR evasion via renamed system utilities, and C2 traffic disguised as legitimate npm registry requests. This incident is tracked as **GHSA-fw8c-xr5c-95f9** and **MAL-2026-2306**.
 
-Given axios's ubiquity — present in an estimated 80% of cloud and development environments — the blast radius of this attack is potentially unprecedented in the npm ecosystem's history.
-
-**Severity:** CRITICAL  
-**Affected packages:** `axios@1.14.1`, `axios@0.30.4`, `plain-crypto-js@4.2.1`  
-**Safe versions:** `axios@1.14.0` and earlier (confirmed clean; published via SLSA-attested pipeline)  
-**Status:** Malicious packages removed from npm; C2 infrastructure dismantled  
-
----
-
-### 3.2 Attack Overview Diagram
+### Attack Lifecycle Diagram
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                      AXIOS NPM SUPPLY CHAIN ATTACK FLOW                      │
-└─────────────────────────────────────────────────────────────────────────────┘
-
-[PREPARATION PHASE — T-18h]
-        │
-        ▼
- ┌──────────────────────────────────────┐
- │  Attacker steals classic npm token   │
- │  for maintainer "jasonsaayman"        │
- │  Changes account email →              │
- │  ifstap@proton.me (ProtonMail)        │
- └──────────────────────────────────────┘
-        │
-        ▼
- ┌──────────────────────────────────────┐
- │  Publishes DECOY package:            │
- │  plain-crypto-js@4.2.0 (benign)      │
- │  to seed trust & evade heuristics    │
- └──────────────────────────────────────┘
-        │
-        ▼
-[ATTACK PHASE — T-0]
-        │
-        ▼
- ┌──────────────────────────────────────┐
- │  Publishes MALICIOUS:                │
- │  plain-crypto-js@4.2.1              │
- │  ├─ postinstall hook → setup.js     │
- │  └─ 2-layer XOR obfuscation         │
- └──────────────────────────────────────┘
-        │
-        ▼
- ┌──────────────────────────────────────┐
- │  Publishes TROJANIZED axios:         │
- │  axios@1.14.1 (tag: latest)          │
- │  axios@0.30.4 (tag: legacy)          │
- │  ONLY CHANGE: +plain-crypto-js dep   │
- └──────────────────────────────────────┘
-        │
-        ▼
-[VICTIM EXECUTION — on npm install]
-        │
-        ├──────────────────────────────────────────────────┐
-        │                                                  │
-        ▼                                                  ▼
- Developer workstation                          CI/CD pipeline
-        │
-        ▼
- ┌──────────────────────────────────────┐
- │  setup.js executes via postinstall   │
- │  Decodes: reverse + base64 + XOR    │
- │  XOR key: OrDeR_7077                │
- │  Detects OS → branches payload       │
- └──────────────────────────────────────┘
-        │
-        ├──────────────────┬──────────────────┐
-        ▼                  ▼                  ▼
-   [WINDOWS]           [macOS]           [LINUX]
- PowerShell+VBS     AppleScript       Python/curl
- wt.exe (PS copy)  com.apple.act.mond  /tmp/ld.py
- Registry persist   (Mach-O RAT)      nohup detach
-        │                  │                  │
-        └──────────────────┴──────────────────┘
-                           │
-                           ▼
-            ┌──────────────────────────────┐
-            │  C2: sfrclak.com:8000        │
-            │  IP: 142.11.206.73           │
-            │  Path: /6202033              │
-            │  Payloads: /product0,1,2     │
-            │  Beacon: every 60 seconds    │
-            └──────────────────────────────┘
-
-[POST-EXPLOITATION]
-        │
-        ▼
- ┌──────────────────────────────────────┐
- │  RAT capabilities:                   │
- │  ├─ System fingerprinting            │
- │  ├─ Process listing                  │
- │  ├─ Directory enumeration            │
- │  ├─ Arbitrary command execution      │
- │  ├─ Code/DLL injection (Windows)     │
- │  └─ Credential/secret harvesting     │
- └──────────────────────────────────────┘
-
-[ANTI-FORENSICS — immediate]
-        │
-        ▼
- ┌──────────────────────────────────────┐
- │  Deletes setup.js                    │
- │  Deletes malicious package.json      │
- │  Restores clean package.json (4.2.0) │
- │  Orphans processes from npm tree     │
- └──────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────────┐
+│                      AXIOS SUPPLY CHAIN ATTACK FLOW                     │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  [1] CREDENTIAL THEFT          [2] PRE-STAGING                          │
+│  ┌──────────────────┐          ┌──────────────────────────┐             │
+│  │ Stolen classic    │          │ Publish clean decoy:     │             │
+│  │ npm token for     │───T-19h──│ plain-crypto-js@4.2.0   │             │
+│  │ jasonsaayman      │          │ (establishes trust)      │             │
+│  └──────────────────┘          └──────────────────────────┘             │
+│           │                              │                              │
+│           ▼                              ▼                              │
+│  [3] WEAPONIZATION             [4] DELIVERY                             │
+│  ┌──────────────────┐          ┌──────────────────────────┐             │
+│  │ Publish malicious │          │ Publish axios@1.14.1     │             │
+│  │ plain-crypto-js   │───T-1h──│ and axios@0.30.4 with    │             │
+│  │ @4.2.1 (dropper)  │          │ dependency on 4.2.1      │             │
+│  └──────────────────┘          └──────────────────────────┘             │
+│                                          │                              │
+│                                          ▼                              │
+│  [5] EXPLOITATION                                                       │
+│  ┌──────────────────────────────────────────────────────────┐           │
+│  │ npm install axios → triggers postinstall hook             │           │
+│  │ setup.js executes → XOR+Base64 deobfuscation              │           │
+│  │ OS detection → platform-specific payload download          │           │
+│  │                                                            │           │
+│  │  ┌──────────┐  ┌──────────────┐  ┌─────────────┐         │           │
+│  │  │  macOS    │  │   Windows    │  │   Linux     │         │           │
+│  │  │ Mach-O   │  │ PowerShell   │  │  Python     │         │           │
+│  │  │ C++ RAT  │  │ RAT (.ps1)   │  │  RAT (.py)  │         │           │
+│  │  └──────────┘  └──────────────┘  └─────────────┘         │           │
+│  └──────────────────────────────────────────────────────────┘           │
+│                            │                                            │
+│                            ▼                                            │
+│  [6] C2 COMMUNICATION     [7] ANTI-FORENSICS                           │
+│  ┌──────────────────┐     ┌─────────────────────────────┐              │
+│  │ sfrclak.com:8000 │     │ Self-delete setup.js         │              │
+│  │ HTTP POST beacon │     │ Overwrite package.json       │              │
+│  │ Base64-encoded   │     │ Restore clean 4.2.0 manifest │              │
+│  │ JSON every 60s   │     │ Orphan processes from npm    │              │
+│  └──────────────────┘     └─────────────────────────────┘              │
+│                                                                         │
+│  [TIMELINE] T-19h → T-1h → T+0 (publish) → T+169min (npm takedown)    │
+└─────────────────────────────────────────────────────────────────────────┘
 ```
 
----
+### Attribution & Threat Actor
 
-### 3.3 Attribution & Threat Actor
+Attribution remains **unconfirmed** at the time of writing. Key indicators of the threat actor's profile include:
 
-**Attribution status:** UNKNOWN — No confirmed group attribution as of 2026-03-31.
+- **Operational sophistication**: The attack exhibited careful pre-staging (publishing a clean decoy version 18 hours before weaponization), multi-platform RAT delivery, and advanced anti-forensics — hallmarks of a well-resourced actor.
+- **Account takeover method**: The attacker stole a classic npm access token (not phished via the web UI), suggesting either credential exfiltration from a compromised development environment or a prior breach of stored tokens.
+- **Email pivot**: The compromised `jasonsaayman` npm account email was changed to `ifstap@proton.me`, a ProtonMail address controlled by the attacker, locking out the legitimate maintainer.
+- **Infrastructure**: The C2 domain `sfrclak[.]com` was registered hours before the attack and hosted at Hostwinds, Seattle (AS54290). No prior malicious activity was associated with this infrastructure.
+- **Possible ecosystem expansion**: Two downstream packages (`@shadanai/openclaw` and `@qqbrowser/openclaw-qbot`) were found to vendor the trojanized Axios, though it is unclear whether these were attacker-controlled or simply collateral.
 
-**Threat actor profile (behavioral assessment):**
-
-The actor demonstrates a high level of operational discipline and technical sophistication, suggesting an experienced team or individual rather than a script-kiddie. Key behavioral indicators:
-
-- **Pre-staging discipline:** Published a benign decoy version (`plain-crypto-js@4.2.0`) approximately 18 hours before the attack to establish package trust and bypass "new package" heuristics deployed by security scanners. This is a hallmark of patient, experienced operators.
-- **Minimal footprint philosophy:** Rather than modifying axios source code (detectable via diff), the attacker made a single, minimal change to `package.json` — adding one dependency line. This reflects tradecraft awareness of code review monitoring.
-- **Multi-platform capability:** Cross-platform RAT development (C++ Mach-O for macOS, PowerShell/.NET injection for Windows, Python for Linux) indicates substantial development resources and capability.
-- **Account takeover as entry vector:** Targeting a classic npm token (non-expiring, non-IP-bound) suggests familiarity with npm's authentication weaknesses. Changing the account email to a ProtonMail address before publishing shows awareness of account recovery mechanisms and a deliberate plan to lock out the legitimate maintainer.
-- **Infrastructure pre-registration:** The C2 domain `sfrclak.com` was registered hours before the attack, minimizing the domain's threat intelligence footprint.
-- **Process orphaning:** Deliberately detaching malicious processes from the `npm install` process tree to evade EDR/process-tree analysis is an advanced anti-forensic technique not commonly seen in opportunistic actors.
-
-**Possible motivations:** Credential and secret harvesting from developer workstations and CI/CD pipelines (API keys, cloud credentials, tokens stored in environment variables); potential espionage or financial gain; possible precursor to a broader supply chain campaign targeting downstream software that uses axios.
-
-**Related packages (downstream propagation):** `@shadanai/openclaw` and `@qqbrowser/openclaw-qbot@0.0.130` were identified as secondary packages that vendored the trojanized axios, potentially propagating the compromise further into the npm ecosystem.
+The operational tempo, multi-platform sophistication, and careful opsec suggest a **motivated financially or espionage-oriented actor** with experience in software supply chain operations. No known APT group has been publicly attributed.
 
 ---
 
-### 3.4 Technical Details
+## 2. Technical Details
 
-#### 3.4.1 Stage 1 — Credential Theft & Account Takeover
+### 2.1 Malware Analysis
 
-The attacker obtained a **classic npm access token** associated with the account `jasonsaayman` (axios lead maintainer). Classic tokens have no expiration date, no IP binding, and grant full publishing rights over all packages owned by the account — a critical security design weakness in the npm registry. After token acquisition, the attacker changed the account's registered email to `ifstap@proton.me`, blocking the legitimate maintainer from receiving account alerts or recovering access through standard email-based flows.
+#### Stage 0: Dependency Injection
 
-#### 3.4.2 Stage 2 — Package Staging & Publication
+The attacker made no changes to Axios's application code. The only modification to `package.json` in both v1.14.1 and v0.30.4 was the addition of a single runtime dependency:
 
-**Decoy publication (T-18h):** `plain-crypto-js@4.2.0` was published as a benign, empty package designed to pass malware heuristics that flag newly created packages. The name was chosen to closely resemble the legitimate `crypto-js` library (typosquatting by design).
-
-**Malicious publication (T-0):** `plain-crypto-js@4.2.1` was published with a `postinstall` hook pointing to `setup.js`. Simultaneously, two poisoned axios versions were published with `plain-crypto-js@^4.2.1` as the only new dependency:
-- `axios@1.14.1` (tagged `latest`) — SHA1: `2553649f232204966871cea80a5d0d6adc700ca`
-- `axios@0.30.4` (tagged `legacy`) — SHA1: `d6f3f62fd3b9f5432f5782b62d8cfd5247d5ee71`
-
-Any project using caret-range version constraints (`^1.14.0` or `^0.30.0`) would automatically pull in the compromised version on next `npm install`.
-
-Critically, these releases lacked **SLSA provenance attestation** — legitimate axios releases are published via GitHub Actions OIDC with attestation. This absence is a detectable signal for security-conscious environments.
-
-#### 3.4.3 Stage 3 — Dropper (setup.js)
-
-The dropper is a 4,209-byte JavaScript file (`setup.js`) executed automatically via npm's `postinstall` lifecycle hook. It is obfuscated with a custom two-layer encoding scheme:
-
-1. **Layer 1:** String reversal + Base64 decoding
-2. **Layer 2:** Custom XOR cipher with static key `OrDeR_7077`
-
-This dual-layer approach was designed to defeat both signature-based detection and simple static analysis. After decoding, the script performs OS detection and branches into platform-specific payload delivery routines. The entire dropper execution completes in under two seconds, before npm finishes installing other dependencies.
-
-**Platform delivery logic:**
-
-| Platform | Mechanism | Payload | Destination |
-|----------|-----------|---------|-------------|
-| **Windows** | PowerShell copied to `%PROGRAMDATA%\wt.exe` (masquerades as Windows Terminal); VBScript (`%TEMP%\6202033.vbs`) executes PowerShell with `-w hidden -ep bypass` | `windows_rat.ps1` via `http://sfrclak.com:8000/product1` | In-memory (fileless) + `system.bat` for persistence |
-| **macOS** | AppleScript via `nohup osascript`; downloads Mach-O binary; ad-hoc code signs it (`codesign --force --deep --sign -`) to bypass Gatekeeper | Mach-O C++ RAT via `http://sfrclak.com:8000/product0` | `/Library/Caches/com.apple.act.mond` |
-| **Linux** | `curl` + `nohup python3` detached in background | Python script via `http://sfrclak.com:8000/product2` | `/tmp/ld.py` |
-
-#### 3.4.4 Stage 4 — RAT Payloads
-
-**macOS RAT (C++ Mach-O, universal binary):**
-- SHA256: `92ff08773995ebc8d55ec4b8e1a225d0d1e51efa4ef88b8849d0071230c9645a`
-- System fingerprinting: hostname, username, macOS version, timezone, CPU type, OS install date, boot time, running processes, directory listings (`/Applications`, `~/Library`, `~/Application Support`)
-- C2 beacon: HTTP POST every 60 seconds, data Base64-encoded
-- Supported commands: arbitrary shell execution, code injection, directory enumeration, RAT termination
-- Written to hidden temp file (`/private/tmp/.XXXXXX`), ad-hoc signed, then moved to final path
-- **No persistence mechanism** on macOS (confirmed by derp.ca)
-
-**Windows RAT (PowerShell/.NET):**
-- SHA256: `617b67a8e1210e4fc87c92d1d1da45a2f311c08d26e89b12307cf583c900d101`
-- Fileless execution: reflective .NET injection — payload never written to disk as PE
-- Persistence: registry Run key `HKCU\Software\Microsoft\Windows\CurrentVersion\Run\MicrosoftUpdate` pointing to `%PROGRAMDATA%\system.bat`, which re-downloads and executes the RAT from C2 on every boot
-- Persistence stub: `system.bat` SHA256: `f7d335205b8d7b20208fb3ef93ee6dc817905dc3ae0c10a0b164f4e7d07121cd`
-- Same HTTP POST protocol and User-Agent spoofing as macOS variant
-
-**Linux RAT (Python):**
-- SHA256: `fcb81618bb15edfdedfb638b4c08a2af9cac9ecba551af135a8402bf980375cf`
-- Executed detached: `nohup python3 /tmp/ld.py SCR_LINK > /dev/null 2>&1 &`
-- Full capabilities unknown — payload was never recovered by researchers
-
-**Shared RAT characteristics (all platforms):**
-- C2 protocol: HTTP POST to `http://sfrclak.com:8000/6202033`
-- Traffic designed to mimic legitimate npm registry traffic (paths: `packages.npm.org/product{0,1,2}`)
-- User-Agent: `mozilla/4.0 (compatible; msie 8.0; windows nt 5.1; trident/4.0)` (legacy IE8/XP string, used for blending)
-- All data Base64-encoded
-
-#### 3.4.5 Stage 5 — Anti-Forensics
-
-Immediately after dropper execution:
-- `setup.js` is **deleted** (removes the malicious install script)
-- `package.json` is **deleted** (removes version 4.2.1 containing the `postinstall` hook)
-- A clean `package.json` (`package.md` renamed to `package.json`) presenting version `4.2.0` is **restored**
-- All spawned processes are **orphaned** from the `npm install` process tree, defeating process-ancestry-based EDR alerts
-
-The only reliable post-infection artifact confirming compromise is the presence of the `plain-crypto-js` directory in `node_modules` — this package is not a dependency in any legitimate axios release.
-
-#### 3.4.6 Incident Response Guidance
-
-**Immediate actions (within 24h):**
-
-1. **Audit lockfiles and node_modules** across all repositories, CI/CD agents, and developer workstations for `axios@1.14.1`, `axios@0.30.4`, or any version of `plain-crypto-js`.
-2. **Pin axios** to `1.14.0` or earlier in all `package.json` files; regenerate lockfiles.
-3. **Block C2 infrastructure** at the network perimeter: domain `sfrclak.com`, IP `142.11.206.73`, port 8000.
-4. **Search for host-based artifacts:**
-   - macOS: `/Library/Caches/com.apple.act.mond`
-   - Windows: `%PROGRAMDATA%\wt.exe`, `%PROGRAMDATA%\system.bat`, registry key `HKCU\...\Run\MicrosoftUpdate`, temp files `%TEMP%\6202033.*`
-   - Linux: `/tmp/ld.py`
-5. **Rotate all secrets** exposed in affected environments: npm tokens, cloud provider credentials (AWS, Azure, GCP), API keys, SSH keys, `.env` files.
-6. **Review CI/CD pipeline logs** for the exposure window (2026-03-31 ~07:00–10:00 UTC) for any `npm install` executions that may have fetched compromised versions.
-7. **Treat affected systems as fully compromised** — reimage where feasible; conduct forensic investigation on others.
-
-**Longer-term mitigations:**
-- Migrate npm publishing workflows to **granular tokens** (scoped, IP-bound, expiring).
-- Enable **publish provenance** / SLSA attestation requirements in CI/CD pipelines.
-- Implement **Software Composition Analysis (SCA)** tools (e.g., Socket.dev, Snyk, Dependabot) with real-time monitoring.
-- Disable or restrict **npm lifecycle scripts** (`--ignore-scripts` flag) in non-development environments.
-- Monitor network egress for HTTP POST traffic matching `sfrclak.com` patterns during `npm install`.
-
----
-
-### 3.5 Infrastructure Analysis
-
-| Component | Value | Notes |
-|-----------|-------|-------|
-| C2 Domain | `sfrclak.com` | Registered hours before the attack; no prior malicious history |
-| C2 IP | `142.11.206.73` | Hosted by Hostwinds, Seattle, WA (AS54290) |
-| C2 Port | `8000` (HTTP, plaintext) | No TLS; deliberate to avoid certificate transparency logs |
-| Beacon URL | `http://sfrclak.com:8000/6202033` | `6202033` = campaign ID |
-| Payload URLs | `/product0` (macOS), `/product1` (Windows), `/product2` (Linux) | Platform-specific staging |
-| Infrastructure lifetime | Hours (taken down after npm removal) | Rapid operational cleanup |
-| Hosting provider | Hostwinds (AS54290) | Commercial US hosting; likely paid with untraceable method |
-
-The use of plain HTTP (port 8000) instead of HTTPS is noteworthy: it avoids leaving traces in certificate transparency logs and reduces infrastructure setup complexity, but also makes traffic trivially detectable if monitored. The C2 infrastructure was dismantled rapidly after the npm takedown, suggesting the attacker monitored the situation in real time and had a planned withdrawal procedure.
-
----
-
-### 3.6 Detection Opportunities
-
-#### Network-Based Detections
-
-| Detection | Pattern | Priority |
-|-----------|---------|----------|
-| C2 beacon | Outbound HTTP POST to `sfrclak.com` or `142.11.206.73:8000` | CRITICAL |
-| Campaign path | HTTP requests containing path `/6202033` or `/product[012]` | CRITICAL |
-| Suspicious User-Agent during npm install | `mozilla/4.0 (compatible; msie 8.0; windows nt 5.1; trident/4.0)` on port 8000 | HIGH |
-| Non-TLS traffic from CI/CD agents | HTTP (not HTTPS) egress during `npm install` operations | MEDIUM |
-| DNS queries | Any resolution of `sfrclak.com` | CRITICAL |
-
-#### Host-Based Detections
-
-| Platform | Artifact | Detection Method |
-|----------|---------|-----------------|
-| All | `plain-crypto-js` in `node_modules` | File system scan / SCA tool |
-| All | `axios@1.14.1` or `axios@0.30.4` in lockfiles | Dependency audit (`npm audit`) |
-| macOS | `/Library/Caches/com.apple.act.mond` | File existence check; AV scan |
-| Windows | `%PROGRAMDATA%\wt.exe` (PowerShell copy) | File path + hash check |
-| Windows | `%PROGRAMDATA%\system.bat` | File path + hash check |
-| Windows | `HKCU\...\Run\MicrosoftUpdate` with unusual value | Registry monitoring |
-| Windows | `%TEMP%\6202033.vbs` or `%TEMP%\6202033.ps1` | File existence / EDR |
-| Linux | `/tmp/ld.py` | File existence check |
-| All | Child processes spawned by `node` / `npm` connecting to external IPs | EDR process-tree monitoring |
-
-#### Behavioral Detections (EDR/XDR Rules)
-
-```
-ALERT: npm postinstall spawning PowerShell or curl with external network connections
-ALERT: Node.js spawning AppleScript (osascript) with download arguments
-ALERT: Process spawned by npm making HTTP POST to non-npm-registry domains
-ALERT: PowerShell copy to PROGRAMDATA with subsequent registry Run key creation
-ALERT: File creation in /Library/Caches/ by node/npm process
-ALERT: Outbound connections from CI/CD agents to IP 142.11.206.73
+```json
+"dependencies": {
+  "plain-crypto-js": "^4.2.1"
+}
 ```
 
-#### SIEM / Sentinel Queries (KQL sketch)
+This dependency — `plain-crypto-js` — had never existed in any legitimate Axios release. The name was chosen to mimic the legitimate `crypto-js` package (typosquatting).
 
-```kusto
-// Detect C2 domain resolution
-DnsEvents
-| where Name contains "sfrclak.com"
-| project TimeGenerated, Computer, Name, IPAddresses
+#### Stage 1: Dropper (`setup.js`)
 
-// Detect C2 IP connections
-CommonSecurityLog
-| where DestinationIP == "142.11.206.73"
-| project TimeGenerated, DeviceName, DestinationPort, Protocol
+Upon `npm install`, the `plain-crypto-js@4.2.1` package triggered a **postinstall lifecycle hook** executing `setup.js` — a 4,209-byte obfuscated JavaScript dropper. The dropper used a **two-layer encoding scheme**:
 
-// Detect suspicious registry persistence
-RegistryEvents
-| where RegistryKey contains "MicrosoftUpdate"
-    and RegistryKey contains "CurrentVersion\\Run"
-| project TimeGenerated, DeviceName, RegistryKey, RegistryValue
-```
+1. **Reversed Base64**: Strings reversed before Base64 encoding
+2. **XOR cipher**: Applied with the static key `OrDeR_7077`
+
+After deobfuscation, the dropper:
+
+1. Detected the host operating system via `process.platform`
+2. Constructed a platform-specific download and execution command
+3. Fetched the appropriate RAT payload from `http://sfrclak[.]com:8000/6202033`
+4. Executed the payload **detached from the npm process tree** (orphaned process)
+5. Performed anti-forensic cleanup: deleted `setup.js`, deleted `package.json` (v4.2.1), renamed `package.md` → `package.json` (restoring clean v4.2.0 manifest)
+
+All dropper operations completed in **under 2 seconds**, before npm finished installing other dependencies.
+
+#### Stage 2: Platform-Specific RATs
+
+**macOS (darwin)**:
+- Delivery: AppleScript invoked via `nohup osascript` → downloads Mach-O binary via `curl`
+- Payload: C++ universal binary written to `/Library/Caches/com.apple.act.mond` (masquerading as Apple system daemon)
+- Code signing: Ad-hoc signed via `codesign --force --deep --sign -` to bypass Gatekeeper
+- Capabilities: System fingerprinting (hostname, username, macOS version, timezone, CPU, installed apps), process enumeration, arbitrary command execution, code injection (writes to hidden temp file `/private/tmp/.XXXXXX` and executes), directory enumeration (`/Applications`, `~/Library`, `~/Application Support`), C2 beacon every 60s
+- Persistence: **None implemented** — single-execution model on macOS
+
+**Windows (win32)**:
+- Delivery: VBScript (`%TEMP%\6202033.vbs`) → downloads PowerShell script (`%TEMP%\6202033.ps1`)
+- EDR evasion: PowerShell is **copied and renamed** to `%PROGRAMDATA%\wt.exe` (disguised as Windows Terminal) with execution flags `-w hidden -ep bypass`
+- Payload: Memory-resident PowerShell RAT with reflective .NET assembly injection (`Assembly.Load(byte[])`) for process hollowing into `cmd.exe`
+- Persistence: Registry Run key `HKCU\Software\Microsoft\Windows\CurrentVersion\Run\MicrosoftUpdate` → executes `%PROGRAMDATA%\system.bat` on every logon → re-fetches RAT from C2 in memory
+- Capabilities: Host fingerprinting via WMI, process listing, remote shell, binary injection (`peinject` command), directory enumeration
+
+**Linux**:
+- Delivery: `curl -o /tmp/ld.py ... && nohup python3 /tmp/ld.py ... &`
+- Payload: Python-based RAT with system reconnaissance, process enumeration from `/proc`, and arbitrary command execution
+- Note: The Linux payload binary was **never recovered** by researchers; analysis was based on dropper logic and IOC references
+
+#### C2 Communication Protocol
+
+All RAT variants shared a consistent C2 protocol:
+
+- **Endpoint**: `http://sfrclak[.]com:8000/6202033` (HTTP POST, plain text)
+- **Beacon interval**: ~60 seconds
+- **Encoding**: Base64-encoded JSON payloads
+- **User-Agent**: `mozilla/4.0 (compatible; msie 8.0; windows nt 5.1; trident/4.0)` — a legacy IE8/Windows XP string to avoid modern browser fingerprinting
+- **Mimicry**: POST bodies contained values like `packages[.]npm[.]org/product{0,1,2}` to disguise traffic as legitimate npm registry requests
+- **Campaign ID**: `6202033` embedded in URL path and payload references
+
+#### RAT Command Set
+
+| Command | Description |
+|---------|-------------|
+| `exec` | Execute arbitrary shell command |
+| `peinject` | In-memory .NET assembly injection (Windows) / code injection (macOS) |
+| `dir` / `ls` | Directory enumeration with metadata (name, size, timestamps) |
+| `ps` | Process listing |
+| `init` | System fingerprinting and initial beacon |
+| `kill` | Terminate the RAT process |
+
+### 2.2 Infrastructure Analysis
+
+| Attribute | Value |
+|-----------|-------|
+| **C2 Domain** | `sfrclak[.]com` |
+| **C2 IP** | `142.11.206.73` |
+| **C2 Port** | `8000` (HTTP) |
+| **C2 Path** | `/6202033` |
+| **Hosting Provider** | Hostwinds, Seattle (AS54290) |
+| **Domain Registration** | Hours before the attack |
+| **Prior Malicious Activity** | None known |
+| **Protocol** | Plain HTTP (no TLS) |
+| **Attacker Email** | `ifstap@proton.me` |
+| **Compromised Account** | `jasonsaayman` (npm) |
+| **Secondary Account** | `nrwise` (npm, email also changed to proton.me) |
+
+The C2 infrastructure was rapidly dismantled after the npm takedown, indicating the operator monitored incident response activity.
+
+### 2.3 Anti-Forensic Techniques
+
+1. **Self-deletion**: `setup.js` deletes itself immediately after payload delivery
+2. **Manifest restoration**: Malicious `package.json` (v4.2.1) deleted and replaced with clean `package.md` renamed to `package.json` (v4.2.0)
+3. **Process orphaning**: RAT processes detached from the npm install process tree, complicating process ancestry analysis
+4. **Fileless execution** (Windows): PowerShell RAT loaded via reflective .NET injection — never written to disk
+5. **Rapid cleanup**: Entire dropper sequence completed in < 2 seconds
+6. **Self-deleting launchers**: VBScript and PowerShell loaders on Windows self-delete after execution
+
+### 2.4 Downstream Propagation
+
+Two additional npm packages were identified as having vendored the trojanized Axios:
+
+- `@shadanai/openclaw`
+- `@qqbrowser/openclaw-qbot@0.0.130`
+
+These packages either bundled the compromised Axios directly or included `plain-crypto-js` as a transitive dependency, extending the attack surface beyond direct Axios installations.
 
 ---
 
-### 3.7 Conclusion
+## 3. Detection Opportunities
 
-The Axios npm supply chain attack of March 31, 2026, represents one of the most technically sophisticated and broadly impactful package compromise events ever documented in the npm ecosystem. The attacker combined credential theft, pre-staging tradecraft, minimal-footprint dependency injection, cross-platform RAT delivery, and aggressive anti-forensic cleanup into a tightly orchestrated operation that could have compromised millions of developer and production environments within hours.
+### 3.1 Behavioral Detections (Elastic Security Labs)
 
-The incident exposes deep systemic vulnerabilities in open-source software supply chains: the reliance on long-lived, unscoped credentials; the implicit trust in transitive dependencies; the unsandboxed execution of npm lifecycle scripts; and the lack of mandatory provenance verification for package publications.
+Elastic Security Labs released cross-platform behavioral detection rules focusing on process ancestry and network behavior rather than static IOCs:
 
-Organizations are strongly advised to treat any environment that executed `npm install` against `axios@1.14.1` or `axios@0.30.4` during the exposure window as fully compromised and initiate full incident response procedures immediately.
+**All Platforms — Delivery Phase:**
+- Node.js process spawning OS-native shell (`sh`, `cscript`, `osascript`) that performs network retrieval (`curl`, `wget`, `Invoke-WebRequest`) and executes downloaded code
+
+**Linux:**
+- `node → /bin/sh -c curl -o /tmp/ld.py ... && nohup python3 /tmp/ld.py ... &`
+- Python process spawned from npm install context with background execution
+- Network connections from Python process to external IPs on non-standard ports
+
+**Windows:**
+- Renamed PowerShell binary (`wt.exe`) executing from `%PROGRAMDATA%`
+- Registry Run key creation under `MicrosoftUpdate`
+- `cmd.exe` spawned with reflective .NET injection patterns
+- VBScript launcher in `%TEMP%` with numeric filename pattern
+
+**macOS:**
+- `osascript` spawned from Node.js process tree performing network download
+- Unsigned or ad-hoc signed Mach-O binary in `/Library/Caches/` with `com.apple.*` naming
+- Gatekeeper bypass via ad-hoc code signing
+
+### 3.2 Network-Based Detections
+
+- HTTP POST traffic to `sfrclak[.]com:8000` or `142.11.206.73:8000`
+- User-Agent string: `mozilla/4.0 (compatible; msie 8.0; windows nt 5.1; trident/4.0)`
+- POST body containing `packages.npm.org/product`
+- Plain HTTP (non-TLS) C2 communication on port 8000
+- Base64-encoded JSON payloads in HTTP POST body
+
+### 3.3 Host-Based Detections
+
+- Presence of `plain-crypto-js` in `node_modules` directories (this package should never exist in legitimate installations)
+- Lockfile (`package-lock.json` / `yarn.lock`) references to `axios@1.14.1` or `axios@0.30.4`
+- File artifacts: `/Library/Caches/com.apple.act.mond`, `%PROGRAMDATA%\wt.exe`, `%PROGRAMDATA%\system.bat`, `/tmp/ld.py`
+- Registry key: `HKCU\Software\Microsoft\Windows\CurrentVersion\Run\MicrosoftUpdate`
+- npm audit or `npm ls` showing `plain-crypto-js` as a dependency
+
+### 3.4 Provenance Verification
+
+Legitimate Axios releases are published via **GitHub Actions OIDC with SLSA provenance**. The malicious versions were published via **direct CLI** without provenance attestations. Organizations should verify npm package provenance as a supply chain integrity check.
 
 ---
 
-## 4. Indicators of Compromise (Labeled)
+## 4. Conclusion
 
-### 4.1 Network IOCs
+The Axios npm supply chain attack of March 31, 2026 represents one of the most sophisticated and potentially impactful software supply chain compromises ever documented. By targeting a single maintainer credential — a classic npm access token without modern security controls — the attacker achieved the ability to distribute malware to a significant fraction of the JavaScript ecosystem.
 
-| Type | Value | Description | Confidence | Kill Chain |
-|------|-------|-------------|------------|------------|
-| Domain | `sfrclak.com` | C2 command-and-control domain | HIGH | C2 |
-| IP | `142.11.206.73` | C2 server IP (Hostwinds, Seattle, AS54290) | HIGH | C2 |
-| URL | `http://sfrclak.com:8000/6202033` | Primary C2 beacon + payload delivery endpoint | HIGH | C2 |
-| URL | `http://sfrclak.com:8000/product0` | macOS RAT payload download URL | MEDIUM | C2 |
-| URL | `http://sfrclak.com:8000/product1` | Windows RAT payload download URL | MEDIUM | C2 |
-| URL | `http://sfrclak.com:8000/product2` | Linux RAT payload download URL | MEDIUM | C2 |
+Key takeaways:
 
-### 4.2 Email IOCs
+1. **Single point of failure**: One stolen credential bypassed all code review, CI/CD, and access control mechanisms
+2. **Transitive trust exploitation**: The npm ecosystem's unsandboxed postinstall hooks and implicit trust in dependencies enabled silent code execution
+3. **Operational discipline**: The 18-hour pre-staging window, anti-forensic cleanup, and C2 mimicry demonstrate a well-planned operation
+4. **Cross-platform impact**: RATs were prepared for all three major operating systems, maximizing the attack surface
+5. **Brief but potent exposure**: Even a 169-minute window was sufficient to achieve measurable compromise across the ecosystem
 
-| Type | Value | Description | Confidence |
-|------|-------|-------------|------------|
-| Email | `ifstap@proton.me` | Attacker-controlled email used to hijack the `jasonsaayman` npm account | HIGH |
+**Immediate remediation actions:**
+- Audit all environments for `axios@1.14.1`, `axios@0.30.4`, and `plain-crypto-js` in lockfiles and `node_modules`
+- Pin Axios to `1.14.0` or earlier known-good version
+- Scan for host-based IOCs across all platforms
+- Block C2 infrastructure (`sfrclak[.]com`, `142.11.206.73`) at network perimeter
+- Rotate all credentials, secrets, and tokens on potentially exposed systems
+- Review CI/CD pipeline logs for npm install activity during the attack window
+- Migrate to **granular npm tokens** with IP binding, expiration, and package scoping
+- Enable npm **publish provenance** verification
 
-### 4.3 File Hashes
+---
 
-| Type | Hash | Description | Confidence |
-|------|------|-------------|------------|
-| SHA256 | `5bb67e88846096f1f8d42a0f0350c9c46260591567612ff9af46f98d1b7571cd` | `axios-1.14.1.tgz` (malicious npm package) | HIGH |
-| SHA256 | `59336a964f110c25c112bcc5adca7090296b54ab33fa95c0744b94f8a0d80c0f` | `axios-0.30.4.tgz` (malicious npm package) | HIGH |
-| SHA1 | `2553649f232204966871cea80a5d0d6adc700ca` | `axios@1.14.1` npm shasum | HIGH |
-| SHA1 | `d6f3f62fd3b9f5432f5782b62d8cfd5247d5ee71` | `axios@0.30.4` npm shasum | HIGH |
-| SHA256 | `58401c195fe0a6204b42f5f90995ece5fab74ce7c69c67a24c61a057325af668` | `plain-crypto-js-4.2.1.tgz` (dropper package) | HIGH |
-| SHA1 | `07d889e2dadce6f3910dcbc253317d28ca61c766` | `plain-crypto-js@4.2.1` npm shasum | HIGH |
-| SHA256 | `e10b1fa84f1d6481625f741b69892780140d4e0e7769e7491e5f4d894c2e0e09` | `setup.js` dropper script | HIGH |
-| SHA256 | `92ff08773995ebc8d55ec4b8e1a225d0d1e51efa4ef88b8849d0071230c9645a` | `com.apple.act.mond` — macOS Mach-O RAT | HIGH |
-| SHA256 | `617b67a8e1210e4fc87c92d1d1da45a2f311c08d26e89b12307cf583c900d101` | `windows_rat.ps1` / `stage2.ps1` — Windows PowerShell RAT | HIGH |
-| SHA256 | `f7d335205b8d7b20208fb3ef93ee6dc817905dc3ae0c10a0b164f4e7d07121cd` | `system.bat` — Windows persistence stub | HIGH |
-| SHA256 | `fcb81618bb15edfdedfb638b4c08a2af9cac9ecba551af135a8402bf980375cf` | `ld.py` — Linux Python RAT (not recovered) | HIGH |
+## 5. Indicators of Compromise (IoC)
 
-### 4.4 File Path IOCs
-
-| Platform | Path | Description | Confidence |
-|----------|------|-------------|------------|
-| macOS | `/Library/Caches/com.apple.act.mond` | macOS RAT binary (masquerading as Apple daemon) | MEDIUM |
-| macOS | `/private/tmp/.XXXXXX` | Temporary staging file (random 6-char name) | MEDIUM |
-| macOS | `/tmp/.XXXXXX.scpt` | Temporary AppleScript execution file | MEDIUM |
-| Windows | `%PROGRAMDATA%\wt.exe` | PowerShell copy disguised as Windows Terminal | HIGH |
-| Windows | `%PROGRAMDATA%\system.bat` | Windows persistence batch stub | HIGH |
-| Windows | `%TEMP%\6202033.vbs` | VBScript downloader | HIGH |
-| Windows | `%TEMP%\6202033.ps1` | PowerShell payload staging file | HIGH |
-| Linux | `/tmp/ld.py` | Linux Python RAT script | MEDIUM |
-| All | `node_modules/plain-crypto-js/` | Presence of this package = compromise indicator | HIGH |
-
-### 4.5 Registry IOCs (Windows)
-
-| Type | Value | Description | Confidence |
-|------|-------|-------------|------------|
-| Registry Key | `HKCU\Software\Microsoft\Windows\CurrentVersion\Run\MicrosoftUpdate` | Persistence Run key; value points to `system.bat` for RAT re-download on reboot | MEDIUM |
-
-### 4.6 Package IOCs
-
-| Package | Version | Status |
-|---------|---------|--------|
-| `axios` | `1.14.1` | MALICIOUS — remove immediately |
-| `axios` | `0.30.4` | MALICIOUS — remove immediately |
-| `plain-crypto-js` | `4.2.1` | MALICIOUS — primary dropper |
-| `plain-crypto-js` | `4.2.0` | SUSPICIOUS — benign decoy, not used by legitimate software |
-| `@shadanai/openclaw` | any | SUSPICIOUS — re-distributes compromised axios |
-| `@qqbrowser/openclaw-qbot` | `0.0.130` | SUSPICIOUS — re-distributes compromised axios |
-
-### 4.7 Behavioral / String IOCs
+### 5.1 Network Indicators
 
 | Type | Value | Description |
 |------|-------|-------------|
-| XOR Key | `OrDeR_7077` | Static XOR key used in dropper obfuscation |
-| Campaign ID | `6202033` | Hardcoded campaign identifier in C2 URL path |
-| User-Agent | `mozilla/4.0 (compatible; msie 8.0; windows nt 5.1; trident/4.0)` | Spoofed legacy IE8/WinXP User-Agent used by all RAT variants for C2 beaconing |
-| npm Account | `jasonsaayman` | Compromised maintainer account |
-| GHSA ID | `GHSA-fw8c-xr5c-95f9` | GitHub Security Advisory for this incident |
-| MAL ID | `MAL-2026-2306` | Malware advisory identifier |
+| Domain | `sfrclak[.]com` | C2 domain |
+| IPv4 | `142.11.206.73` | C2 IP address (Hostwinds, AS54290, Seattle) |
+| URL | `http://sfrclak[.]com:8000/6202033` | C2 endpoint for payload delivery and beaconing |
+| User-Agent | `mozilla/4.0 (compatible; msie 8.0; windows nt 5.1; trident/4.0)` | RAT C2 User-Agent string |
+
+### 5.2 File Hash Indicators
+
+| Type | Value | Description |
+|------|-------|-------------|
+| SHA256 | `5bb67e88846096f1f8d42a0f0350c9c46260591567612ff9af46f98d1b7571cd` | Malicious `axios-1.14.1.tgz` npm package |
+| SHA256 | `59336a964f110c25c112bcc5adca7090296b54ab33fa95c0744b94f8a0d80c0f` | Malicious `axios-0.30.4.tgz` npm package |
+| SHA256 | `58401c195fe0a6204b42f5f90995ece5fab74ce7c69c67a24c61a057325af668` | Trojanized `plain-crypto-js-4.2.1.tgz` |
+| SHA256 | `e10b1fa84f1d6481625f741b69892780140d4e0e7769e7491e5f4d894c2e0e09` | `setup.js` dropper |
+| SHA256 | `92ff08773995ebc8d55ec4b8e1a225d0d1e51efa4ef88b8849d0071230c9645a` | macOS RAT (`com.apple.act.mond` Mach-O binary) |
+| SHA256 | `617b67a8e1210e4fc87c92d1d1da45a2f311c08d26e89b12307cf583c900d101` | Windows RAT (`6202033.ps1` PowerShell script) |
+| SHA256 | `f7d335205b8d7b20208fb3ef93ee6dc817905dc3ae0c10a0b164f4e7d07121cd` | Windows persistence (`system.bat`) |
+| SHA256 | `fcb81618bb15edfdedfb638b4c08a2af9cac9ecba551af135a8402bf980375cf` | Linux RAT (`ld.py` Python script) |
+| SHA1 | `2553649f232204966871cea80a5d0d6adc700ca` | Malicious `axios@1.14.1` |
+| SHA1 | `d6f3f62fd3b9f5432f5782b62d8cfd5247d5ee71` | Malicious `axios@0.30.4` |
+| SHA1 | `07d889e2dadce6f3910dcbc253317d28ca61c766` | Malicious `plain-crypto-js@4.2.1` |
+
+### 5.3 Host-Based Indicators
+
+| Platform | Type | Value | Description |
+|----------|------|-------|-------------|
+| macOS | File Path | `/Library/Caches/com.apple.act.mond` | RAT binary (masquerades as Apple daemon) |
+| macOS | File Path | `/private/tmp/.XXXXXX` | Hidden temp file for injected code |
+| Windows | File Path | `%PROGRAMDATA%\wt.exe` | Renamed PowerShell (EDR evasion) |
+| Windows | File Path | `%PROGRAMDATA%\system.bat` | Persistence batch script |
+| Windows | File Path | `%TEMP%\6202033.vbs` | VBScript launcher (self-deletes) |
+| Windows | File Path | `%TEMP%\6202033.ps1` | PowerShell payload (self-deletes) |
+| Windows | Registry | `HKCU\...\Run\MicrosoftUpdate` | Registry Run key persistence |
+| Linux | File Path | `/tmp/ld.py` | Python RAT script |
+| All | npm | `plain-crypto-js` in `node_modules` | Anomalous dependency (never legitimate) |
+
+### 5.4 Malicious npm Packages
+
+| Package | Version | Status |
+|---------|---------|--------|
+| `axios` | `1.14.1` | Removed from npm |
+| `axios` | `0.30.4` | Removed from npm |
+| `plain-crypto-js` | `4.2.0` | Decoy (clean) |
+| `plain-crypto-js` | `4.2.1` | Malicious dropper |
+| `@shadanai/openclaw` | various | Vendored trojanized Axios |
+| `@qqbrowser/openclaw-qbot` | `0.0.130` | Vendored trojanized Axios |
+
+### 5.5 Campaign Identifiers
+
+| Identifier | Value |
+|------------|-------|
+| Campaign ID | `6202033` |
+| XOR Key | `OrDeR_7077` |
+| Attacker Email | `ifstap@proton.me` |
+| Advisory ID | `GHSA-fw8c-xr5c-95f9` |
+| MAL ID | `MAL-2026-2306` |
 
 ---
 
-## 5. MITRE ATT&CK Techniques
+## 6. MITRE ATT&CK Techniques
 
-| Technique ID | Technique Name | Tactic | Description |
-|-------------|----------------|--------|-------------|
-| **T1195** | Supply Chain Compromise | Initial Access | The attacker published malicious axios versions to the npm registry, poisoning the package supply chain and affecting any consumer of `axios@1.14.1` or `axios@0.30.4` |
-| **T1195.002** | Compromise Software Dependencies and Development Tools | Initial Access | `plain-crypto-js@4.2.1` was injected as a transitive dependency into the poisoned axios releases, exploiting npm's automatic dependency resolution |
-| **T1078** | Valid Accounts | Initial Access | The attacker stole and abused a classic npm access token belonging to the legitimate maintainer `jasonsaayman` to authenticate as a trusted publisher |
-| **T1059.007** | Command and Scripting Interpreter: JavaScript | Execution | The obfuscated dropper `setup.js` was executed automatically via npm's `postinstall` lifecycle hook upon package installation |
-| **T1059.001** | Command and Scripting Interpreter: PowerShell | Execution | On Windows, PowerShell was used to download and execute the RAT payload, launched with `-w hidden -ep bypass` flags to suppress windows and bypass execution policy |
-| **T1059.002** | Command and Scripting Interpreter: AppleScript | Execution | On macOS, `osascript` via a `nohup` wrapper was used to download and execute the Mach-O RAT binary |
-| **T1059.006** | Command and Scripting Interpreter: Python | Execution | On Linux, a Python script (`ld.py`) was fetched and launched via `nohup python3` in a detached background process |
-| **T1059.003** | Command and Scripting Interpreter: Windows Command Shell | Execution | VBScript (`6202033.vbs`) was used on Windows to orchestrate PowerShell execution and payload staging |
-| **T1204.002** | User Execution: Malicious File | Execution | Victims who executed `npm install` on projects with caret-ranged axios dependencies unknowingly triggered the malicious postinstall hook |
-| **T1027** | Obfuscated Files or Information | Defense Evasion | The `setup.js` dropper used a custom two-layer encoding (string reversal + Base64 + XOR with key `OrDeR_7077`) to evade static analysis and signature detection |
-| **T1027.002** | Software Packing | Defense Evasion | Custom encoding/packing of the dropper payload to defeat antivirus and signature-based scanning |
-| **T1036** | Masquerading | Defense Evasion | The dropper restored a clean `package.json` (presenting version 4.2.0) after execution to appear as a legitimate, unmodified package |
-| **T1036.003** | Masquerading: Rename System Utilities | Defense Evasion | On Windows, PowerShell was copied to `%PROGRAMDATA%\wt.exe` to masquerade as Windows Terminal and evade EDR detection heuristics |
-| **T1070.004** | Indicator Removal: File Deletion | Defense Evasion | `setup.js` and the malicious `package.json` were deleted immediately after execution to eliminate forensic evidence of the postinstall hook |
-| **T1070.003** | Indicator Removal: Rename or Move Files | Defense Evasion | `package.md` was renamed to `package.json` to restore a clean package manifest, obscuring the attack mechanism from post-incident investigators |
-| **T1564.001** | Hide Artifacts: Hidden Files and Directories | Defense Evasion | macOS payloads were initially staged in randomly named hidden temp files (`/private/tmp/.XXXXXX`) before being moved to their final paths |
-| **T1116** | Code Signing | Defense Evasion | On macOS, the RAT binary was ad-hoc code signed (`codesign --force --deep --sign -`) to bypass Gatekeeper without requiring a legitimate Apple developer certificate |
-| **T1218** | System Binary Proxy Execution | Defense Evasion | `osascript` (a signed Apple binary) was used as a proxy to download and execute the macOS RAT, evading controls that block unsigned executables |
-| **T1547.001** | Boot or Logon Autostart Execution: Registry Run Keys | Persistence | On Windows, the malware created `HKCU\...\Run\MicrosoftUpdate` pointing to `system.bat`, ensuring the RAT was re-fetched and executed on every user logon |
-| **T1053.003** | Scheduled Task/Job: Unix Shell Script | Persistence | On macOS and Linux, `nohup` was used to launch payloads detached from the terminal session, surviving session termination |
-| **T1105** | Ingress Tool Transfer | Command and Control | Platform-specific RAT binaries and scripts were downloaded from the C2 server (`sfrclak.com:8000/product[0-2]`) during the dropper execution phase |
-| **T1219** | Remote Access Software | Command and Control | All platform variants deployed fully functional RATs with remote command execution, process control, and file system access capabilities |
-| **T1071.001** | Application Layer Protocol: Web Protocols | Command and Control | RATs beaconed to the C2 server every 60 seconds via plain HTTP POST, with payloads Base64-encoded and traffic patterns designed to mimic npm registry requests |
-| **T1041** | Exfiltration Over C2 Channel | Exfiltration | System fingerprint data (hostname, username, OS version, timezone, CPU, processes, directory listings) was exfiltrated to the C2 server via the same HTTP POST channel used for command receipt |
-| **T1082** | System Information Discovery | Discovery | All RAT variants collected comprehensive system information: hostname, username, OS version, timezone, CPU type, OS install date, boot time |
-| **T1057** | Process Discovery | Discovery | All RAT variants enumerated running processes and transmitted the list to the C2 server |
-| **T1083** | File and Directory Discovery | Discovery | RATs enumerated directory structures including `/Applications`, `~/Library`, `~/Application Support` (macOS) and equivalent Windows paths |
-| **T1005** | Data from Local System | Collection | The macOS RAT specifically collected data from application directories and local system inventory for exfiltration to the C2 |
-| **T1074** | Data Staged | Collection | On macOS, the received binary was written to a hidden temp file (`/private/tmp/.XXXXXX`) before being moved and executed |
-| **T1552** | Unsecured Credentials | Credential Access | Developer workstations and CI/CD environments commonly store secrets in environment variables, config files, and `.env` files — all accessible to the RAT's command execution capability |
+| Technique ID | Technique | Tactic | Description |
+|--------------|-----------|--------|-------------|
+| T1195 | Supply Chain Compromise | Initial Access | Compromised the npm publishing pipeline for Axios by stealing the lead maintainer's classic npm access token |
+| T1195.002 | Compromise Software Dependencies and Development Tools | Initial Access | Injected malicious `plain-crypto-js@4.2.1` dependency into Axios package manifest |
+| T1078 | Valid Accounts | Initial Access | Used stolen credentials for the `jasonsaayman` npm account to publish malicious packages |
+| T1204.002 | User Execution: Malicious File | Execution | Developers unknowingly installed compromised Axios versions via `npm install`, triggering automatic postinstall execution |
+| T1059.007 | Command and Scripting Interpreter: JavaScript | Execution | Obfuscated `setup.js` dropper executed via npm postinstall lifecycle hook |
+| T1059.001 | Command and Scripting Interpreter: PowerShell | Execution | Windows RAT delivered and executed as PowerShell script with hidden execution and bypass flags |
+| T1059.002 | Command and Scripting Interpreter: AppleScript | Execution | macOS payload delivery via `osascript` executing AppleScript to download and launch RAT binary |
+| T1059.004 | Command and Scripting Interpreter: Unix Shell | Execution | Linux payload fetched and executed via `sh -c curl ... && nohup python3 ...` |
+| T1059.006 | Command and Scripting Interpreter: Python | Execution | Linux RAT implemented as Python script (`ld.py`) |
+| T1059.003 | Command and Scripting Interpreter: Windows Command Shell | Execution | Shell commands executed via RAT on Windows systems |
+| T1027 | Obfuscated Files or Information | Defense Evasion | Dropper used two-layer encoding (reversed Base64 + XOR with key `OrDeR_7077`) |
+| T1027.002 | Obfuscated Files or Information: Software Packing | Defense Evasion | Custom encoding scheme to evade static analysis and signature-based detection |
+| T1036 | Masquerading | Defense Evasion | macOS RAT masquerading as Apple system daemon (`com.apple.act.mond`) |
+| T1036.003 | Masquerading: Rename System Utilities | Defense Evasion | Windows: PowerShell copied and renamed to `wt.exe` (Windows Terminal) to evade EDR |
+| T1070.004 | Indicator Removal: File Deletion | Defense Evasion | Self-deletion of `setup.js`, `package.json`, VBScript and PowerShell launchers |
+| T1070.003 | Indicator Removal: Rename or Move Files | Defense Evasion | Renamed `package.md` → `package.json` to restore clean package manifest |
+| T1564.001 | Hide Artifacts: Hidden Files and Directories | Defense Evasion | macOS injected code written to hidden temp file `/private/tmp/.XXXXXX` |
+| T1218 | System Binary Proxy Execution | Defense Evasion | Renamed PowerShell binary used as signed binary proxy for execution |
+| T1116 | Code Signing | Defense Evasion | Ad-hoc code signing of macOS Mach-O binary to bypass Gatekeeper |
+| T1055 | Process Injection | Defense Evasion | In-memory .NET assembly injection on Windows |
+| T1055.012 | Process Injection: Process Hollowing | Defense Evasion | Reflective .NET injection via `Assembly.Load(byte[])` into `cmd.exe` |
+| T1547.001 | Boot or Logon Autostart: Registry Run Keys | Persistence | Windows persistence via `HKCU\...\Run\MicrosoftUpdate` registry key |
+| T1053.001 | Scheduled Task/Job: At (Linux) | Persistence | Linux RAT launched with `nohup` and backgrounded |
+| T1105 | Ingress Tool Transfer | Command and Control | Platform-specific RAT payloads downloaded from C2 via `curl`/`wget`/PowerShell |
+| T1219 | Remote Access Software | Command and Control | Cross-platform RAT with full remote access capabilities |
+| T1095 | Non-Application Layer Protocol | Command and Control | C2 communication via plain HTTP with Base64-encoded JSON and fake IE8 User-Agent |
+| T1041 | Exfiltration Over C2 Channel | Exfiltration | System fingerprint data and reconnaissance results exfiltrated via C2 beacon |
+| T1082 | System Information Discovery | Discovery | Host fingerprinting: hostname, username, OS version, CPU, timezone, install date, boot time |
+| T1057 | Process Discovery | Discovery | Enumeration of running processes with PID, username, and start times |
+| T1083 | File and Directory Discovery | Discovery | Directory enumeration of applications, user libraries, and configuration paths |
+| T1005 | Data from Local System | Collection | Collection of system metadata, installed applications, and configuration data |
+| T1074 | Data Staged | Collection | Collected data staged and Base64-encoded before C2 exfiltration |
 
 ---
 
-*Report generated by [TI Mindmap HUB](https://ti-mindmap-hub.com) — Automated Threat Intelligence Platform*  
-*Generation date: 2026-03-31 | Sources: 7 reports | Classification: TLP:WHITE*
+*Report generated by TI Mindmap HUB — Cross-source threat intelligence analysis platform.*
+*Sources: Socket.dev, OpenSourceMalware.com, derp.ca, Wiz.io, Joe Desimone (GitHub Gist), StepSecurity, Elastic Security Labs, Picus Security.*
