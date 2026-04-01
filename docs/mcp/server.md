@@ -23,7 +23,7 @@ The MCP server provides AI clients with access to:
 | Client | Setup Guide |
 |--------|-------------|
 | VS Code + GitHub Copilot | [VS Code + Copilot Setup](vscode-copilot.md) |
-| Claude Desktop | [Claude Desktop Setup](claude-desktop.md) |
+| Claude | [Claude Setup](claude.md) |
 
 ## Server Endpoint
 
@@ -33,7 +33,12 @@ https://mcp.ti-mindmap-hub.com/mcp
 
 ## Authentication
 
-All requests require an API key passed in the `X-API-Key` header.
+TI Mindmap HUB supports two authentication models, depending on the MCP client:
+
+- **OAuth 2.1** for connector-native clients such as Claude custom connectors
+- **API key authentication** via the `X-API-Key` header for direct HTTP clients and local integrations
+
+For Claude, the OAuth flow is started by Claude when the custom connector is added, so no manual API key entry is required in Claude.
 
 ### Getting an API Key
 
@@ -42,7 +47,7 @@ All requests require an API key passed in the `X-API-Key` header.
 3. Click **Generate Key**
 4. Copy and securely store your key (format: `tim_xxxxxxxxxxxx`)
 
-> **Roadmap**: OAuth 2.0 authentication support is planned for a future release, enabling browser-based authorization flows for MCP clients that support it (e.g., Claude Web).
+Use an API key when configuring direct clients such as the VS Code example in this repository. If you are using Claude's custom connector flow, use OAuth instead.
 
 ## Available Tools (19)
 
@@ -239,8 +244,8 @@ Content-Type: application/json
 |------|-------------|
 | [MCP Overview](index.md) | MCP section overview, use cases, and agents |
 | [VS Code + Copilot Setup](vscode-copilot.md) | Setup guide for VS Code + GitHub Copilot |
-| [Claude Desktop Setup](claude-desktop.md) | Setup guide for Claude Desktop |
-| [mcp-bridge.js](https://github.com/TI-Mindmap-HUB-Org/ti-mindmap-hub-research/blob/main/mcp-integration/mcp-bridge.js) | Bridge script for stdio-based clients |
+| [Claude Setup](claude.md) | Setup guide for Claude via native connector and OAuth |
+| [mcp-bridge.js](https://github.com/TI-Mindmap-HUB-Org/ti-mindmap-hub-research/blob/main/mcp-integration/mcp-bridge.js) | Legacy bridge script for stdio-based clients |
 
 ## Support
 

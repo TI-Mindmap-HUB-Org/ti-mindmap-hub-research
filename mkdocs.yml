@@ -122,7 +122,7 @@ nav:
       - Overview: mcp/index.md
       - MCP Server: mcp/server.md
       - VS Code + Copilot: mcp/vscode-copilot.md
-      - Claude Desktop: mcp/claude-desktop.md
+      - Claude: mcp/claude.md
   - Integrations:
       - Overview: integrations/index.md
       - STIX Platforms: integrations/stix-platforms.md

@@ -96,7 +96,7 @@ Visit [ti-mindmap-hub.com](https://ti-mindmap-hub.com) to browse reports, view a
 
 ### MCP Integration
 
-Connect your AI assistant (VS Code + GitHub Copilot, Claude Desktop, Microsoft Copilot Studio) to query threat intelligence data directly from your working environment. See the [MCP](../mcp/index.md) section.
+Connect your AI assistant (VS Code + GitHub Copilot, Claude, Microsoft Copilot Studio) to query threat intelligence data directly from your working environment. See the [MCP](../mcp/index.md) section.
 
 ### API
 

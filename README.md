@@ -66,9 +66,9 @@ TI Mindmap HUB exposes a [Model Context Protocol (MCP)](https://modelcontextprot
 
 | Client | Setup Guide |
 |--------|-------------|
-| VS Code + GitHub Copilot | [Setup Guide](docs/integrations/mcp/vscode-copilot.md) |
-| Claude Desktop | [Setup Guide](docs/integrations/mcp/claude-desktop.md) |
-| Custom Clients | [MCP Server Docs](docs/integrations/mcp/index.md) |
+| VS Code + GitHub Copilot | [Setup Guide](docs/mcp/vscode-copilot.md) |
+| Claude | [Setup Guide](docs/mcp/claude.md) |
+| Custom Clients | [MCP Server Docs](docs/mcp/index.md) |
 
 **Quick example** — with a connected MCP client:
 

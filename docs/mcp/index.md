@@ -27,7 +27,8 @@ The MCP server is the core integration layer. It provides:
 
 - **19 tools** for querying threat intelligence data
 - **HTTP + SSE transport** with session management
-- **API key authentication** (format: `tim_xxxxxxxxxxxx`)
+- **OAuth 2.1** for connector-native clients such as Claude
+- **API key authentication** for direct HTTP clients and local tooling
 - **Endpoint**: `https://mcp.ti-mindmap-hub.com/mcp`
 
 For full technical documentation, available tools, protocol details, and examples, see the [MCP Server](server.md) page.
@@ -41,7 +42,7 @@ Setup guides for connecting AI assistants to TI Mindmap HUB:
 | Client | Description | Guide |
 |--------|-------------|-------|
 | **VS Code + GitHub Copilot** | Query threat intelligence directly from your IDE | [Setup Guide](vscode-copilot.md) |
-| **Claude Desktop** | Use Claude as a threat intelligence analyst via local bridge | [Setup Guide](claude-desktop.md) |
+| **Claude** | Use Claude through a native custom connector with OAuth | [Setup Guide](claude.md) |
 
 Additional client integrations (e.g., Microsoft Copilot Studio, Cursor, custom clients) will be documented here as they become available.
 
