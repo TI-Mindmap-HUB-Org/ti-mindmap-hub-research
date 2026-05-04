@@ -175,6 +175,21 @@ The backend assembles all extraction outputs into a unified STIX 2.1 bundle:
 
 See [STIX 2.1 Data Model](data-model.md) for detailed STIX generation documentation.
 
+### Stage 4b: Knowledge Graph Sync
+
+```
+STIX Bundle → Entity Resolution → Neo4j Canonical Entities → Cross-Report Relationships
+```
+
+After STIX bundle assembly, entities are synced to the **STIX Constellation** Knowledge Graph (Neo4j):
+
+1. STIX objects are extracted and normalized
+2. Entity deduplication merges aliases into canonical entities
+3. Relationships are stored as graph edges
+4. Cross-report links are computed (shared actors, tools, techniques)
+
+This enables cross-report queries, attack path analysis, and campaign tracking. See [Knowledge Graph](../outputs/knowledge-graph.md) for full documentation.
+
 ### Stage 5: Per-Article Frontend Delivery
 
 Each processed article is presented to the analyst through a tabbed interface with:
@@ -247,12 +262,18 @@ See [Known Limitations](limitations.md) for detailed information on system limit
 
 | Component | Technology |
 |-----------|------------|
-| LLM Provider | OpenAI GPT-4 / Azure OpenAI |
-| Backend | Python, Azure Functions |
-| Database | Azure Cosmos DB |
-| Frontend | React, TypeScript, Material-UI |
-| Authentication | Azure AD B2C |
-| Hosting | Azure Static Web Apps, Azure Container Apps |
+| LLM Provider | Azure OpenAI |
+| Backend | Python, FastAPI, Azure Functions |
+| Primary Database | Azure Cosmos DB |
+| Graph Database | Neo4j (Knowledge Graph) |
+| Object Storage | Azure Blob Storage |
+| Queue | Azure Storage Queue |
+| Frontend | React 19, TypeScript, MUI 7 |
+| Authentication | Azure AD B2C + API Keys |
+| Hosting | Azure Static Web Apps (frontend), Azure Functions (backend) |
+| Secrets | Azure Key Vault |
+
+For full architectural details, see [Architecture](architecture.md).
 
 ## Reproducibility
 
@@ -265,8 +286,8 @@ While the core application code is private, we aim to provide:
 
 ## Future Research Directions
 
-1. **Knowledge Graph Construction** — Building a graph database of threat relationships for longitudinal analysis
+1. **Knowledge Graph Expansion** — Improving entity resolution accuracy and expanding inferred relationship detection with confidence scoring
 2. **Confidence Scoring** — Developing reliable confidence metrics for AI outputs
-3. **Cross-Source Correlation** — Linking intelligence across multiple sources
+3. **Cross-Source Correlation** — Deepening analytics reports with automated multi-source correlation
 4. **Evaluation Framework** — Systematic evaluation of extraction accuracy
 5. **Expanded OSINT Coverage** — Broader source monitoring and deeper cross-report correlation

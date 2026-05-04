@@ -107,6 +107,7 @@ nav:
       - Overview: getting-started/index.md
   - Concepts:
       - Overview: concepts/index.md
+      - Architecture: concepts/architecture.md
       - Processing Methodology: concepts/methodology.md
       - STIX 2.1 Data Model: concepts/data-model.md
       - Known Limitations: concepts/limitations.md
@@ -118,6 +119,8 @@ nav:
       - CVE Intelligence: outputs/cve-intelligence.md
       - MITRE ATT&CK Mapping: outputs/mitre-mapping.md
       - Weekly Briefings: outputs/weekly-briefings.md
+      - Knowledge Graph: outputs/knowledge-graph.md
+      - Analytics Reports: outputs/analytics-reports.md
   - MCP:
       - Overview: mcp/index.md
       - MCP Server: mcp/server.md

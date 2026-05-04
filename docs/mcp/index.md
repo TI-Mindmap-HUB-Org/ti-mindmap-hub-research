@@ -17,7 +17,7 @@ And receive a structured, contextual, and immediately usable response — withou
 
 ## What Is MCP
 
-The [Model Context Protocol](https://modelcontextprotocol.io/) is an open standard that enables AI applications to connect to external data sources and tools. TI Mindmap HUB implements an MCP server that exposes 19 tools across six categories, covering reports, weekly briefings, IOC search, CVE intelligence, STIX bundles, and platform statistics.
+The [Model Context Protocol](https://modelcontextprotocol.io/) is an open standard that enables AI applications to connect to external data sources and tools. TI Mindmap HUB implements an MCP server that exposes 25 tools across seven categories, covering reports, weekly briefings, IOC search, CVE intelligence, STIX bundles, platform statistics, and knowledge graph queries.
 
 ---
 
@@ -25,7 +25,7 @@ The [Model Context Protocol](https://modelcontextprotocol.io/) is an open standa
 
 The MCP server is the core integration layer. It provides:
 
-- **19 tools** for querying threat intelligence data
+- **25 tools** for querying threat intelligence data
 - **HTTP + SSE transport** with session management
 - **OAuth 2.1** for connector-native clients such as Claude
 - **API key authentication** for direct HTTP clients and local tooling

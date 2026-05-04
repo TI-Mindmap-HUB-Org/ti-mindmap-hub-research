@@ -28,6 +28,8 @@ flowchart LR
     E5 --> G[Article Knowledge<br/>Artifacts]
     F --> H[Analyst Frontend<br/>by Article]
     G --> H
+    F --> KG[Knowledge Graph<br/>Neo4j Sync]
+    KG --> KGF[STIX Constellation<br/>Cross-Report Explorer]
     H --> I1[Intel Graph and<br/>STIX JSON Download]
     H --> I2[Diamond Model and<br/>Attack Flow]
     H --> I3[AI Summary and<br/>TI Mindmap]
@@ -48,7 +50,8 @@ The platform processes threat intelligence through a multi-stage pipeline:
     - **Actor and Malware Context** — Threat actor attribution and malware family identification
     - **Summary and Mindmap Generation** — AI-powered summaries and visual threat models
 4. **STIX 2.1 Structuring** — Extracted entities and relationships are assembled into validated STIX 2.1 bundles.
-5. **Analyst Frontend** — All outputs converge into a per-article experience with multiple analysis tabs.
+5. **Knowledge Graph Sync** — STIX entities are deduplicated and synced to Neo4j as canonical entities, enabling cross-report correlation via the [STIX Constellation](../outputs/knowledge-graph.md).
+6. **Analyst Frontend** — All outputs converge into a per-article experience with multiple analysis tabs, plus a cross-report Knowledge Graph explorer.
 
 ---
 

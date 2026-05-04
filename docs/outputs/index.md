@@ -1,6 +1,6 @@
 ---
 title: Outputs
-description: Overview of all structured outputs produced by TI Mindmap HUB — mindmaps, STIX bundles, IOCs, CVEs, MITRE ATT&CK mappings, and weekly briefings.
+description: Overview of all structured outputs produced by TI Mindmap HUB — mindmaps, STIX bundles, IOCs, CVEs, MITRE ATT&CK mappings, weekly briefings, knowledge graph, and analytics reports.
 ---
 
 # Outputs
@@ -19,6 +19,8 @@ TI Mindmap HUB generates several structured outputs from each processed threat i
 | [CVE Intelligence](cve-intelligence.md) | JSON | Vulnerability identifiers with enrichment and cross-report correlation |
 | [MITRE ATT&CK Mapping](mitre-mapping.md) | Table / JSON | Behavioral technique and tactic mapping from report content |
 | [Weekly Briefings](weekly-briefings.md) | Markdown / HTML | Trend-focused weekly threat landscape synthesis from 50–60 reports |
+| [Knowledge Graph](knowledge-graph.md) | Neo4j Graph | Cross-report entity correlation via STIX Constellation |
+| [Analytics Reports](analytics-reports.md) | Markdown / HTML | Cross-source deep-dive intelligence analyses with severity ratings |
 
 ---
 

@@ -56,12 +56,20 @@ A multi-agent AI system analyzes all weekly intelligence, identifies emerging tr
 All processed reports in a centralized, filterable dashboard. A single pane of glass for browsing and searching through a growing library of threat intelligence.
 </div>
 
+<div class="feature-card" markdown>
+<div class="feature-icon">🕸️</div>
+
+### Knowledge Graph — STIX Constellation
+
+A Neo4j-backed cross-report graph connecting threat actors, malware, tools, and techniques across all processed intelligence. Enables attack path analysis, campaign tracking, and entity correlation.
+</div>
+
 <div class="feature-card feature-card--wide" markdown>
 <div class="feature-icon">🧩</div>
 
 ### Integration & Export
 
-Each report offers multiple views: raw text, visual mindmaps, structured IOC/TTP tables, and downloadable **STIX 2.1 bundles**. Seamless integration with SIEMs, SOARs, TIPs, and AI assistants via the **MCP server** (19 tools).
+Each report offers multiple views: raw text, visual mindmaps, structured IOC/TTP tables, and downloadable **STIX 2.1 bundles**. Seamless integration with SIEMs, SOARs, TIPs, and AI assistants via the **MCP server** (25 tools).
 
 !!! warning ""
     All AI-generated outputs are experimental and require human verification before operational use.

@@ -1,6 +1,6 @@
 ---
 title: MCP Server
-description: Model Context Protocol server for TI Mindmap HUB — 19 tools for AI assistants to query threat intelligence data.
+description: Model Context Protocol server for TI Mindmap HUB — 25 tools for AI assistants to query threat intelligence data.
 ---
 
 # MCP Server Integration
@@ -17,6 +17,7 @@ The MCP server provides AI clients with access to:
 - **IOC Search** — Search for Indicators of Compromise across all reports
 - **STIX 2.1 Bundles** — Structured threat intelligence in standard format
 - **MITRE ATT&CK Mapping** — TTPs extracted from threat reports
+- **Knowledge Graph** — Cross-report entity search, clustering, timeline, and attack path analysis via STIX Constellation
 
 ## Quick Start
 
@@ -49,7 +50,7 @@ For Claude, the OAuth flow is started by Claude when the custom connector is add
 
 Use an API key when configuring direct clients such as the VS Code example in this repository. If you are using Claude's custom connector flow, use OAuth instead.
 
-## Available Tools (19)
+## Available Tools (25)
 
 ### Reports (5 tools)
 
@@ -119,6 +120,24 @@ Bundles can be imported into STIX-compatible platforms like MISP, OpenCTI, or Mi
 |------|-------------|------------|
 | `get_statistics` | Platform statistics | — |
 | `submit_article` | Submit URL for analysis | `url` |
+
+### Knowledge Graph — STIX Constellation (6 tools)
+
+| Tool | Description | Parameters |
+|------|-------------|------------|
+| `kg_stats` | Graph-wide statistics (entities, relationships, type distribution) | — |
+| `kg_search` | Search canonical entities by name or alias | `query`, `entity_type`, `limit` |
+| `kg_cluster` | Get local ego-graph around an entity | `canon_id`, `depth`, `include_inferred`, `min_inferred_confidence` |
+| `kg_timeline` | Chronological report appearances for an entity | `canon_id` |
+| `kg_attack_path` | Find attack patterns and traverse to connected actors/malware/tools | `ttp_query`, `depth` |
+| `kg_cross_report` | Find entities shared between two reports | `report_id_a`, `report_id_b` |
+
+The Knowledge Graph tools query the Neo4j-backed **STIX Constellation** — a cross-report graph that deduplicates entities into canonical nodes and connects them across all processed intelligence. Use these tools to:
+
+- **Pivot from IOC to actor** — Start with an indicator and discover associated threat groups
+- **Map adversary infrastructure** — Query a TTP and traverse to the actors, malware, and tools using it
+- **Correlate reports** — Find shared entities between two articles to identify campaign overlaps
+- **Track entity activity** — View the timeline of an actor or malware family across reports
 
 ## Protocol Details
 

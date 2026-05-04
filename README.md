@@ -62,7 +62,7 @@ You can also browse the docs directly in this repo under [`docs/`](docs/):
 
 ## MCP Integration
 
-TI Mindmap HUB exposes a [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) server with 19 tools for AI assistant integration.
+TI Mindmap HUB exposes a [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) server with 25 tools for AI assistant integration.
 
 | Client | Setup Guide |
 |--------|-------------|
