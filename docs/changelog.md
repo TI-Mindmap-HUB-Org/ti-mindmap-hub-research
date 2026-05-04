@@ -11,6 +11,29 @@ This changelog covers the public documentation repository. For platform release 
 
 ---
 
+## 2026-05 — Architecture, Knowledge Graph & MCP 25 Tools
+
+### Added
+
+- **[Architecture](concepts/architecture.md)** — Full technical architecture page covering backend (Azure Functions + FastAPI), frontend (React 19 + MUI 7), data stores (Cosmos DB, Neo4j, Blob Storage), authentication model, and deployment topology with Mermaid diagrams
+- **[Knowledge Graph — STIX Constellation](outputs/knowledge-graph.md)** — Documentation for the Neo4j-backed cross-report knowledge graph: graph schema, API endpoints (6), frontend experience, entity resolution, and use cases
+- **[Analytics Reports](outputs/analytics-reports.md)** — Documentation for cross-source intelligence reports with severity classification and correlation methodology
+- Knowledge Graph tools added to MCP server documentation (6 new tools: `kg_stats`, `kg_search`, `kg_cluster`, `kg_timeline`, `kg_attack_path`, `kg_cross_report`)
+
+### Changed
+
+- **MCP tool count updated from 19 to 25** across all documentation (`server.md`, `index.md`, `llms.txt`, `README.md`, home page)
+- MCP server overview now lists seven tool categories (added Knowledge Graph)
+- Processing pipeline diagrams updated to include Neo4j Knowledge Graph sync stage
+- Technology stack in `methodology.md` corrected: Azure OpenAI (not generic OpenAI), FastAPI (added), Neo4j (added), MUI 7 (was "Material-UI"), Azure Functions (was "Azure Container Apps")
+- Future research directions updated — Knowledge Graph moved from "planned" to "shipped"
+- Home page (`index.md`) — added Knowledge Graph feature card
+- Outputs index table — added Knowledge Graph and Analytics Reports rows
+- `concepts/index.md` high-level pipeline — added Knowledge Graph sync and STIX Constellation node
+- `mkdocs.yml` navigation — added Architecture, Knowledge Graph, and Analytics Reports entries
+
+---
+
 ## 2025-02 — Documentation Site Launch
 
 ### Added
