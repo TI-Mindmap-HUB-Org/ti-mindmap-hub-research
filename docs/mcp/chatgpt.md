@@ -16,7 +16,7 @@ Connect ChatGPT to TI Mindmap HUB so you can query reports, IOCs, CVEs, STIX bun
 - A **TI Mindmap HUB** account — see [Account & Access](../using-the-platform/account-and-access.md)
 - MCP endpoint: `https://mcp.ti-mindmap-hub.com/mcp`
 
-No API key is needed: ChatGPT signs you in with OAuth, as Claude does.
+No API key is needed: ChatGPT signs you in with OAuth. The TI Mindmap HUB server supports Dynamic Client Registration and explicitly accepts ChatGPT's connector redirect URI, so ChatGPT registers itself automatically.
 
 ## Setup
 
@@ -40,7 +40,7 @@ Complete the TI Mindmap HUB sign-in in the browser window ChatGPT opens, then re
 
 ### 4. Review tools
 
-Open the app's details page to see the 25 tools and toggle any of them off. Use **Refresh** after server updates to pull new tools and descriptions.
+Open the app's details page to see the 27 tools and toggle any of them off. Use **Refresh** after server updates to pull new tools and descriptions.
 
 ### 5. Use it in a conversation
 
@@ -63,12 +63,12 @@ With TI Mindmap HUB, get the latest weekly briefing and list the top observed TT
 ```
 
 ```text
-Use TI Mindmap HUB kg_search for "APT28", then kg_cluster with depth 2, and describe the main connected malware and tools.
+Use TI Mindmap HUB kg_search_entities for "APT28", then kg_get_entity_cluster with depth 2, and describe the main connected malware and tools.
 ```
 
 ## Confirmations
 
-ChatGPT treats tools without a read-only hint as **write actions** and asks for confirmation. Review the payload before approving — especially `submit_article`, which sends a URL for processing. You can expand each tool call to see the full JSON input and output.
+All TI Mindmap HUB tools except `submit_article` are annotated as **read-only**, so ChatGPT runs them without asking. `submit_article` is treated as a write action and requires your confirmation — review the URL before approving. You can expand each tool call to see the full JSON input and output.
 
 ## Troubleshooting
 

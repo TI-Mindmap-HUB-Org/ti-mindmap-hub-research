@@ -132,7 +132,7 @@ The original article, converted to clean text. This is your ground truth for ver
 
 ## Related Reports
 
-Below the tabs, **Related Reports** lists up to five other reports that share entities (actors, malware, tools, techniques) with the current one, together with the shared entities.
+Below the tabs, **Related Reports** lists up to five other reports that share entities (actors, malware, tools, techniques) with the current one, together with the shared entities. Rare entities (a specific malware family, a unique IOC) weigh more than ubiquitous ones (PowerShell, curl). The same ranking is available via the `kg_get_related_reports` MCP tool.
 
 ---
 

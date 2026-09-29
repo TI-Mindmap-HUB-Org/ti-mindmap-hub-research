@@ -27,7 +27,7 @@ azd ai connection create ti-mindmap-hub \
   --custom-key "X-API-Key=<your tim_ key>"
 ```
 
-You can also create an equivalent key-based connection in the Foundry portal.
+You can also create an equivalent key-based connection in the Foundry portal. If a tool only lets you set an `Authorization` header, use `Authorization=Bearer <your tim_ key>` — the server accepts API keys in both forms.
 
 ## 2. Add the MCP tool to an agent (Python)
 
@@ -48,7 +48,7 @@ ti_tool = MCPTool(
     require_approval="always",
     allowed_tools=[
         "list_reports", "get_report_content", "search_ioc",
-        "search_cve", "get_latest_briefing", "kg_search", "kg_cluster",
+        "search_cve", "get_latest_briefing", "kg_search_entities", "kg_get_entity_cluster",
     ],
 )
 
@@ -65,7 +65,7 @@ agent = project.agents.create_version(
 )
 ```
 
-- `allowed_tools` limits the agent to the tools it needs (see [the full list](server.md#available-tools-25))
+- `allowed_tools` limits the agent to the tools it needs (see [the full list](server.md#available-tools-27))
 - `require_approval="always"` makes the run pause for approval of each tool call — handle `mcp_approval_request` items in your app, or relax it once you trust the setup
 
 For the full request/approval loop, see Microsoft Learn: [Connect agents to MCP servers](https://learn.microsoft.com/azure/foundry/agents/how-to/tools/model-context-protocol).

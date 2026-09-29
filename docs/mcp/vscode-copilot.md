@@ -11,7 +11,7 @@ Connect VS Code with GitHub Copilot to TI Mindmap HUB's threat intelligence plat
 
 - **VS Code** 1.99+ ([download](https://code.visualstudio.com/))
 - **GitHub Copilot** extension installed and active
-- **TI Mindmap HUB API Key** — generate one from **My Profile → MCP Server API Keys** ([ti-mindmap-hub.com/profile](https://ti-mindmap-hub.com/profile)). See [Account & Access](../using-the-platform/account-and-access.md#mcp-server-api-keys).
+- **TI Mindmap HUB API Key** — generate one from **My Profile → MCP Server API Keys** ([ti-mindmap-hub.com/profile](https://ti-mindmap-hub.com/profile)). See [Account & Access](../using-the-platform/account-and-access.md#mcp-server-api-keys). Not needed if you use [OAuth](#alternative-oauth-sign-in-no-api-key).
 
 ## Setup
 
@@ -51,6 +51,23 @@ Developer: Reload Window
 ### 3. Enter API Key
 
 When prompted, enter your TI Mindmap HUB API key (format: `tim_xxxxxxxxxxxx`).
+
+## Alternative: OAuth Sign-In (No API Key)
+
+The server supports OAuth 2.1 with dynamic client registration and loopback redirects, so recent VS Code versions with MCP authorization support can sign you in with your TI Mindmap HUB account instead of using a key. Omit the `headers` block:
+
+```json
+{
+  "servers": {
+    "ti-mindmap": {
+      "type": "http",
+      "url": "https://mcp.ti-mindmap-hub.com/mcp"
+    }
+  }
+}
+```
+
+When the server starts, VS Code asks you to allow authentication and opens the TI Mindmap HUB sign-in page in your browser. If your VS Code version does not offer the sign-in prompt, use the API key configuration above.
 
 ## Alternative: Hardcoded API Key
 
@@ -99,7 +116,7 @@ Press `Ctrl+Shift+I` (or `Cmd+Shift+I` on macOS) to open Copilot Chat.
 ### Verify Connection
 
 1. Click on the **Tools** icon (🔧) in the chat
-2. You should see **ti-mindmap** listed with 25 tools
+2. You should see **ti-mindmap** listed with 27 tools
 
 ### Example Prompts
 
@@ -144,13 +161,13 @@ Analyze this threat article: https://example.com/threat-report
 |----------|-------|
 | **Reports** | `list_reports`, `get_report_details`, `get_report_content`, `get_available_sources`, `get_available_tags` |
 | **Briefings** | `get_latest_briefing`, `list_briefings`, `get_briefing_by_date` |
-| **IOCs** | `search_ioc` |
+| **IOCs** | `search_ioc`, `export_iocs_csv` |
 | **CVEs** | `search_cve`, `search_cves_by_keyword`, `list_cves`, `get_cves_by_article`, `get_cve_statistics` |
 | **STIX** | `get_stix_bundle`, `list_stix_bundles`, `get_stix_statistics` |
-| **Knowledge Graph** | `kg_stats`, `kg_search`, `kg_cluster`, `kg_timeline`, `kg_attack_path`, `kg_cross_report` |
+| **Knowledge Graph** | `kg_get_graph_stats`, `kg_search_entities`, `kg_get_entity_cluster`, `kg_get_entity_timeline`, `kg_search_attack_path`, `kg_find_cross_report_links`, `kg_get_related_reports` |
 | **Other** | `get_statistics`, `submit_article` |
 
-See [MCP Server](server.md#available-tools-25) for parameters.
+See [MCP Server](server.md#available-tools-27) for parameters.
 
 ## Example Workflows
 

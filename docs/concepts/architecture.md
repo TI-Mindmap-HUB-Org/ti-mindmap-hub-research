@@ -54,7 +54,7 @@ flowchart TD
     end
 
     subgraph "MCP Layer"
-        MCP[MCP Server<br/>HTTP + SSE]
+        MCP[MCP Server<br/>Streamable HTTP]
     end
 
     FE -->|MSAL tokens| B2C

@@ -69,7 +69,7 @@ A Neo4j-backed cross-report graph connecting threat actors, malware, tools, and 
 
 ### Integration & Export
 
-Each report offers multiple views: raw text, visual mindmaps, structured IOC/TTP tables, and downloadable **STIX 2.1 bundles** and **MISP events**. Seamless integration with SIEMs, SOARs, TIPs, and AI assistants — Claude, ChatGPT, GitHub Copilot, Copilot Studio, Foundry — via the **MCP server** (25 tools).
+Each report offers multiple views: raw text, visual mindmaps, structured IOC/TTP tables, and downloadable **STIX 2.1 bundles** and **MISP events**. Seamless integration with SIEMs, SOARs, TIPs, and AI assistants — Claude, ChatGPT, GitHub Copilot, Copilot Studio, Foundry — via the **MCP server** (27 tools).
 
 !!! warning ""
     All AI-generated outputs are experimental and require human verification before operational use.

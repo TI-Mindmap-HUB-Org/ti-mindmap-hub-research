@@ -72,7 +72,7 @@ Click **Save Changes** to apply edits.
 API keys let external tools — IDEs, agents, and scripts — query TI Mindmap HUB on your behalf through the [MCP Server](../mcp/index.md). You manage them in **My Profile → MCP Server API Keys**.
 
 !!! tip "Do you need a key?"
-    OAuth-based clients (Claude, ChatGPT, Copilot Studio with OAuth) sign you in directly and **do not** need an API key. Key-based clients (VS Code, Foundry, Cursor, custom scripts) do.
+    OAuth-capable clients (Claude, ChatGPT, Copilot Studio with OAuth, and recent versions of VS Code, Cursor, and Claude Code) sign you in with your TI Mindmap HUB account and **do not** need an API key. Keys are needed for agent frameworks (Foundry, OpenAI Responses API), scripts, shared agents, and clients without OAuth support.
 
 ### Create a key
 

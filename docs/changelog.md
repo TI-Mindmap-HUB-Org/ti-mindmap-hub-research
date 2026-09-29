@@ -18,11 +18,16 @@ This changelog covers the public documentation repository. For platform release 
 - **[Using the Platform](using-the-platform/index.md)** — New section with a page-by-page guide to the web app: Account & Access (public vs. authenticated pages, sign-in, profile, MCP API keys), Threat Reports Dashboard, Report View (all 12 tabs), Weekly Briefing, Agentic Reports, IOC Search (bulk triage, CSV export), CVE Search (Patch Priority, KEV), Threat Entities, STIX Bundles, STIX Constellation, Statistics, Submit an Article
 - **[How Content Is Generated](concepts/how-content-is-generated.md)** — Plain-language explanation of each output, its deterministic safeguards, IOC confidence rules, and what to verify
 - **[Glossary](concepts/glossary.md)**
-- MCP setup guides for **[ChatGPT](mcp/chatgpt.md)**, **[Microsoft Copilot Studio](mcp/copilot-studio.md)**, **[Microsoft Foundry](mcp/foundry.md)**, and **[Other Clients](mcp/other-clients.md)** (Cursor, Claude Code, Claude Desktop bridge, Python SDK)
+- MCP setup guides for **[ChatGPT](mcp/chatgpt.md)**, **[Microsoft Copilot Studio](mcp/copilot-studio.md)**, **[Microsoft Foundry](mcp/foundry.md)**, and **[Other Clients](mcp/other-clients.md)** (OpenAI Responses API, Cursor, Claude Code, Claude Desktop bridge, Python SDK)
+- Two new MCP tools documented: `export_iocs_csv` and `kg_get_related_reports`
+- MCP server OAuth 2.1 documentation (PKCE, Dynamic Client Registration, discovery endpoints) and public endpoints (`/health`, `/info`)
 
 ### Changed
 
-- Tool count harmonised to **25** across all MCP pages (VS Code and Claude pages previously showed 16 and 18)
+- MCP tool count updated to **27** across all pages (VS Code and Claude pages previously showed 16 and 18)
+- Transport documented as **Streamable HTTP** (MCP spec `2025-11-25`) instead of HTTP + SSE
+- API keys can also be sent as `Authorization: Bearer tim_…`; VS Code, Cursor, and Claude Code can use OAuth instead of a key
+- ChatGPT page: only `submit_article` requires confirmation (all other tools are read-only)
 - API key instructions now point to **My Profile → MCP Server API Keys** (5 active keys, 365-day validity, regenerate/revoke)
 - Frontend routes in [Architecture](concepts/architecture.md) corrected and split into public and authenticated routes
 - Report tabs updated everywhere to include the **Knowledge Graph** tab, **Export MISP Event**, and **Related Reports**
@@ -33,6 +38,7 @@ This changelog covers the public documentation repository. For platform release 
 ### Fixed
 
 - Missing front-matter delimiter in `mcp/claude.md`
+- Knowledge Graph MCP tool names corrected to the names exposed by the server: `kg_get_graph_stats`, `kg_search_entities`, `kg_get_entity_cluster`, `kg_get_entity_timeline`, `kg_search_attack_path`, `kg_find_cross_report_links` (previously documented as `kg_stats`, `kg_search`, `kg_cluster`, `kg_timeline`, `kg_attack_path`, `kg_cross_report`)
 
 ---
 

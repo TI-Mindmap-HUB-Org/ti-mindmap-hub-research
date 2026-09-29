@@ -1,18 +1,49 @@
 ---
 title: Other MCP Clients
-description: Connect Cursor, Claude Code, Claude Desktop (legacy bridge), and custom Python or HTTP clients to the TI Mindmap HUB MCP server.
+description: Connect the OpenAI Responses API, Cursor, Claude Code, Claude Desktop (legacy bridge), and custom Python or HTTP clients to the TI Mindmap HUB MCP server.
 ---
 
 # Other MCP Clients
 
-Any client that supports **remote MCP servers over HTTP** can use TI Mindmap HUB. Key-based clients send your API key in the `X-API-Key` header.
+Any client that supports **remote MCP servers over HTTP** can use TI Mindmap HUB. Key-based clients send your API key in the `X-API-Key` header (or as `Authorization: Bearer tim_…`). Clients that implement MCP OAuth can sign in instead — the server supports Dynamic Client Registration and accepts `localhost` / `127.0.0.1` redirect URIs used by IDEs and CLIs.
 
 | Setting | Value |
 |---------|-------|
 | Endpoint | `https://mcp.ti-mindmap-hub.com/mcp` |
-| Transport | HTTP with SSE (streamable HTTP) |
-| Header | `X-API-Key: tim_…` |
+| Transport | Streamable HTTP (MCP spec `2025-11-25`) |
+| API key header | `X-API-Key: tim_…` or `Authorization: Bearer tim_…` |
+| OAuth discovery | `https://mcp.ti-mindmap-hub.com/.well-known/oauth-protected-resource` |
 | Key | **My Profile → MCP Server API Keys** — see [MCP Server API Keys](../using-the-platform/account-and-access.md#mcp-server-api-keys) |
+
+---
+
+## OpenAI Responses API
+
+The Responses API `mcp` tool accepts a bearer value in the `authorization` field. Pass your API key there:
+
+```python
+import os
+from openai import OpenAI
+
+client = OpenAI()
+
+resp = client.responses.create(
+    model="<model>",
+    tools=[{
+        "type": "mcp",
+        "server_label": "ti_mindmap_hub",
+        "server_description": "Cyber threat intelligence: reports, IOCs, CVEs, ATT&CK, STIX, briefings, knowledge graph.",
+        "server_url": "https://mcp.ti-mindmap-hub.com/mcp",
+        "authorization": os.environ["TI_MINDMAP_API_KEY"],
+        "allowed_tools": ["list_reports", "search_ioc", "search_cve", "get_latest_briefing"],
+        "require_approval": "never",
+    }],
+    input="Summarise this week's ransomware reports.",
+)
+print(resp.output_text)
+```
+
+All listed tools are read-only. Keep `require_approval` at its default if you include `submit_article`.
 
 ---
 
@@ -33,7 +64,7 @@ Add the server to `~/.cursor/mcp.json` (all projects) or `.cursor/mcp.json` (one
 }
 ```
 
-Restart Cursor and check the MCP settings page for the `ti-mindmap` server and its tools.
+Restart Cursor and check the MCP settings page for the `ti-mindmap` server and its tools. To use OAuth instead of a key, omit `headers`; if your Cursor version supports MCP OAuth it will prompt you to sign in.
 
 ---
 
@@ -45,6 +76,8 @@ claude mcp add --transport http ti-mindmap https://mcp.ti-mindmap-hub.com/mcp \
 ```
 
 Run `claude mcp list` to verify, then ask for example: *"Use ti-mindmap to get the latest weekly briefing."*
+
+To use OAuth instead, add the server without `--header` and run `/mcp` inside Claude Code to authenticate in the browser.
 
 ---
 

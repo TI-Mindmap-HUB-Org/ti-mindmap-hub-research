@@ -90,4 +90,4 @@ See [IOC Extraction](../outputs/ioc-extraction.md) and [How Content Is Generated
 
 ## Via MCP
 
-The `search_ioc` MCP tool performs the same single lookup from an AI assistant. See [MCP Server](../mcp/server.md#ioc-search-1-tool).
+The `search_ioc` MCP tool performs the same single lookup from an AI assistant, and `export_iocs_csv` produces the same CSV export (with `since_days`, `ioc_type`, `article_id`, `defang`, and `unique` options). See [MCP Server](../mcp/server.md#ioc-search-export-2-tools).

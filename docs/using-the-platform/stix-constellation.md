@@ -85,4 +85,4 @@ See [Knowledge Graph](../outputs/knowledge-graph.md) for the data model and [How
 
 ## Via MCP
 
-Use `kg_stats`, `kg_search`, `kg_cluster`, `kg_timeline`, `kg_attack_path`, and `kg_cross_report` from an AI assistant. See [MCP Server](../mcp/server.md#knowledge-graph-stix-constellation-6-tools).
+Use `kg_get_graph_stats`, `kg_search_entities`, `kg_get_entity_cluster`, `kg_get_entity_timeline`, `kg_search_attack_path`, `kg_find_cross_report_links`, and `kg_get_related_reports` from an AI assistant. See [MCP Server](../mcp/server.md#knowledge-graph-stix-constellation-7-tools).

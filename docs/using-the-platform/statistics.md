@@ -49,4 +49,4 @@ Hover a chart element to see exact values.
 
 Statistics are computed directly from the platform's databases — they are counts and averages, not AI-generated text. They reflect what the processed reports contain, which depends on which sources are monitored. A high count means *a lot of reporting*, not necessarily *a lot of activity*.
 
-Via MCP: `get_statistics`, `get_cve_statistics`, `get_stix_statistics`, `kg_stats`.
+Via MCP: `get_statistics`, `get_cve_statistics`, `get_stix_statistics`, `kg_get_graph_stats`.

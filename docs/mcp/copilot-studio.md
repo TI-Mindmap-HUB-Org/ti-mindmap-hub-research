@@ -51,7 +51,7 @@ The orchestrator uses the description to decide when to call the server, so keep
     2. Type: **Dynamic discovery**
     3. Select **Create**
 
-    Each user signs in with their own TI Mindmap HUB account the first time the agent calls the server.
+    The server publishes OAuth discovery metadata and supports Dynamic Client Registration with HTTPS redirect URIs, which is what this option relies on. Each user signs in with their own TI Mindmap HUB account the first time the agent calls the server.
 
 ### 4. Create the connection and add the tool
 

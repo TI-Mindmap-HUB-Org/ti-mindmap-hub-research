@@ -125,13 +125,13 @@ After connection, Claude can enumerate the MCP tools exposed by TI Mindmap HUB, 
 
 - Threat intelligence reports
 - Weekly briefings
-- IOC search
+- IOC search and CSV export
 - CVE enrichment
 - STIX bundles
 - Platform statistics and article submission
 - Knowledge graph (STIX Constellation) queries
 
-The server exposes all **25 tools** listed in [MCP Server](server.md#available-tools-25). Claude's permissions screen lists every tool the connector discovers; you can disable any of them individually. If you see fewer tools than expected, refresh the connector so Claude re-reads the tool list.
+The server exposes all **27 tools** listed in [MCP Server](server.md#available-tools-27). Claude's permissions screen lists every tool the connector discovers; you can disable any of them individually. If you see fewer tools than expected, refresh the connector so Claude re-reads the tool list.
 
 ## Troubleshooting
 
