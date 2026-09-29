@@ -7,22 +7,12 @@ description: Video walkthrough of the TI Mindmap HUB web interface and key featu
 
 A guided tour of the TI Mindmap HUB web interface — browsing reports, viewing AI-generated analyses, and downloading STIX bundles.
 
-<!-- Replace VIDEO_ID with the actual YouTube video ID when available -->
-<div class="video-wrapper">
-  <iframe
-    src="https://www.youtube-nocookie.com/embed/VIDEO_ID_PLACEHOLDER"
-    title="TI Mindmap HUB — Platform Overview"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen>
-  </iframe>
-</div>
-
-!!! note "Placeholder"
-    This video embed is a placeholder. Replace `VIDEO_ID_PLACEHOLDER` in the iframe `src` with the actual YouTube video ID when the video is published.
+!!! info "Coming soon"
+    This video is in production. Follow [@ti_mindmap_hub](https://x.com/ti_mindmap_hub) for the announcement. In the meantime, the [Using the Platform](../using-the-platform/index.md) guide covers the same ground in writing.
 
 ---
 
-## What This Video Covers
+## What This Video Will Cover
 
 - **Dashboard** — Overview of the main dashboard and navigation
 - **Report browsing** — How to find and filter threat intelligence reports
@@ -36,6 +26,7 @@ A guided tour of the TI Mindmap HUB web interface — browsing reports, viewing 
 
 ## Related
 
+- [Using the Platform](../using-the-platform/index.md)
 - [Getting Started](../getting-started/index.md)
 - [Outputs](../outputs/index.md)
 - [MCP Integration Demo](mcp-integration-demo.md)

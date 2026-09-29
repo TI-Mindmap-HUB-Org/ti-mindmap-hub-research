@@ -7,6 +7,9 @@ description: How TI Mindmap HUB maps threat behaviors to MITRE ATT&CK techniques
 
 TI Mindmap HUB automatically maps attack behaviors described in threat reports to the [MITRE ATT&CK](https://attack.mitre.org/) framework.
 
+!!! tip "Where to find it"
+    The **TTP Catalog**, **Attack Flow**, and **ATT&CK Heatmap** tabs of the [Report View](../using-the-platform/report-view.md#ttp-catalog), and the **ATT&CK Techniques** section of each [entity profile](../using-the-platform/threat-entities.md#entity-profile).
+
 ---
 
 ## How It Works

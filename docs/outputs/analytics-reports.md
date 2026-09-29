@@ -52,8 +52,8 @@ Each Analytics Report includes:
 
 Analytics Reports are accessible via:
 
-- **Web interface** — Browse from the **Analytics** page with search, severity filter, and classification filter
-- **Direct URL** — Each report has a permanent URL at `/analytics/{slug}`
+- **Web interface** — Browse from **Agentic Reports** in the sidebar (`/analytics`) with search, severity filter, sort, tags, and grid/timeline views. **No sign-in required** — see [Agentic Reports](../using-the-platform/agentic-reports.md)
+- **Direct URL** — Each report has a permanent, public URL at `/analytics/{slug}`
 
 ---
 

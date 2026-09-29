@@ -105,12 +105,28 @@ nav:
   - Home: index.md
   - Getting Started:
       - Overview: getting-started/index.md
+  - Using the Platform:
+      - Overview: using-the-platform/index.md
+      - Account & Access: using-the-platform/account-and-access.md
+      - Threat Reports Dashboard: using-the-platform/dashboard.md
+      - Report View: using-the-platform/report-view.md
+      - Weekly Briefing: using-the-platform/weekly-briefing.md
+      - Agentic Reports: using-the-platform/agentic-reports.md
+      - IOC Search: using-the-platform/ioc-search.md
+      - CVE Search: using-the-platform/cve-search.md
+      - Threat Entities: using-the-platform/threat-entities.md
+      - STIX Bundles: using-the-platform/stix-bundles.md
+      - STIX Constellation: using-the-platform/stix-constellation.md
+      - Statistics: using-the-platform/statistics.md
+      - Submit an Article: using-the-platform/submit-article.md
   - Concepts:
       - Overview: concepts/index.md
+      - How Content Is Generated: concepts/how-content-is-generated.md
       - Architecture: concepts/architecture.md
       - Processing Methodology: concepts/methodology.md
       - STIX 2.1 Data Model: concepts/data-model.md
       - Known Limitations: concepts/limitations.md
+      - Glossary: concepts/glossary.md
   - Outputs:
       - Overview: outputs/index.md
       - Interactive Mindmaps: outputs/mindmaps.md
@@ -126,13 +142,17 @@ nav:
       - MCP Server: mcp/server.md
       - VS Code + Copilot: mcp/vscode-copilot.md
       - Claude: mcp/claude.md
+      - ChatGPT: mcp/chatgpt.md
+      - Microsoft Copilot Studio: mcp/copilot-studio.md
+      - Microsoft Foundry: mcp/foundry.md
+      - Other Clients: mcp/other-clients.md
   - Integrations:
       - Overview: integrations/index.md
       - STIX Platforms: integrations/stix-platforms.md
   - Tutorials:
       - Overview: tutorials/index.md
       - Report to Intelligence: tutorials/report-to-intelligence.md
-  - Videos:
+  - Videos (Coming Soon):
       - Overview: videos/index.md
       - Platform Overview: videos/platform-overview.md
       - MCP Integration Demo: videos/mcp-integration-demo.md

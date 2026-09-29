@@ -7,6 +7,9 @@ description: How TI Mindmap HUB generates STIX 2.1 bundles from processed threat
 
 Each processed report generates a [STIX 2.1](https://oasis-open.github.io/cti-documentation/stix/intro.html) bundle — a standardized package of threat intelligence objects that can be imported into security platforms.
 
+!!! tip "Where to find it"
+    Download a bundle from the **Intel Graph** tab of the [Report View](../using-the-platform/report-view.md#intel-graph), or browse all bundles on the [STIX Bundles](../using-the-platform/stix-bundles.md) page.
+
 ---
 
 ## Bundle Structure

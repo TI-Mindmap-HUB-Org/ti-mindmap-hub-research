@@ -1,3 +1,4 @@
+---
 title: Claude Setup
 description: Connect Claude to TI Mindmap HUB via MCP using Claude's custom connector flow and OAuth.
 ---
@@ -127,9 +128,10 @@ After connection, Claude can enumerate the MCP tools exposed by TI Mindmap HUB, 
 - IOC search
 - CVE enrichment
 - STIX bundles
-- Platform statistics
+- Platform statistics and article submission
+- Knowledge graph (STIX Constellation) queries
 
-The March 2026 Claude connector flow described in the TI Mindmap HUB blog shows 18 configurable tools in Claude's permissions interface.
+The server exposes all **25 tools** listed in [MCP Server](server.md#available-tools-25). Claude's permissions screen lists every tool the connector discovers; you can disable any of them individually. If you see fewer tools than expected, refresh the connector so Claude re-reads the tool list.
 
 ## Troubleshooting
 

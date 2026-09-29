@@ -180,23 +180,40 @@ backend/
 
 ## Frontend Architecture
 
-The React frontend is a single-page application with the following page structure:
+The React frontend is a single-page application. Most routes require sign-in; a small set is public.
+
+**Public routes (no sign-in required)**
 
 | Page | Route | Description |
 |------|-------|-------------|
-| Landing | `/` | Public landing page |
-| Dashboard | `/dashboard` | Main report listing with filters |
-| Report Detail | `/report/:id` | Per-article multi-tab analysis view |
-| IOC Search | `/ioc-search` | Cross-report indicator search |
-| CVE Search | `/cve-search` | Vulnerability search and enrichment |
-| Knowledge Graph | `/knowledge-graph` | STIX Constellation explorer |
-| STIX Bundles | `/stix-bundles` | Browse and download STIX bundles |
-| Weekly Briefing | `/briefing` | AI-generated weekly threat landscape |
+| Sign-in | any other route | Sign-in screen with Terms/Privacy consent (shown for every protected route when signed out) |
+| Landing | `/landingpage` | Public presentation page |
+| Research Project | `/research` | Research scope and limitations |
+| Agentic Reports | `/analytics` | Cross-source intelligence reports |
+| Agentic Report | `/analytics/:slug` | Single cross-source report |
+| Terms of Service | `/terms` | Terms of use |
+| Privacy Policy | `/privacy` | Privacy policy |
+
+**Authenticated routes**
+
+| Page | Route | Description |
+|------|-------|-------------|
+| Threat Reports (Dashboard) | `/` | Main report listing with search and filters |
+| Report Detail | `/report/:reportId` | Per-article 12-tab analysis view |
+| AI Briefing Agent | `/briefing` | AI-generated weekly threat briefing |
+| IOC Search | `/ioc-search` | Cross-report indicator search, bulk triage, CSV export |
+| CVE Search | `/cve-search` | Vulnerability search, KEV/EPSS context, patch priority |
+| Threat Entities | `/entities` | Index of actors, malware, tools, and campaigns |
+| Entity Profile | `/entity/:canonId` | Cross-report profile of a single entity |
+| STIX Bundles | `/stix-bundles` | Browse, preview, and download STIX bundles |
+| STIX Constellation | `/knowledge-graph` | Knowledge graph explorer |
+| About STIX Constellation | `/knowledge-graph/about` | Explainer for the knowledge graph |
 | Statistics | `/statistics` | Platform-wide metrics and charts |
-| Analytics | `/analytics` | Cross-source intelligence reports |
-| Submit Article | `/submit` | Manual URL submission |
-| MCP Integration | `/mcp` | MCP setup documentation |
-| Profile | `/profile` | User profile and API key management |
+| MCP Server | `/mcp-integration` | MCP setup and tool catalog |
+| Submit Article | `/submit` | URL submission (human-reviewed) |
+| Roadmap | `/roadmap` | Research roadmap |
+| About / Feedback | `/about`, `/feedback` | Project information and contact |
+| Profile | `/profile` | User profile, newsletter, and MCP API keys |
 
 ### Key Components
 

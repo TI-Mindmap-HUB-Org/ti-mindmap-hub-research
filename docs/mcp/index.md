@@ -27,8 +27,8 @@ The MCP server is the core integration layer. It provides:
 
 - **25 tools** for querying threat intelligence data
 - **HTTP + SSE transport** with session management
-- **OAuth 2.1** for connector-native clients such as Claude
-- **API key authentication** for direct HTTP clients and local tooling
+- **OAuth 2.1** for connector-native clients such as Claude, ChatGPT, and Copilot Studio
+- **API key authentication** for IDEs, agent frameworks, and custom clients
 - **Endpoint**: `https://mcp.ti-mindmap-hub.com/mcp`
 
 For full technical documentation, available tools, protocol details, and examples, see the [MCP Server](server.md) page.
@@ -37,14 +37,23 @@ For full technical documentation, available tools, protocol details, and example
 
 ## MCP Clients
 
-Setup guides for connecting AI assistants to TI Mindmap HUB:
+Setup guides for connecting AI assistants and agent platforms to TI Mindmap HUB:
 
-| Client | Description | Guide |
-|--------|-------------|-------|
-| **VS Code + GitHub Copilot** | Query threat intelligence directly from your IDE | [Setup Guide](vscode-copilot.md) |
-| **Claude** | Use Claude through a native custom connector with OAuth | [Setup Guide](claude.md) |
+| Client | Auth | Guide |
+|--------|------|-------|
+| **VS Code + GitHub Copilot** | API key | [Setup Guide](vscode-copilot.md) |
+| **Claude** (custom connector) | OAuth — no key needed | [Setup Guide](claude.md) |
+| **ChatGPT** (developer mode) | OAuth — no key needed | [Setup Guide](chatgpt.md) |
+| **Microsoft Copilot Studio** | API key or OAuth 2.0 | [Setup Guide](copilot-studio.md) |
+| **Microsoft Foundry Agent Service** | API key (project connection) | [Setup Guide](foundry.md) |
+| **Cursor, Claude Code, Claude Desktop bridge, Python SDK** | API key | [Other Clients](other-clients.md) |
 
-Additional client integrations (e.g., Microsoft Copilot Studio, Cursor, custom clients) will be documented here as they become available.
+Any other MCP client that supports remote HTTP servers and custom headers can connect using the endpoint and an API key.
+
+### Which authentication should I use?
+
+- **OAuth** — the client signs you in with your TI Mindmap HUB account. Nothing to copy or rotate. Best for personal assistants (Claude, ChatGPT)
+- **API key** — a personal `tim_…` key sent in the `X-API-Key` header. Needed by IDEs, agent frameworks, and scripts. Create it in **My Profile → MCP Server API Keys** ([how](../using-the-platform/account-and-access.md#mcp-server-api-keys))
 
 ---
 

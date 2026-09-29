@@ -7,6 +7,9 @@ description: STIX Constellation — the cross-report knowledge graph that connec
 
 The Knowledge Graph (internally called **STIX Constellation**) is a Neo4j-backed graph database that unifies STIX entities and relationships across all processed threat intelligence reports, enabling cross-report correlation and attack path analysis.
 
+!!! tip "Exploring the graph"
+    See [STIX Constellation](../using-the-platform/stix-constellation.md) for the interactive explorer and [Threat Entities](../using-the-platform/threat-entities.md) for entity profiles.
+
 ---
 
 ## Overview

@@ -11,21 +11,25 @@ This tutorial walks through the process of going from a raw threat report to str
 
 ## Prerequisites
 
-- A TI Mindmap HUB account at [ti-mindmap-hub.com](https://ti-mindmap-hub.com)
-- A publicly accessible threat intelligence report URL
+- A TI Mindmap HUB account — see [Account & Access](../using-the-platform/account-and-access.md)
+- A publicly accessible threat intelligence report URL (or an existing report already in the platform)
 
 ---
 
-## Step 1: Submit a Report
+## Step 1: Find or Submit a Report
 
-You can submit a report URL in two ways:
+Most reports are ingested automatically from curated OSINT sources. First check whether your report is already there:
+
+1. Open **Threat Reports** (the dashboard at `/`)
+2. Search by title, source, CVE, IOC, or keyword
+
+If it is not there, submit it:
 
 === "Web Interface"
 
-    1. Log in to [ti-mindmap-hub.com](https://ti-mindmap-hub.com)
-    2. Navigate to the submission form
-    3. Paste the report URL
-    4. Click **Submit**
+    1. In the sidebar, open **Platform → Submit Article**
+    2. Paste the URL in **Article URL**
+    3. Click **Submit URL**
 
 === "MCP Tool"
 
@@ -37,83 +41,88 @@ You can submit a report URL in two ways:
 
     This invokes the `submit_article` tool.
 
+!!! info "Human approval"
+    Every submission is reviewed by a human before entering the pipeline. Once approved and processed, you receive an email from `info@ti-mindmap-hub.com` with a direct link to the report. See [Submit an Article](../using-the-platform/submit-article.md).
+
 ---
 
-## Step 2: Wait for Processing
+## Step 2: Processing
 
-The platform processes the report through its [six-stage pipeline](../concepts/methodology.md):
+Once approved, the report goes through the [processing pipeline](../concepts/methodology.md):
 
 1. Content acquisition and cleaning
-2. AI-powered analysis
-3. IOC extraction
-4. TTP mapping
-5. STIX 2.1 generation
-6. Storage and indexing
+2. Parallel AI analysis (summary, mindmap, IOCs, CVEs, TTPs, 5W)
+3. STIX 2.1 bundle assembly and validation
+4. Knowledge graph synchronisation
 
-Processing typically completes within a few minutes.
+For details on how each output is produced, see [How Content Is Generated](../concepts/how-content-is-generated.md).
 
 ---
 
-## Step 3: Review the Summary
+## Step 3: Get the Big Picture
 
-Once processing completes, the report page shows:
+Open the report and start with the narrative tabs:
 
-- **Technical summary** — A concise AI-generated overview
-- **Visual mindmap** — Key relationships in diagram form
-- **Five Whats** — Structured root-cause analysis
-
-These provide a quick understanding of the report's content without reading the full original article.
+- **AI Summary** — concise AI-generated overview
+- **TI Mindmap** — visual threat topology; focus a branch and export as PNG/SVG
+- **5W Context** — Who, What, When, Where, Why
+- **Diamond Model** — adversary, capability, infrastructure, victim
 
 ---
 
 ## Step 4: Examine Extracted IOCs
 
-Navigate to the IOCs tab to see extracted indicators:
+Open the **IOCs** tab:
 
-- IP addresses, domains, and URLs
-- File hashes (MD5, SHA-1, SHA-256)
-- CVE identifiers
-- Email addresses
+- High- and medium-confidence indicators are shown in the table
+- Download the full JSON (including low-confidence items) for offline review
+- Pivot any indicator through [IOC Search](../using-the-platform/ioc-search.md) to see which other reports mention it
 
 !!! warning "Verify Before Blocking"
-    Always validate extracted IOCs against the original source before adding them to blocklists or detection rules.
+    Always validate extracted IOCs against the original source (the **Source Report** tab) before adding them to blocklists or detection rules.
 
 ---
 
-## Step 5: Review MITRE ATT&CK Mappings
+## Step 5: Review Vulnerabilities
 
-The TTPs tab shows which MITRE ATT&CK techniques were identified:
-
-- Technique ID and name
-- Associated tactic (kill-chain phase)
-- Execution sequence (probable attack flow)
-
-Use these mappings to check your coverage against the described attack.
+Open the **CVEs** tab to see CVSS severity, exploitation status (exploited, PoC, patched), affected products, and references. Use [CVE Search](../using-the-platform/cve-search.md) to check CISA KEV and EPSS context across the whole corpus.
 
 ---
 
-## Step 6: Download the STIX Bundle
+## Step 6: Review MITRE ATT&CK Mappings
 
-The STIX tab provides the complete STIX 2.1 bundle for import into your security tools:
+- **TTP Catalog** — technique ID, name, tactic, and supporting comment
+- **Attack Flow** — probable execution sequence
+- **ATT&CK Heatmap** — coverage across tactics, rendered from an ATT&CK Navigator–compatible layer
 
-1. Click **Download STIX Bundle**
-2. Import into your SIEM, SOAR, or TIP (see [STIX Platform Integration](../integrations/stix-platforms.md))
-3. Review the imported objects and relationships
+Use these mappings to check your detection coverage against the described attack.
 
 ---
 
-## Step 7: Cross-Reference with Existing Intelligence
+## Step 7: Export Structured Intelligence
 
-For best results:
+| Need | Where |
+|------|-------|
+| STIX 2.1 bundle | **Intel Graph** tab → download, or [STIX Bundles](../using-the-platform/stix-bundles.md) page |
+| MISP event | **Export MISP Event** button in the report header |
+| PDF briefing | **Export PDF (Beta)** button in the report header |
+| IOC list | **IOCs** tab JSON download, or CSV from [IOC Search](../using-the-platform/ioc-search.md#export-iocs-to-csv) |
 
-- Compare extracted IOCs with your existing threat feeds
-- Check whether mapped TTPs align with known adversary profiles
-- Use the weekly briefing to understand broader trends
+Import the STIX bundle into your SIEM, SOAR, or TIP (see [STIX Platform Integration](../integrations/stix-platforms.md)).
+
+---
+
+## Step 8: Cross-Reference
+
+- Open the **Knowledge Graph** tab and the **Related Reports** panel to find reports sharing actors, malware, or infrastructure
+- Open an actor or malware profile in [Threat Entities](../using-the-platform/threat-entities.md)
+- Check the [AI Briefing Agent](../using-the-platform/weekly-briefing.md) to place the report in the week's trends
 
 ---
 
 ## Next Steps
 
+- [Using the Platform](../using-the-platform/index.md) — Page-by-page guide to the web interface
 - [Outputs](../outputs/index.md) — Detailed documentation of each output type
 - [MCP](../mcp/index.md) — Automate queries with AI assistants
 - [Known Limitations](../concepts/limitations.md) — Understand what to verify

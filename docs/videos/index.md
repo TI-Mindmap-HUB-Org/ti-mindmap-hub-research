@@ -5,11 +5,11 @@ description: Video walkthroughs of TI Mindmap HUB features, integrations, and wo
 
 # Video Tutorials
 
-Visual walkthroughs of TI Mindmap HUB features and workflows. Videos are hosted on YouTube.
+Visual walkthroughs of TI Mindmap HUB features and workflows. Videos will be hosted on YouTube.
 
 ---
 
-## Available Videos
+## Coming Soon
 
 ### [Platform Overview](platform-overview.md)
 
@@ -21,8 +21,8 @@ See how to connect an AI assistant to TI Mindmap HUB via the Model Context Proto
 
 ---
 
-!!! info "More Videos Coming"
-    Additional video tutorials are in production. Check back for updates or follow [@ti_mindmap_hub](https://x.com/ti_mindmap_hub) for announcements.
+!!! info "Videos are in production"
+    Follow [@ti_mindmap_hub](https://x.com/ti_mindmap_hub) for announcements. Until then, see [Using the Platform](../using-the-platform/index.md) and the [MCP setup guides](../mcp/index.md).
 
 
 ---

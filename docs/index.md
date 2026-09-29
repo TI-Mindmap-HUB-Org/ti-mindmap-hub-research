@@ -69,7 +69,7 @@ A Neo4j-backed cross-report graph connecting threat actors, malware, tools, and 
 
 ### Integration & Export
 
-Each report offers multiple views: raw text, visual mindmaps, structured IOC/TTP tables, and downloadable **STIX 2.1 bundles**. Seamless integration with SIEMs, SOARs, TIPs, and AI assistants via the **MCP server** (25 tools).
+Each report offers multiple views: raw text, visual mindmaps, structured IOC/TTP tables, and downloadable **STIX 2.1 bundles** and **MISP events**. Seamless integration with SIEMs, SOARs, TIPs, and AI assistants — Claude, ChatGPT, GitHub Copilot, Copilot Studio, Foundry — via the **MCP server** (25 tools).
 
 !!! warning ""
     All AI-generated outputs are experimental and require human verification before operational use.
@@ -88,7 +88,7 @@ Each report offers multiple views: raw text, visual mindmaps, structured IOC/TTP
 
 ### 🔍 Security Practitioners
 
-Start with the [Getting Started](getting-started/index.md) guide. Consume [Outputs](outputs/index.md) and connect your tools via [Integrations](integrations/index.md).
+Start with the [Getting Started](getting-started/index.md) guide and the page-by-page [Using the Platform](using-the-platform/index.md) guide. Learn [how content is generated](concepts/how-content-is-generated.md), then connect your tools via [MCP](mcp/index.md) and [Integrations](integrations/index.md).
 </div>
 
 <div class="audience-card" markdown>
@@ -114,6 +114,10 @@ Read the [Contributing](community/contributing.md) guide and the [Style Guide](c
 <div class="link-grid" markdown>
 
 <a class="link-card" href="https://ti-mindmap-hub.com">🌐 Try the Platform</a>
+
+<a class="link-card" href="https://ti-mindmap-hub.com/analytics">📑 Agentic Reports (public)</a>
+
+<a class="link-card" href="using-the-platform/">🧭 Using the Platform</a>
 
 <a class="link-card" href="https://github.com/TI-Mindmap-HUB-Org/ti-mindmap-hub-research">📂 GitHub Repository</a>
 

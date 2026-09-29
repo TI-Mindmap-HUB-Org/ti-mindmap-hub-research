@@ -11,6 +11,31 @@ This changelog covers the public documentation repository. For platform release 
 
 ---
 
+## 2026-09 — End-User Documentation Overhaul
+
+### Added
+
+- **[Using the Platform](using-the-platform/index.md)** — New section with a page-by-page guide to the web app: Account & Access (public vs. authenticated pages, sign-in, profile, MCP API keys), Threat Reports Dashboard, Report View (all 12 tabs), Weekly Briefing, Agentic Reports, IOC Search (bulk triage, CSV export), CVE Search (Patch Priority, KEV), Threat Entities, STIX Bundles, STIX Constellation, Statistics, Submit an Article
+- **[How Content Is Generated](concepts/how-content-is-generated.md)** — Plain-language explanation of each output, its deterministic safeguards, IOC confidence rules, and what to verify
+- **[Glossary](concepts/glossary.md)**
+- MCP setup guides for **[ChatGPT](mcp/chatgpt.md)**, **[Microsoft Copilot Studio](mcp/copilot-studio.md)**, **[Microsoft Foundry](mcp/foundry.md)**, and **[Other Clients](mcp/other-clients.md)** (Cursor, Claude Code, Claude Desktop bridge, Python SDK)
+
+### Changed
+
+- Tool count harmonised to **25** across all MCP pages (VS Code and Claude pages previously showed 16 and 18)
+- API key instructions now point to **My Profile → MCP Server API Keys** (5 active keys, 365-day validity, regenerate/revoke)
+- Frontend routes in [Architecture](concepts/architecture.md) corrected and split into public and authenticated routes
+- Report tabs updated everywhere to include the **Knowledge Graph** tab, **Export MISP Event**, and **Related Reports**
+- [Tutorial](tutorials/report-to-intelligence.md) rewritten with actual tab names and the human-reviewed submission flow
+- IOC extraction and methodology pages document the high/medium/low confidence rules and STIX validation behaviour
+- Video pages marked as **coming soon**
+
+### Fixed
+
+- Missing front-matter delimiter in `mcp/claude.md`
+
+---
+
 ## 2026-05 — Architecture, Knowledge Graph & MCP 25 Tools
 
 ### Added

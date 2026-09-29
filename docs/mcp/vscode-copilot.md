@@ -11,7 +11,7 @@ Connect VS Code with GitHub Copilot to TI Mindmap HUB's threat intelligence plat
 
 - **VS Code** 1.99+ ([download](https://code.visualstudio.com/))
 - **GitHub Copilot** extension installed and active
-- **TI Mindmap HUB API Key** (get one from [ti-mindmap-hub.com/settings](https://ti-mindmap-hub.com/settings))
+- **TI Mindmap HUB API Key** — generate one from **My Profile → MCP Server API Keys** ([ti-mindmap-hub.com/profile](https://ti-mindmap-hub.com/profile)). See [Account & Access](../using-the-platform/account-and-access.md#mcp-server-api-keys).
 
 ## Setup
 
@@ -99,7 +99,7 @@ Press `Ctrl+Shift+I` (or `Cmd+Shift+I` on macOS) to open Copilot Chat.
 ### Verify Connection
 
 1. Click on the **Tools** icon (🔧) in the chat
-2. You should see **ti-mindmap** listed with 16 tools
+2. You should see **ti-mindmap** listed with 25 tools
 
 ### Example Prompts
 
@@ -146,7 +146,11 @@ Analyze this threat article: https://example.com/threat-report
 | **Briefings** | `get_latest_briefing`, `list_briefings`, `get_briefing_by_date` |
 | **IOCs** | `search_ioc` |
 | **CVEs** | `search_cve`, `search_cves_by_keyword`, `list_cves`, `get_cves_by_article`, `get_cve_statistics` |
+| **STIX** | `get_stix_bundle`, `list_stix_bundles`, `get_stix_statistics` |
+| **Knowledge Graph** | `kg_stats`, `kg_search`, `kg_cluster`, `kg_timeline`, `kg_attack_path`, `kg_cross_report` |
 | **Other** | `get_statistics`, `submit_article` |
+
+See [MCP Server](server.md#available-tools-25) for parameters.
 
 ## Example Workflows
 
@@ -186,8 +190,8 @@ Analyze this threat article: https://example.com/threat-report
 
 ### Authentication errors
 
-1. Verify your API key at [ti-mindmap-hub.com/settings](https://ti-mindmap-hub.com/settings)
-2. Ensure the key has not expired
+1. Check the key status in **My Profile → MCP Server API Keys** ([ti-mindmap-hub.com/profile](https://ti-mindmap-hub.com/profile))
+2. Ensure the key is `Active` and not `Expired` or `Revoked` (keys expire after 365 days)
 3. Check for typos in the configuration
 
 ### Connection timeout

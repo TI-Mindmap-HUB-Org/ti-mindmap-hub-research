@@ -7,25 +7,15 @@ description: Video demonstration of connecting AI assistants to TI Mindmap HUB v
 
 See how to connect an AI assistant to TI Mindmap HUB via the Model Context Protocol (MCP) and query threat intelligence data conversationally.
 
-<!-- Replace VIDEO_ID with the actual YouTube video ID when available -->
-<div class="video-wrapper">
-  <iframe
-    src="https://www.youtube-nocookie.com/embed/VIDEO_ID_PLACEHOLDER"
-    title="TI Mindmap HUB — MCP Integration Demo"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen>
-  </iframe>
-</div>
-
-!!! note "Placeholder"
-    This video embed is a placeholder. Replace `VIDEO_ID_PLACEHOLDER` in the iframe `src` with the actual YouTube video ID when the video is published.
+!!! info "Coming soon"
+    This video is in production. Follow [@ti_mindmap_hub](https://x.com/ti_mindmap_hub) for the announcement. In the meantime, follow the written [MCP setup guides](../mcp/index.md#mcp-clients).
 
 ---
 
-## What This Video Covers
+## What This Video Will Cover
 
-- **Setup** — Configuring MCP in VS Code with GitHub Copilot
-- **Authentication** — Obtaining and configuring your API key
+- **Setup** — Connecting an MCP client (VS Code + GitHub Copilot, Claude, ChatGPT)
+- **Authentication** — OAuth sign-in and API keys
 - **Querying reports** — Asking natural-language questions about threat intelligence
 - **IOC lookup** — Searching for indicators across all processed data
 - **CVE investigation** — Looking up vulnerability details and context

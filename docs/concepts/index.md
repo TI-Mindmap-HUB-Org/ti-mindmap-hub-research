@@ -92,6 +92,7 @@ flowchart TD
     F0 --> F9[Attack Flow Tab]
     F0 --> F10[5W Context Tab]
     F0 --> F11[ATT&CK Heatmap Tab]
+    F0 --> F13[Knowledge Graph Tab]
     F0 --> F12[Source Report Tab]
 ```
 
@@ -136,7 +137,7 @@ For each processed article, the analyst frontend presents a comprehensive analys
 
 ### Header Metadata
 
-Every article page displays: **title**, **source**, **publication date**, **link to original report**, **bookmark**, and **PDF export**.
+Every article page displays: **title**, **source**, **publication date**, a **bookmark** toggle, and three actions: **View Original Source**, **Export PDF (Beta)**, and **Export MISP Event**. Below the tabs, a **Related Reports** panel lists other reports that share entities with the current one.
 
 ### Analysis Tabs
 
@@ -152,7 +153,10 @@ Every article page displays: **title**, **source**, **publication date**, **link
 | **Attack Flow** | Probable attack execution sequence reconstructed from the report. |
 | **5W Context** | Structured root-cause analysis (Who, What, When, Where, Why). |
 | **ATT&CK Heatmap** | Visual heatmap of mapped ATT&CK techniques across tactics. |
+| **Knowledge Graph** | The report's entities as they appear in the cross-report STIX Constellation. |
 | **Source Report** | Original report content for reference and verification. |
+
+For a step-by-step guide to each tab, see [Report View](../using-the-platform/report-view.md).
 
 ---
 
@@ -183,6 +187,9 @@ For detailed object specifications and examples, see [STIX 2.1 Data Model](data-
 
 ## In This Section
 
+- [How Content Is Generated](how-content-is-generated.md) — Plain-language guide to each output and what to verify
+- [Architecture](architecture.md) — Backend, frontend, data stores, and authentication
 - [Processing Methodology](methodology.md) — Detailed pipeline stages and technology stack
 - [STIX 2.1 Data Model](data-model.md) — Object types, patterns, and integration guides
 - [Known Limitations](limitations.md) — Comprehensive transparency on AI limitations
+- [Glossary](glossary.md) — Terms used across the platform

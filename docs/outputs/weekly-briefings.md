@@ -7,6 +7,9 @@ description: How TI Mindmap HUB generates weekly threat intelligence briefings u
 
 TI Mindmap HUB produces a weekly threat intelligence briefing using a multi-agent AI system that aggregates and synthesizes the week's processed reports.
 
+!!! tip "Reading the briefing"
+    Open **AI Briefing Agent** in the sidebar. See [Weekly Briefing](../using-the-platform/weekly-briefing.md) for a section-by-section guide.
+
 ---
 
 ## Multi-Agent Architecture

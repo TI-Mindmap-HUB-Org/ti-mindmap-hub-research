@@ -9,6 +9,9 @@ Each analyzed report is transformed into an interactive mindmap — a visual thr
 
 This allows analysts to reason visually about relationships instead of scanning pages of text, without losing analytical depth.
 
+!!! tip "Where to find it"
+    The **TI Mindmap** tab of the [Report View](../using-the-platform/report-view.md#ti-mindmap): focus a branch, zoom, and export as PNG or SVG.
+
 ---
 
 ## What the Mindmap Contains

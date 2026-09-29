@@ -7,6 +7,9 @@ description: How TI Mindmap HUB extracts Indicators of Compromise from threat re
 
 TI Mindmap HUB extracts Indicators of Compromise (IOCs) from each processed report using a combination of regex pattern matching and LLM-based analysis.
 
+!!! tip "Using IOCs in the web interface"
+    See the **IOCs** tab in the [Report View](../using-the-platform/report-view.md#iocs), and [IOC Search](../using-the-platform/ioc-search.md) for cross-report lookup, bulk triage of up to 500 indicators, and CSV export.
+
 ---
 
 ## Supported IOC Types
@@ -16,8 +19,7 @@ TI Mindmap HUB extracts Indicators of Compromise (IOCs) from each processed repo
 | IPv4 / IPv6 | Regex + LLM | Format validation, private range exclusion |
 | Domains | Regex + LLM | TLD validation, whitelist filtering |
 | URLs | Regex + LLM | Format validation |
-| File Hashes (MD5, SHA-1, SHA-256) | Regex | Length and character validation |
-| CVE IDs | Regex | Format validation (CVE-YYYY-NNNNN) |
+| File Hashes (MD5, SHA-1, SHA-256) | Regex + LLM | Length and character validation |
 | Email Addresses | Regex + LLM | Format validation |
 
 ---
@@ -29,9 +31,22 @@ Raw Text → Pattern Matching + LLM → IOC List → Validation → Deduplicatio
 ```
 
 1. **Pattern matching** identifies candidate indicators using regex
-2. **LLM analysis** provides context-aware extraction for ambiguous cases
-3. **Validation** checks format correctness and filters known false positives
-4. **Deduplication** removes duplicate indicators within the same report
+2. **LLM analysis** provides context-aware extraction, including indicators described in prose, with malware family, threat actor, and kill-chain phase when stated
+3. **Validation** refangs values, checks format correctness, and filters known false positives
+4. **Consolidation** merges both result sets and assigns confidence (see below)
+5. **Deduplication** removes duplicate indicators within the same report
+
+---
+
+## Confidence Levels
+
+| Confidence | Rule | Shown in the IOCs tab |
+|------------|------|:---------------------:|
+| **High** | Found by both pattern matching and the LLM | Yes |
+| **Medium** | Found by the LLM only | Yes |
+| **Low** | Found by pattern matching only, or a generic value (e.g., common user-agent) | No — JSON download only |
+
+CVE identifiers are handled separately — see [CVE Intelligence](cve-intelligence.md).
 
 ---
 
@@ -41,7 +56,7 @@ Common benign indicators are excluded automatically:
 
 - Well-known domains (e.g., google.com, microsoft.com)
 - Cloud provider infrastructure ranges
-- Known false-positive patterns
+- Known false-positive patterns (common Windows binaries, standard system paths, CLSIDs, the article's own URL)
 - RFC 5737 documentation IP ranges (192.0.2.x, 198.51.100.x, 203.0.113.x)
 
 ---

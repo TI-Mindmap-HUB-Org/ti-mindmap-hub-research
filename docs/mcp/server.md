@@ -21,10 +21,14 @@ The MCP server provides AI clients with access to:
 
 ## Quick Start
 
-| Client | Setup Guide |
-|--------|-------------|
-| VS Code + GitHub Copilot | [VS Code + Copilot Setup](vscode-copilot.md) |
-| Claude | [Claude Setup](claude.md) |
+| Client | Auth | Setup Guide |
+|--------|------|-------------|
+| VS Code + GitHub Copilot | API key | [VS Code + Copilot Setup](vscode-copilot.md) |
+| Claude (web / desktop) | OAuth 2.1 | [Claude Setup](claude.md) |
+| ChatGPT | OAuth 2.1 | [ChatGPT Setup](chatgpt.md) |
+| Microsoft Copilot Studio | API key or OAuth 2.0 | [Copilot Studio Setup](copilot-studio.md) |
+| Microsoft Foundry Agent Service | API key (project connection) | [Foundry Setup](foundry.md) |
+| Cursor, Claude Code, custom clients | API key | [Other Clients](other-clients.md) |
 
 ## Server Endpoint
 
@@ -36,17 +40,19 @@ https://mcp.ti-mindmap-hub.com/mcp
 
 TI Mindmap HUB supports two authentication models, depending on the MCP client:
 
-- **OAuth 2.1** for connector-native clients such as Claude custom connectors
-- **API key authentication** via the `X-API-Key` header for direct HTTP clients and local integrations
+- **OAuth 2.1** for connector-native clients such as Claude custom connectors, ChatGPT developer-mode apps, and Copilot Studio (OAuth 2.0 dynamic discovery)
+- **API key authentication** via the `X-API-Key` header for direct HTTP clients, IDEs, agent frameworks, and local integrations
 
-For Claude, the OAuth flow is started by Claude when the custom connector is added, so no manual API key entry is required in Claude.
+For OAuth-based clients, the client starts the sign-in flow itself when the connector is added, so no manual API key entry is required.
 
 ### Getting an API Key
 
-1. Sign up at [ti-mindmap-hub.com](https://ti-mindmap-hub.com)
+1. Sign in at [ti-mindmap-hub.com](https://ti-mindmap-hub.com)
 2. Navigate to **My Profile** → **MCP Server API Keys**
-3. Click **Generate Key**
-4. Copy and securely store your key (format: `tim_xxxxxxxxxxxx`)
+3. Click **Generate Key**, give the key a name, and confirm with **Generate**
+4. Copy and securely store your key (format: `tim_xxxxxxxxxxxx`) — it is shown **only once**
+
+Each account can hold up to **5 active keys**. Keys expire after **365 days** and can be regenerated or revoked from the same page.
 
 Use an API key when configuring direct clients such as the VS Code example in this repository. If you are using Claude's custom connector flow, use OAuth instead.
 
@@ -264,6 +270,10 @@ Content-Type: application/json
 | [MCP Overview](index.md) | MCP section overview, use cases, and agents |
 | [VS Code + Copilot Setup](vscode-copilot.md) | Setup guide for VS Code + GitHub Copilot |
 | [Claude Setup](claude.md) | Setup guide for Claude via native connector and OAuth |
+| [ChatGPT Setup](chatgpt.md) | Setup guide for ChatGPT developer-mode apps |
+| [Copilot Studio Setup](copilot-studio.md) | Add TI Mindmap HUB as an MCP tool in a Copilot Studio agent |
+| [Foundry Setup](foundry.md) | Attach TI Mindmap HUB to a Microsoft Foundry agent |
+| [Other Clients](other-clients.md) | Cursor, Claude Code, Claude Desktop bridge, and custom clients |
 | [mcp-bridge.js](https://github.com/TI-Mindmap-HUB-Org/ti-mindmap-hub-research/blob/main/mcp-integration/mcp-bridge.js) | Legacy bridge script for stdio-based clients |
 
 ## Support

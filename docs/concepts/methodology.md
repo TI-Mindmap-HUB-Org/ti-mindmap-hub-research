@@ -7,6 +7,9 @@ description: How TI Mindmap HUB processes threat intelligence through a multi-st
 
 This document describes the methodology used in TI Mindmap HUB for processing threat intelligence using Generative AI.
 
+!!! tip "Looking for a shorter version?"
+    [How Content Is Generated](how-content-is-generated.md) summarises each output, its deterministic safeguards, and what to verify.
+
 ## Overview
 
 TI Mindmap HUB employs a multi-stage pipeline to transform unstructured threat intelligence reports into structured, actionable data. The system leverages Large Language Models (LLMs) for natural language understanding and information extraction, combined with pattern matching and validation layers.
@@ -76,6 +79,16 @@ Normalized Text → Pattern Matching + LLM → IOC List → Validation → Dedup
 - Cloud provider infrastructure ranges are filtered
 - RFC 5737 documentation IP ranges are excluded
 - Known false-positive patterns are maintained
+
+**Confidence scoring (consolidation):**
+
+| Confidence | Rule |
+|------------|------|
+| High | Indicator found by both pattern matching and the LLM |
+| Medium | Indicator found by the LLM only |
+| Low | Indicator found by pattern matching only, or generic value (e.g., common user-agent) |
+
+Only high- and medium-confidence IOCs are shown in the report's **IOCs** tab; the downloadable JSON contains all levels.
 
 #### TTP Extraction and ATT&CK Mapping
 
@@ -147,7 +160,7 @@ Full Report Content → LLM Processing → Summary + Mindmap + 5W Analysis
 Extracted Objects → Relationship Generation → Bundle Assembly → Validation → Storage
 ```
 
-The backend assembles all extraction outputs into a unified STIX 2.1 bundle:
+The backend assembles all extraction outputs into a unified STIX 2.1 bundle. Specialised LLM extractors handle attack patterns, malware and threat actors, tools, and relationships separately; indicators come from the consolidated IOC set.
 
 **Objects Generated:**
 
@@ -168,8 +181,8 @@ The backend assembles all extraction outputs into a unified STIX 2.1 bundle:
 
 **Validation:**
 
-- STIX 2.1 JSON Schema compliance
-- Object reference integrity
+- STIX 2.1 JSON Schema compliance (objects failing validation are discarded)
+- Object reference integrity (relationships with dangling references are discarded)
 - Required field presence
 - Pattern syntax validation (for indicators)
 
@@ -194,7 +207,7 @@ This enables cross-report queries, attack path analysis, and campaign tracking. 
 
 Each processed article is presented to the analyst through a tabbed interface with:
 
-- **Header Metadata** — Title, source, publication date, link to original report, bookmark, and PDF export
+- **Header Metadata** — Title, source, publication date, bookmark, and the actions **View Original Source**, **Export PDF (Beta)**, and **Export MISP Event**
 - **Intel Graph** — Interactive STIX graph with graph/JSON views, object count, and bundle download
 - **Diamond Model** — Adversary, capability, infrastructure, and victim mapping
 - **AI Summary** — AI-generated technical summary
@@ -205,7 +218,10 @@ Each processed article is presented to the analyst through a tabbed interface wi
 - **Attack Flow** — Reconstructed attack execution sequence
 - **5W Context** — Structured root-cause analysis
 - **ATT&CK Heatmap** — Visual technique heatmap across tactics
+- **Knowledge Graph** — The report's entities within the cross-report STIX Constellation
 - **Source Report** — Original content for verification
+
+A **Related Reports** panel below the tabs lists other reports sharing entities with the current one.
 
 ### Stage 6: Weekly Briefing Generation
 
